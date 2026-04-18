@@ -85,7 +85,7 @@ export default function Navbar() {
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-center py-3 px-6">
+    <nav className="sticky top-0 z-50 flex justify-center px-6 pt-10 pb-4">
       <div
         className="flex items-center rounded-full"
         style={{
@@ -95,6 +95,7 @@ export default function Navbar() {
           border: '1px solid rgba(56,189,248,.18)',
           padding: '8px 20px',
           gap: 0,
+          overflow: 'visible',
         }}
         onMouseLeave={() => setHovered(null)}
       >
@@ -132,7 +133,7 @@ export default function Navbar() {
                 <span
                   className="absolute pointer-events-none"
                   style={{
-                    top: -30,
+                    bottom: '110%',
                     left: '50%',
                     transform: 'translateX(-50%)',
                     background: 'rgba(4,8,16,.92)',
@@ -144,6 +145,7 @@ export default function Navbar() {
                     padding: '3px 9px',
                     borderRadius: 20,
                     whiteSpace: 'nowrap',
+                    zIndex: 100,
                   }}
                 >
                   {item.label}
