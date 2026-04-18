@@ -11,7 +11,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         placeholder="Cerca tra gli articoli…"
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full bg-transparent border-b border-ghiaccio/20 py-3 pr-10 font-serif text-ghiaccio placeholder-ghiaccio/30 focus:outline-none focus:border-oro transition-colors text-lg"
+        className="w-full bg-transparent border-b border-ghiaccio/20 py-3 pr-10 font-serif text-ghiaccio placeholder-ghiaccio/30 focus:outline-none focus:border-blu-accento transition-colors text-lg"
         aria-label="Cerca articoli"
       />
       <svg

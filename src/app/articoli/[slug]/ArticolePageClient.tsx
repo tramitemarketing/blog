@@ -5,6 +5,7 @@ import ArticleBody from '@/components/article/ArticleBody'
 import ShareButton from '@/components/article/ShareButton'
 import CommentsSection from '@/components/article/CommentsSection'
 import { getArticleBySlug } from '@/lib/firestore'
+import { getReadingTime } from '@/lib/utils'
 import type { Article } from '@/types'
 
 export default function ArticolePage() {
@@ -37,7 +38,7 @@ export default function ArticolePage() {
     )
   }
 
-  const readingTime = Math.max(1, Math.ceil(article.wordCount / 200))
+  const readingTime = getReadingTime(article.wordCount)
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   return (

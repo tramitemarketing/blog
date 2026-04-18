@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getReadingTime } from '@/lib/utils'
 import type { Article } from '@/types'
 
 interface LatestArticlesProps {
@@ -121,7 +122,7 @@ function ArticlesSkeleton() {
 }
 
 function ArticleCardFeatured({ article }: { article: Article }) {
-  const readingTime = Math.max(1, Math.ceil(article.wordCount / 200))
+  const readingTime = getReadingTime(article.wordCount)
 
   return (
     <div

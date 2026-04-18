@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getReadingTime } from '@/lib/utils'
 import type { Article } from '@/types'
 
 interface ArticleCardProps {
@@ -7,12 +8,12 @@ interface ArticleCardProps {
 }
 
 export default function ArticleCard({ article, index }: ArticleCardProps) {
-  const readingTime = Math.max(1, Math.ceil(article.wordCount / 200))
+  const readingTime = getReadingTime(article.wordCount)
 
   return (
     <article className="py-10 grid grid-cols-[4rem_1fr] gap-6 border-b border-ghiaccio/10 last:border-0">
       <span
-        className="font-sans font-black text-viola-vivace/40 leading-none"
+        className="font-sans font-black text-blu-chiaro/40 leading-none"
         style={{ fontSize: '2.5rem' }}
       >
         {String(index + 1).padStart(2, '0')}
@@ -39,7 +40,7 @@ export default function ArticleCard({ article, index }: ArticleCardProps) {
         </p>
         <Link
           href={`/articoli/${article.id}`}
-          className="font-sans text-[11px] uppercase tracking-[4px] text-oro hover:opacity-70 transition-opacity mt-2 w-fit"
+          className="font-sans text-[11px] uppercase tracking-[4px] text-blu-accento hover:opacity-70 transition-opacity mt-2 w-fit"
         >
           Leggi →
         </Link>

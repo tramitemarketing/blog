@@ -26,14 +26,22 @@ function docToArticle(id: string, data: DocumentData): Article {
   }
 }
 
+let publishedArticlesCache: Article[] | null = null
+
 export async function getPublishedArticles(): Promise<Article[]> {
+  if (publishedArticlesCache) return publishedArticlesCache
   const q = query(
     collection(db, 'articles'),
     where('status', '==', 'published'),
     orderBy('publishedAt', 'desc')
   )
   const snap = await getDocs(q)
-  return snap.docs.map(d => docToArticle(d.id, d.data()))
+  publishedArticlesCache = snap.docs.map(d => docToArticle(d.id, d.data()))
+  return publishedArticlesCache
+}
+
+export function invalidateArticlesCache(): void {
+  publishedArticlesCache = null
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
