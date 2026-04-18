@@ -61,16 +61,17 @@ const ITEMS: NavItem[] = [
   },
 ]
 
-const TRANSITION = '0.38s cubic-bezier(0.34, 1.2, 0.64, 1)'
+const EASE = '0.38s cubic-bezier(0.34, 1.2, 0.64, 1)'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState<number | null>(null)
 
   return (
     <nav className="sticky top-0 z-50 flex justify-center py-4 px-6">
       <div
         onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
+        onMouseLeave={() => { setOpen(false); setActive(null) }}
         style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -81,58 +82,84 @@ export default function Navbar() {
           borderRadius: 40,
           padding: '8px 18px',
           gap: 4,
-          transition: `background ${TRANSITION}, border-color ${TRANSITION}`,
+          transition: `background ${EASE}, border-color ${EASE}, box-shadow ${EASE}`,
           boxShadow: open ? '0 8px 32px rgba(56,189,248,.1)' : 'none',
         }}
       >
-        {ITEMS.map((item, i) => (
-          <div key={item.label} style={{ display: 'flex', alignItems: 'center' }}>
+        {ITEMS.map((item, i) => {
+          const isActive = active === i
 
-            {/* Separatore verticale tra Home e il resto */}
-            {i === 1 && (
-              <div style={{
-                width: 1,
-                height: 14,
-                background: 'rgba(56,189,248,.2)',
-                marginRight: 4,
-                flexShrink: 0,
-              }} />
-            )}
+          return (
+            <div key={item.label} style={{ display: 'flex', alignItems: 'center' }}>
 
-            <Link
-              href={item.href}
-              aria-label={item.label}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: open ? 7 : 0,
-                padding: '4px 8px',
-                borderRadius: 24,
-                textDecoration: 'none',
-                transition: `gap ${TRANSITION}`,
-              }}
-            >
-              {item.icon}
+              {/* Separatore verticale tra Home e il resto */}
+              {i === 1 && (
+                <div style={{
+                  width: 1,
+                  height: 14,
+                  background: 'rgba(56,189,248,.2)',
+                  marginRight: 4,
+                  flexShrink: 0,
+                }} />
+              )}
 
-              {/* Label — si espande inline */}
-              <span style={{
-                maxWidth: open ? 72 : 0,
-                opacity: open ? 1 : 0,
-                overflow: 'hidden',
-                whiteSpace: 'nowrap',
-                fontFamily: 'system-ui, sans-serif',
-                fontSize: 9,
-                fontWeight: 600,
-                letterSpacing: '2.5px',
-                textTransform: 'uppercase',
-                color: '#BAE6FD',
-                transition: `max-width ${TRANSITION}, opacity 0.22s ease`,
-              }}>
-                {item.label}
-              </span>
-            </Link>
-          </div>
-        ))}
+              <Link
+                href={item.href}
+                aria-label={item.label}
+                onMouseEnter={() => setActive(i)}
+                onMouseLeave={() => setActive(null)}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 3,
+                  padding: '5px 9px',
+                  borderRadius: 24,
+                  textDecoration: 'none',
+                  background: isActive ? 'rgba(56,189,248,.1)' : 'transparent',
+                  transition: `background 0.18s ease`,
+                }}
+              >
+                {/* Icona + label in riga */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: open ? 7 : 0,
+                  transition: `gap ${EASE}`,
+                }}>
+                  {item.icon}
+
+                  {/* Label — si espande inline con la pill */}
+                  <span style={{
+                    maxWidth: open ? 72 : 0,
+                    opacity: open ? 1 : 0,
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    fontFamily: 'system-ui, sans-serif',
+                    fontSize: 9,
+                    fontWeight: 600,
+                    letterSpacing: '2.5px',
+                    textTransform: 'uppercase',
+                    color: isActive ? '#F0F9FF' : '#7DD3FC',
+                    transition: `max-width ${EASE}, opacity 0.22s ease, color 0.18s ease`,
+                  }}>
+                    {item.label}
+                  </span>
+                </div>
+
+                {/* Puntino indicatore sotto — appare solo al hover dell'item */}
+                <div style={{
+                  width: isActive && open ? 16 : 3,
+                  height: 2,
+                  borderRadius: 2,
+                  background: '#38BDF8',
+                  opacity: isActive && open ? 0.8 : 0,
+                  transition: `width 0.22s ease, opacity 0.18s ease`,
+                }} />
+              </Link>
+            </div>
+          )
+        })}
       </div>
     </nav>
   )
