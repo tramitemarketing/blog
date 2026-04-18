@@ -5,8 +5,9 @@ import type { ReactNode } from 'react'
 
 interface NavItem {
   label: string
-  href: string
   icon: ReactNode
+  href?: string
+  action?: () => void
 }
 
 const ITEMS: NavItem[] = [
@@ -36,7 +37,7 @@ const ITEMS: NavItem[] = [
   },
   {
     label: 'Cerca',
-    href: '/articoli',
+    action: () => window.dispatchEvent(new Event('soglia:open-search')),
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
         stroke="#38BDF8" strokeWidth="1.8" strokeLinecap="round"
@@ -63,6 +64,20 @@ const ITEMS: NavItem[] = [
 
 const EASE = '0.38s cubic-bezier(0.34, 1.2, 0.64, 1)'
 
+const itemStyle = (isActive: boolean) => ({
+  display: 'flex' as const,
+  flexDirection: 'column' as const,
+  alignItems: 'center' as const,
+  gap: 3,
+  padding: '5px 9px',
+  borderRadius: 24,
+  textDecoration: 'none',
+  background: isActive ? 'rgba(56,189,248,.1)' : 'transparent',
+  transition: 'background 0.18s ease',
+  border: 'none',
+  cursor: 'pointer',
+})
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<number | null>(null)
@@ -88,11 +103,50 @@ export default function Navbar() {
       >
         {ITEMS.map((item, i) => {
           const isActive = active === i
+          const sharedProps = {
+            'aria-label': item.label,
+            onMouseEnter: () => setActive(i),
+            onMouseLeave: () => setActive(null),
+            style: itemStyle(isActive),
+          }
+          const inner = (
+            <>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: open ? 7 : 0,
+                transition: `gap ${EASE}`,
+              }}>
+                {item.icon}
+                <span style={{
+                  maxWidth: open ? 72 : 0,
+                  opacity: open ? 1 : 0,
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                  fontFamily: 'system-ui, sans-serif',
+                  fontSize: 9,
+                  fontWeight: 600,
+                  letterSpacing: '2.5px',
+                  textTransform: 'uppercase',
+                  color: isActive ? '#F0F9FF' : '#7DD3FC',
+                  transition: `max-width ${EASE}, opacity 0.22s ease, color 0.18s ease`,
+                }}>
+                  {item.label}
+                </span>
+              </div>
+              <div style={{
+                width: isActive && open ? 16 : 3,
+                height: 2,
+                borderRadius: 2,
+                background: '#38BDF8',
+                opacity: isActive && open ? 0.8 : 0,
+                transition: 'width 0.22s ease, opacity 0.18s ease',
+              }} />
+            </>
+          )
 
           return (
             <div key={item.label} style={{ display: 'flex', alignItems: 'center' }}>
-
-              {/* Separatore verticale tra Home e il resto */}
               {i === 1 && (
                 <div style={{
                   width: 1,
@@ -103,60 +157,15 @@ export default function Navbar() {
                 }} />
               )}
 
-              <Link
-                href={item.href}
-                aria-label={item.label}
-                onMouseEnter={() => setActive(i)}
-                onMouseLeave={() => setActive(null)}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 3,
-                  padding: '5px 9px',
-                  borderRadius: 24,
-                  textDecoration: 'none',
-                  background: isActive ? 'rgba(56,189,248,.1)' : 'transparent',
-                  transition: `background 0.18s ease`,
-                }}
-              >
-                {/* Icona + label in riga */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: open ? 7 : 0,
-                  transition: `gap ${EASE}`,
-                }}>
-                  {item.icon}
-
-                  {/* Label — si espande inline con la pill */}
-                  <span style={{
-                    maxWidth: open ? 72 : 0,
-                    opacity: open ? 1 : 0,
-                    overflow: 'hidden',
-                    whiteSpace: 'nowrap',
-                    fontFamily: 'system-ui, sans-serif',
-                    fontSize: 9,
-                    fontWeight: 600,
-                    letterSpacing: '2.5px',
-                    textTransform: 'uppercase',
-                    color: isActive ? '#F0F9FF' : '#7DD3FC',
-                    transition: `max-width ${EASE}, opacity 0.22s ease, color 0.18s ease`,
-                  }}>
-                    {item.label}
-                  </span>
-                </div>
-
-                {/* Puntino indicatore sotto — appare solo al hover dell'item */}
-                <div style={{
-                  width: isActive && open ? 16 : 3,
-                  height: 2,
-                  borderRadius: 2,
-                  background: '#38BDF8',
-                  opacity: isActive && open ? 0.8 : 0,
-                  transition: `width 0.22s ease, opacity 0.18s ease`,
-                }} />
-              </Link>
+              {item.action ? (
+                <button {...sharedProps} onClick={item.action}>
+                  {inner}
+                </button>
+              ) : (
+                <Link {...sharedProps} href={item.href!}>
+                  {inner}
+                </Link>
+              )}
             </div>
           )
         })}

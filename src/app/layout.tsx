@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import SearchOverlay from '@/components/layout/SearchOverlay'
 import CookieBanner from '@/components/ui/CookieBanner'
 import ConditionalGA from '@/components/ui/ConditionalGA'
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <CookieBanner />
         <ConditionalGA measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ''} />
         <Navbar />
+        <SearchOverlay />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
