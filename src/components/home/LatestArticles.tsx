@@ -4,9 +4,14 @@ import type { Article } from '@/types'
 interface LatestArticlesProps {
   articles: Article[]
   searchQuery?: string
+  loading?: boolean
 }
 
-export default function LatestArticles({ articles, searchQuery }: LatestArticlesProps) {
+export default function LatestArticles({ articles, searchQuery, loading }: LatestArticlesProps) {
+  if (loading) {
+    return <ArticlesSkeleton />
+  }
+
   if (articles.length === 0) {
     return (
       <section className="px-14 py-12">
@@ -62,6 +67,53 @@ export default function LatestArticles({ articles, searchQuery }: LatestArticles
               → Archivio completo
             </Link>
           </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ArticlesSkeleton() {
+  return (
+    <section className="border-b border-blu-accento/08">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr 1fr',
+          gridTemplateRows: 'auto auto',
+        }}
+      >
+        {/* Featured skeleton */}
+        <div
+          className="p-8 border-r border-t border-blu-accento/08 flex flex-col gap-4"
+          style={{ gridRow: 'span 2', minHeight: 280, background: 'rgba(56,189,248,.02)' }}
+        >
+          <div className="h-2 w-16 rounded bg-blu-accento/10 animate-pulse" />
+          <div className="h-5 w-3/4 rounded bg-ghiaccio/08 animate-pulse" />
+          <div className="h-4 w-full rounded bg-ghiaccio/05 animate-pulse" />
+          <div className="h-4 w-5/6 rounded bg-ghiaccio/05 animate-pulse" />
+        </div>
+
+        {/* 4 small card skeletons */}
+        {[0, 1, 2, 3].map(i => (
+          <div key={i} className="p-5 border-l border-t border-blu-accento/06 flex flex-col gap-3">
+            <div className="h-2 w-12 rounded bg-blu-accento/10 animate-pulse" />
+            <div className="h-4 w-4/5 rounded bg-ghiaccio/08 animate-pulse" />
+            <div className="h-2 w-8 rounded bg-blu-accento/08 animate-pulse mt-auto" />
+          </div>
+        ))}
+
+        {/* Archive link cell */}
+        <div
+          className="border-l border-t border-blu-accento/06 flex items-end p-5"
+          style={{ background: 'rgba(56,189,248,.02)' }}
+        >
+          <Link
+            href="/articoli"
+            className="font-sans text-[11px] font-bold text-blu-accento/30"
+          >
+            → Archivio completo
+          </Link>
         </div>
       </div>
     </section>

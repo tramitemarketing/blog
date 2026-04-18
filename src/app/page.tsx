@@ -22,19 +22,7 @@ export default function HomePage() {
       .finally(() => setLoading(false))
   }, [])
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="font-sans text-[11px] uppercase tracking-[4px] text-ghiaccio/30 animate-pulse">
-          Caricamento…
-        </div>
-      </div>
-    )
-  }
-
-  const featured = articles[0] ?? null
   const pool = articles.slice(0, 5)
-
   const filtered = searchQuery.trim()
     ? pool.filter(a =>
         a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -44,7 +32,7 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroSection featuredArticle={featured} citazione={citazione} />
+      <HeroSection featuredArticle={articles[0] ?? null} citazione={citazione} />
 
       {/* Search Band */}
       <div
@@ -90,9 +78,7 @@ export default function HomePage() {
         </span>
       </div>
 
-      {filtered.length > 0 && (
-        <LatestArticles articles={filtered} searchQuery={searchQuery} />
-      )}
+      <LatestArticles articles={filtered} searchQuery={searchQuery} loading={loading} />
       <BioTeaser />
       <BrevoWidget />
     </>
