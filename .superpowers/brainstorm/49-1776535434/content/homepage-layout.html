@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage Layout Options</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #060E1C;
+    font-family: system-ui, sans-serif;
+    color: #F0F9FF;
+    padding: 40px 20px 80px;
+  }
+
+  h1 {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(56,189,248,.5);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: rgba(186,230,253,.4);
+    text-align: center;
+    margin-bottom: 48px;
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+
+  /* ═══════ OPTION WRAPPER ═══════ */
+  .option-wrap {
+    max-width: 860px;
+    margin: 0 auto 48px;
+    border: 2px solid rgba(56,189,248,.1);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+  }
+
+  .option-wrap:hover {
+    border-color: rgba(56,189,248,.45);
+    box-shadow: 0 0 0 4px rgba(56,189,248,.07), 0 20px 60px rgba(14,165,233,.15);
+    transform: translateY(-3px);
+  }
+
+  .option-wrap.selected {
+    border-color: #38BDF8;
+    box-shadow: 0 0 0 4px rgba(56,189,248,.15), 0 24px 60px rgba(14,165,233,.2);
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(255,255,255,.03);
+    border-top: 1px solid rgba(56,189,248,.1);
+  }
+
+  .option-label h3 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7DD3FC;
+  }
+
+  .option-label p {
+    font-size: 11px;
+    color: rgba(186,230,253,.4);
+    font-family: Georgia, serif;
+    font-style: italic;
+  }
+
+  .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(56,189,248,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: transparent;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .selected .check { background: #38BDF8; border-color: #38BDF8; color: #060E1C; }
+
+  /* ═══════════════════════════════════
+     OPTION A — BENTO GRID
+  ═══════════════════════════════════ */
+  .preview-a {
+    background: linear-gradient(160deg, #0C1B33, #0E2347);
+    padding: 0;
+  }
+
+  /* Navbar mini */
+  .mini-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(56,189,248,.08);
+  }
+
+  .mini-pill {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(56,189,248,.15);
+    border-radius: 30px;
+    padding: 6px 16px;
+  }
+
+  .mini-pill .cross { font-size: 11px; color: #F0F9FF; font-weight: 900; letter-spacing: 1px; }
+  .mini-pill .sep { width: 1px; height: 10px; background: rgba(56,189,248,.2); }
+  .mini-pill .ico { width: 10px; height: 10px; opacity: .6; }
+
+  /* Hero A — compact, left-aligned */
+  .hero-a {
+    padding: 32px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-eyebrow { font-size: 7px; letter-spacing: 4px; text-transform: uppercase; color: rgba(56,189,248,.5); }
+
+  .hero-title-a {
+    font-weight: 900;
+    font-size: 36px;
+    letter-spacing: -2px;
+    line-height: 1.0;
+    color: #F0F9FF;
+  }
+
+  .hero-title-a span { color: #38BDF8; }
+
+  .search-inline {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(56,189,248,.2);
+    border-radius: 30px;
+    padding: 8px 16px;
+    max-width: 320px;
+  }
+
+  .search-inline span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.3); }
+
+  /* Bento grid */
+  .bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px;
+    padding: 16px 24px 24px;
+  }
+
+  .bento-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(56,189,248,.08);
+    border-radius: 10px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bento-card.featured {
+    grid-column: span 2;
+    background: rgba(56,189,248,.07);
+    border-color: rgba(56,189,248,.18);
+  }
+
+  .bento-card.tall { grid-row: span 2; }
+
+  .bento-tag { font-size: 6px; letter-spacing: 3px; text-transform: uppercase; color: rgba(56,189,248,.6); margin-bottom: 8px; }
+  .bento-title { font-size: 12px; font-weight: 700; color: #F0F9FF; line-height: 1.3; margin-bottom: 6px; }
+  .bento-excerpt { font-family: Georgia; font-size: 10px; color: rgba(186,230,253,.45); line-height: 1.5; }
+  .bento-num { position: absolute; bottom: 12px; right: 14px; font-weight: 900; font-size: 28px; color: rgba(56,189,248,.08); line-height: 1; }
+  .bento-arrow { display: inline-block; margin-top: 10px; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #38BDF8; opacity: .7; }
+
+  /* ═══════════════════════════════════
+     OPTION B — CINEMATIC + CARD ROW
+  ═══════════════════════════════════ */
+  .preview-b { background: #070F1E; }
+
+  .hero-b {
+    padding: 28px 24px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: end;
+    border-bottom: 1px solid rgba(56,189,248,.08);
+  }
+
+  .hero-b-left {}
+
+  .hero-b-title {
+    font-weight: 900;
+    font-size: 42px;
+    letter-spacing: -2.5px;
+    line-height: .95;
+    color: #F0F9FF;
+    margin-bottom: 12px;
+  }
+
+  .hero-b-title em { font-style: italic; font-weight: 300; color: rgba(186,230,253,.4); font-family: Georgia, serif; }
+
+  .hero-b-search {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(56,189,248,.18);
+    border-radius: 6px;
+    padding: 9px 16px;
+    max-width: 280px;
+  }
+
+  .hero-b-search span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.25); }
+
+  .hero-b-right {
+    text-align: right;
+    padding-bottom: 4px;
+  }
+
+  .hero-b-right p { font-family: Georgia; font-style: italic; font-size: 11px; color: rgba(186,230,253,.35); line-height: 1.5; max-width: 160px; }
+
+  /* Horizontal card scroll row */
+  .card-row {
+    display: flex;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .h-card {
+    flex: 1;
+    padding: 20px 20px;
+    border-right: 1px solid rgba(56,189,248,.07);
+    position: relative;
+  }
+
+  .h-card:last-child { border-right: none; }
+
+  .h-num { font-weight: 900; font-size: 32px; color: rgba(56,189,248,.1); line-height: 1; margin-bottom: 10px; }
+  .h-tag { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: rgba(56,189,248,.5); margin-bottom: 6px; }
+  .h-title { font-size: 12px; font-weight: 700; color: #F0F9FF; line-height: 1.3; margin-bottom: 6px; }
+  .h-excerpt { font-family: Georgia; font-size: 10px; color: rgba(186,230,253,.4); line-height: 1.5; }
+  .h-cta { margin-top: 12px; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #38BDF8; opacity: .7; }
+
+  /* ═══════════════════════════════════
+     OPTION C — EDITORIAL ASYMMETRIC
+  ═══════════════════════════════════ */
+  .preview-c { background: linear-gradient(180deg, #080F20, #0C1B33); }
+
+  .hero-c {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    min-height: 160px;
+  }
+
+  .hero-c-left {
+    padding: 28px 24px;
+    border-right: 1px solid rgba(56,189,248,.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-c-title {
+    font-weight: 900;
+    font-size: 38px;
+    letter-spacing: -2px;
+    line-height: 1.0;
+    color: #F0F9FF;
+    margin-bottom: 10px;
+  }
+
+  .hero-c-title .accent-line {
+    display: block;
+    width: 36px;
+    height: 3px;
+    background: #38BDF8;
+    margin-top: 12px;
+  }
+
+  .hero-c-right {
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 12px;
+    background: rgba(56,189,248,.04);
+  }
+
+  .quote-text { font-family: Georgia; font-style: italic; font-size: 11px; color: rgba(186,230,253,.6); line-height: 1.6; }
+  .quote-ref { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: rgba(56,189,248,.4); }
+
+  /* Search full-width band */
+  .search-band {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(56,189,248,.06);
+    border-top: 1px solid rgba(56,189,248,.1);
+    border-bottom: 1px solid rgba(56,189,248,.1);
+    padding: 12px 24px;
+  }
+
+  .search-band span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(186,230,253,.3); }
+  .search-band .shortcut { margin-left: auto; font-size: 8px; background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.2); border-radius: 4px; padding: 2px 8px; color: rgba(56,189,248,.6); letter-spacing: 1px; }
+
+  /* Staggered list + featured */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 0;
+  }
+
+  .edit-col { padding: 20px 22px; }
+  .edit-divider { background: rgba(56,189,248,.08); }
+
+  .edit-card { padding: 14px 0; border-bottom: 1px solid rgba(56,189,248,.06); }
+  .edit-card:last-child { border-bottom: none; }
+
+  .edit-num { font-weight: 900; font-size: 9px; color: rgba(56,189,248,.35); letter-spacing: 2px; margin-bottom: 5px; }
+  .edit-title { font-size: 12px; font-weight: 700; color: #F0F9FF; line-height: 1.3; margin-bottom: 4px; }
+  .edit-date { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.3); }
+
+  .featured-col { display: flex; flex-direction: column; justify-content: center; }
+  .featured-badge { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: #38BDF8; opacity: .7; margin-bottom: 10px; }
+  .featured-title { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: #F0F9FF; line-height: 1.2; margin-bottom: 10px; }
+  .featured-excerpt { font-family: Georgia; font-size: 11px; color: rgba(186,230,253,.45); line-height: 1.6; margin-bottom: 14px; }
+  .featured-cta { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: #38BDF8; }
+
+  /* ═══ SVG icons inline ═══ */
+  .ico-svg { width: 12px; height: 12px; stroke: #38BDF8; fill: none; stroke-width: 2; stroke-linecap: round; display: inline-block; }
+</style>
+</head>
+<body>
+
+<h1>Scegli il layout homepage</h1>
+<p class="subtitle">Hero compatto + search + card — 3 direzioni creative. Clicca per selezionare.</p>
+
+<!-- ═══════════════════════════════════════════
+     OPTION A — BENTO GRID
+═══════════════════════════════════════════ -->
+<div class="option-wrap" onclick="selectOption(this,'a')">
+  <div class="preview-a">
+
+    <!-- Navbar pill mini -->
+    <div class="mini-nav">
+      <div class="mini-pill">
+        <span class="cross">✛</span>
+        <span class="sep"></span>
+        <svg class="ico" viewBox="0 0 20 20"><rect x="9" y="2" width="2" height="16" fill="#F0F9FF"/><rect x="4" y="7" width="12" height="2" fill="#F0F9FF"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+      </div>
+    </div>
+
+    <!-- Hero compact -->
+    <div class="hero-a">
+      <p class="hero-eyebrow">Riflessioni di un sacerdote</p>
+      <h2 class="hero-title-a">Pensieri<br>alla <span>soglia</span></h2>
+      <div class="search-inline">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <span>Cerca tra gli articoli…</span>
+      </div>
+    </div>
+
+    <!-- Bento cards -->
+    <div class="bento">
+      <div class="bento-card featured">
+        <p class="bento-tag">↗ In evidenza</p>
+        <p class="bento-title">La soglia del mistero — dove la fede incontra il dubbio</p>
+        <p class="bento-excerpt">Riflessioni sulla presenza e sull'assenza di Dio nell'esperienza quotidiana e nel silenzio contemplativo della vita spirituale…</p>
+        <span class="bento-arrow">Leggi →</span>
+        <div class="bento-num">01</div>
+      </div>
+      <div class="bento-card" style="grid-row:span 2;">
+        <p class="bento-tag">Citazione</p>
+        <p style="font-family:Georgia;font-style:italic;font-size:11px;color:rgba(186,230,253,.6);line-height:1.6;margin-bottom:8px;">"La fede non è certezza, è fiducia nel buio."</p>
+        <p style="font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(56,189,248,.4);">— Thomas Merton</p>
+      </div>
+      <div class="bento-card">
+        <p class="bento-tag">Recente</p>
+        <p class="bento-title">Il silenzio come linguaggio di Dio</p>
+        <p class="bento-excerpt">Lectio divina e preghiera contemplativa…</p>
+        <div class="bento-num">02</div>
+      </div>
+      <div class="bento-card">
+        <p class="bento-tag">Recente</p>
+        <p class="bento-title">Corpo e spirito nella teologia moderna</p>
+        <p class="bento-excerpt">Il dualismo superato dalla fenomenologia…</p>
+        <div class="bento-num">03</div>
+      </div>
+    </div>
+  </div>
+  <div class="option-label">
+    <div>
+      <h3>A — Bento Grid</h3>
+      <p>Card asimmetriche, articolo featured grande + citazione + recenti. Dinamico, visivamente ricco.</p>
+    </div>
+    <div class="check">✓</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     OPTION B — CINEMATIC + CARD ROW
+═══════════════════════════════════════════ -->
+<div class="option-wrap" onclick="selectOption(this,'b')">
+  <div class="preview-b">
+
+    <div class="mini-nav" style="background:#070F1E;">
+      <div class="mini-pill">
+        <span class="cross">✛</span>
+        <span class="sep"></span>
+        <svg class="ico" viewBox="0 0 20 20"><rect x="9" y="2" width="2" height="16" fill="#F0F9FF"/><rect x="4" y="7" width="12" height="2" fill="#F0F9FF"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+      </div>
+    </div>
+
+    <div class="hero-b">
+      <div class="hero-b-left">
+        <h2 class="hero-b-title">Pensieri<br>alla <em>soglia</em></h2>
+        <div class="hero-b-search">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+          <span>Cerca tra gli articoli…</span>
+        </div>
+      </div>
+      <div class="hero-b-right">
+        <p>"Non esistono risposte facili ai misteri profondi della fede."</p>
+        <p style="margin-top:8px;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(56,189,248,.35);">Citazione del giorno</p>
+      </div>
+    </div>
+
+    <div class="card-row">
+      <div class="h-card">
+        <div class="h-num">01</div>
+        <p class="h-tag">↗ Featured</p>
+        <p class="h-title">La soglia del mistero e l'incontro con il divino</p>
+        <p class="h-excerpt">Dove la fede incontra il dubbio quotidiano…</p>
+        <p class="h-cta">Leggi →</p>
+      </div>
+      <div class="h-card">
+        <div class="h-num">02</div>
+        <p class="h-tag">Recente</p>
+        <p class="h-title">Il silenzio come linguaggio</p>
+        <p class="h-excerpt">Lectio divina e contemplazione…</p>
+        <p class="h-cta">Leggi →</p>
+      </div>
+      <div class="h-card">
+        <div class="h-num">03</div>
+        <p class="h-tag">Recente</p>
+        <p class="h-title">Corpo e spirito nella teologia</p>
+        <p class="h-excerpt">Il dualismo superato…</p>
+        <p class="h-cta">Leggi →</p>
+      </div>
+    </div>
+  </div>
+  <div class="option-label">
+    <div>
+      <h3>B — Cinematic Split</h3>
+      <p>Hero tipografico + citazione a destra, poi 3 colonne orizzontali numerate. Potente, giornalistico.</p>
+    </div>
+    <div class="check">✓</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     OPTION C — EDITORIAL ASYMMETRIC
+═══════════════════════════════════════════ -->
+<div class="option-wrap" onclick="selectOption(this,'c')">
+  <div class="preview-c">
+
+    <div class="mini-nav" style="background:#080F20;">
+      <div class="mini-pill">
+        <span class="cross">✛</span>
+        <span class="sep"></span>
+        <svg class="ico" viewBox="0 0 20 20"><rect x="9" y="2" width="2" height="16" fill="#F0F9FF"/><rect x="4" y="7" width="12" height="2" fill="#F0F9FF"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+      </div>
+    </div>
+
+    <div class="hero-c">
+      <div class="hero-c-left">
+        <div>
+          <p class="hero-eyebrow" style="font-size:7px;letter-spacing:4px;text-transform:uppercase;color:rgba(56,189,248,.4);margin-bottom:10px;">Riflessioni di un sacerdote</p>
+          <h2 class="hero-c-title">Pensieri<br>alla soglia<span class="accent-line"></span></h2>
+        </div>
+      </div>
+      <div class="hero-c-right">
+        <p class="quote-text">"La fede non è certezza, è fiducia nel buio."</p>
+        <p class="quote-ref">— Thomas Merton</p>
+      </div>
+    </div>
+
+    <!-- Search band -->
+    <div class="search-band">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <span>Cerca tra gli articoli…</span>
+      <span class="shortcut">⌘K</span>
+    </div>
+
+    <!-- Editorial grid -->
+    <div class="editorial-grid">
+      <div class="edit-col">
+        <div class="edit-card">
+          <p class="edit-num">— 02</p>
+          <p class="edit-title">Il silenzio come linguaggio di Dio</p>
+          <p class="edit-date">12 aprile 2026</p>
+        </div>
+        <div class="edit-card">
+          <p class="edit-num">— 03</p>
+          <p class="edit-title">Corpo e spirito nella teologia moderna</p>
+          <p class="edit-date">5 aprile 2026</p>
+        </div>
+        <div class="edit-card">
+          <p class="edit-num">— 04</p>
+          <p class="edit-title">Il tempo liturgico e la memoria</p>
+          <p class="edit-date">28 marzo 2026</p>
+        </div>
+      </div>
+      <div class="edit-divider"></div>
+      <div class="edit-col featured-col">
+        <p class="featured-badge">↗ In evidenza</p>
+        <p class="featured-title">La soglia del mistero — dove la fede incontra il dubbio</p>
+        <p class="featured-excerpt">Riflessioni sulla presenza e sull'assenza di Dio nell'esperienza quotidiana e nel silenzio contemplativo…</p>
+        <span class="featured-cta">Leggi l'articolo →</span>
+      </div>
+    </div>
+  </div>
+  <div class="option-label">
+    <div>
+      <h3>C — Editoriale Asimmetrico</h3>
+      <p>Lista articoli a sinistra + featured grande a destra. Search come banda separata. Molto originale.</p>
+    </div>
+    <div class="check">✓</div>
+  </div>
+</div>
+
+<script>
+  function selectOption(el, choice) {
+    document.querySelectorAll('.option-wrap').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    // Try to post to parent frame if in visual companion
+    try {
+      window.parent.postMessage({ type: 'choice', choice }, '*');
+    } catch(e) {}
+  }
+</script>
+
+</body>
+</html>

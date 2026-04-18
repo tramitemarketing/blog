@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Articles
+    match /articles/{articleId} {
+      // Published articles readable by anyone
+      allow read: if resource.data.status == 'published';
+      // Drafts and writes only for authenticated admin
+      allow read, write: if request.auth != null;
+    }
+
+    // Comments
+    match /comments/{commentId} {
+      // Anyone can submit a pending comment
+      allow create: if request.resource.data.status == 'pending'
+        && request.resource.data.keys().hasAll(['articleId','authorName','text','ip','createdAt','status'])
+        && request.resource.data.authorName.size() <= 100
+        && request.resource.data.text.size() <= 2000;
+
+      // Approved comments are publicly readable
+      allow read: if resource.data.status == 'approved';
+
+      // Pending comments and moderation only for admin
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Config (citazione, biografia)
+    match /config/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

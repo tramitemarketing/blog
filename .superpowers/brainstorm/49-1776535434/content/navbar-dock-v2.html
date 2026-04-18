@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar Demo v2</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: linear-gradient(135deg, #0C1B33 0%, #0E2347 50%, #163A6F 100%);
+    min-height: 100vh;
+    font-family: system-ui, sans-serif;
+    color: #F0F9FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    overflow-x: hidden;
+  }
+
+  .label-top {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(56,189,248,.4);
+    margin-bottom: 32px;
+  }
+
+  /* ═══════════════════════
+     PILL
+  ═══════════════════════ */
+  .navbar-pill {
+    display: flex;
+    align-items: center;   /* vertically centers everything */
+    gap: 0;
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(56,189,248,.18);
+    border-radius: 60px;
+    padding: 10px 18px;
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .navbar-pill:hover {
+    background: rgba(255,255,255,.09);
+    border-color: rgba(56,189,248,.35);
+    box-shadow: 0 8px 40px rgba(14,165,233,.15), 0 0 0 1px rgba(56,189,248,.08);
+  }
+
+  /* ═══════════════════════
+     DOCK ITEMS — centrati
+  ═══════════════════════ */
+  .dock-item {
+    display: flex;
+    align-items: center;   /* icona centrata verticalmente */
+    justify-content: center;
+    padding: 4px 14px;
+    cursor: pointer;
+    position: relative;
+    /* nessun height fisso — la pill dà l'altezza */
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center bottom;
+    border-radius: 12px;
+  }
+
+  .dock-item.scale-xl { transform: translateY(-9px) scale(1.45); }
+  .dock-item.scale-lg { transform: translateY(-4px) scale(1.22); }
+  .dock-item.scale-md { transform: translateY(-1px) scale(1.08); }
+
+  .dock-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dock-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  /* Tooltip sopra */
+  .dock-item::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: rgba(6,14,28,.92);
+    border: 1px solid rgba(56,189,248,.2);
+    color: #BAE6FD;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+  }
+
+  .dock-item.scale-xl::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Separator */
+  .dock-sep {
+    width: 1px;
+    height: 16px;
+    background: rgba(56,189,248,.15);
+    margin: 0 2px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* Icon colors */
+  .icon-home  svg { fill: #F0F9FF; }
+  .icon-articles svg { stroke: #7DD3FC; fill: none; }
+  .icon-search   svg { stroke: #38BDF8; fill: none; }
+  .icon-bio      svg { stroke: #BAE6FD; fill: none; }
+
+  /* ═══════════════════════
+     PAGE PREVIEW
+  ═══════════════════════ */
+  .page-content {
+    margin-top: 80px;
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .page-eyebrow {
+    font-size: 8px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(56,189,248,.5);
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-weight: 900;
+    font-size: 42px;
+    letter-spacing: -2px;
+    line-height: 1.0;
+    color: #F0F9FF;
+    margin-bottom: 16px;
+  }
+
+  .page-subtitle {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    color: rgba(186,230,253,.5);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(56,189,248,.2);
+    border-radius: 40px;
+    padding: 12px 20px;
+    max-width: 380px;
+    margin: 0 auto;
+    cursor: text;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .search-bar:hover {
+    border-color: rgba(56,189,248,.5);
+    box-shadow: 0 0 0 3px rgba(56,189,248,.08);
+  }
+
+  .search-bar svg { flex-shrink: 0; opacity: .45; }
+
+  .search-bar span {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(186,230,253,.3);
+    text-transform: uppercase;
+  }
+
+  .confirm-btn {
+    margin-top: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56,189,248,.1);
+    border: 1px solid rgba(56,189,248,.28);
+    border-radius: 40px;
+    padding: 10px 24px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #38BDF8;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    font-family: system-ui;
+  }
+
+  .confirm-btn:hover { background: rgba(56,189,248,.2); transform: scale(1.04); }
+</style>
+</head>
+<body>
+
+<p class="label-top">— Muovi il mouse sulle icone —</p>
+
+<nav class="navbar-pill" id="dock">
+
+  <!-- Home / Croce -->
+  <div class="dock-item icon-home" data-index="0" data-label="Home">
+    <div class="dock-icon">
+      <svg viewBox="0 0 20 20">
+        <rect x="9" y="2" width="2" height="16" fill="#F0F9FF"/>
+        <rect x="4" y="7" width="12" height="2"  fill="#F0F9FF"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="dock-sep"></div>
+
+  <!-- Articoli / Libro -->
+  <div class="dock-item icon-articles" data-index="1" data-label="Articoli">
+    <div class="dock-icon">
+      <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        <line x1="8" y1="7" x2="16" y2="7"/>
+        <line x1="8" y1="11" x2="13" y2="11"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Cerca / Lente -->
+  <div class="dock-item icon-search" data-index="2" data-label="Cerca">
+    <div class="dock-icon">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Biografia / Penna/Piuma -->
+  <div class="dock-item icon-bio" data-index="3" data-label="Biografia">
+    <div class="dock-icon">
+      <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+        <line x1="16" y1="8" x2="2" y2="22"/>
+        <line x1="17.5" y1="15" x2="9" y2="15"/>
+      </svg>
+    </div>
+  </div>
+
+</nav>
+
+<div class="page-content">
+  <p class="page-eyebrow">In evidenza</p>
+  <h1 class="page-title">La soglia<br>del mistero</h1>
+  <p class="page-subtitle">Riflessioni sulla presenza e sull'assenza di Dio nell'esperienza quotidiana e nel silenzio contemplativo.</p>
+  <div class="search-bar">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round">
+      <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+    </svg>
+    <span>Cerca tra gli articoli…</span>
+  </div>
+</div>
+
+<button class="confirm-btn" onclick="this.textContent='✓ Confermato! Procediamo.'">
+  ✓ &nbsp; Perfetto — andiamo con questo
+</button>
+
+<script>
+  const items = Array.from(document.querySelectorAll('.dock-item'));
+  const CLS = ['scale-xl', 'scale-lg', 'scale-md'];
+
+  items.forEach((item, i) => {
+    item.addEventListener('mouseenter', () => {
+      items.forEach(el => el.classList.remove(...CLS));
+      item.classList.add('scale-xl');
+      if (items[i-1]) items[i-1].classList.add('scale-lg');
+      if (items[i+1]) items[i+1].classList.add('scale-lg');
+      if (items[i-2]) items[i-2].classList.add('scale-md');
+      if (items[i+2]) items[i+2].classList.add('scale-md');
+    });
+  });
+
+  document.getElementById('dock').addEventListener('mouseleave', () => {
+    items.forEach(el => el.classList.remove(...CLS));
+  });
+</script>
+
+</body>
+</html>

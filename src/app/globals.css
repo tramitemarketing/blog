@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  /* Blu Marina palette */
+  --color-blu-notte:    #050C18;
+  --color-blu-marino:   #0C1B33;
+  --color-blu-profondo: #040810;
+  --color-blu-accento:  #38BDF8;
+  --color-blu-chiaro:   #7DD3FC;
+  --color-ghiaccio:     #F0F9FF;
+  --color-ghiaccio-soft: #BAE6FD;
+
+  /* Typography */
+  --font-sans: system-ui, Arial, sans-serif;
+  --font-serif: Georgia, serif;
+
+  --letter-spacing-widest: 4px;
+  --line-height-relaxed: 1.85;
+}
+
+:root {
+  --background: #050C18;
+  --foreground: #F0F9FF;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Tiptap article body styles */
+.article-body h2 {
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 2rem 0 0.75rem;
+  color: #F0F9FF;
+}
+
+.article-body h3 {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 1.5rem 0 0.5rem;
+  color: #F0F9FF;
+}
+
+.article-body p {
+  margin-bottom: 1.25rem;
+}
+
+.article-body strong {
+  color: #38BDF8;
+}
+
+.article-body em {
+  font-style: italic;
+}
+
+.article-body blockquote {
+  border-left: 3px solid #38BDF8;
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  font-size: 1.125rem;
+  color: #F0F9FF;
+}
+
+.article-body a {
+  color: #38BDF8;
+  text-decoration: underline;
+}
+
+.article-body a:hover {
+  color: #38BDF8;
+  opacity: 0.8;
+}
+
+.article-body img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+}

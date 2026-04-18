@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage — Creative Directions</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #040B16;
+  font-family: system-ui, sans-serif;
+  color: #F0F9FF;
+  padding: 40px 20px 100px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.page-header h1 {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(56,189,248,.45);
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(186,230,253,.35);
+}
+
+/* ═══ OPTION WRAPPER ═══ */
+.option-wrap {
+  max-width: 880px;
+  margin: 0 auto 56px;
+  border: 2px solid rgba(56,189,248,.08);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .3s, box-shadow .3s, transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+
+.option-wrap:hover {
+  border-color: rgba(56,189,248,.4);
+  box-shadow: 0 0 0 4px rgba(56,189,248,.06), 0 24px 70px rgba(14,165,233,.18);
+  transform: translateY(-4px);
+}
+
+.option-wrap.selected {
+  border-color: #38BDF8;
+  box-shadow: 0 0 0 5px rgba(56,189,248,.12), 0 28px 70px rgba(14,165,233,.22);
+}
+
+.option-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 22px;
+  background: rgba(255,255,255,.025);
+  border-top: 1px solid rgba(56,189,248,.08);
+}
+
+.option-footer h3 { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #7DD3FC; }
+.option-footer p  { font-size: 11px; color: rgba(186,230,253,.35); font-family: Georgia, serif; font-style: italic; margin-top: 3px; }
+
+.check {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1.5px solid rgba(56,189,248,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: transparent;
+  transition: all .2s; flex-shrink: 0;
+}
+.selected .check { background: #38BDF8; border-color: #38BDF8; color: #040B16; font-weight: 900; }
+
+/* ═══ MINI NAVBAR (shared) ═══ */
+.mini-nav {
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px 22px;
+}
+
+.mini-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(56,189,248,.15);
+  border-radius: 30px;
+  padding: 7px 18px;
+}
+
+.mini-pill .lbl { font-weight: 900; font-size: 10px; letter-spacing: 4px; color: #F0F9FF; }
+.mini-pill .sep-v { width: 1px; height: 12px; background: rgba(56,189,248,.2); }
+.mini-pill .ico { width: 13px; height: 13px; display: block; }
+
+
+/* ════════════════════════════════════════════════
+   OPTION D — ARCHIVIO
+   Huge watermark + index cards staggered
+════════════════════════════════════════════════ */
+.preview-d {
+  background: #060E1C;
+  position: relative;
+  overflow: hidden;
+}
+
+.watermark {
+  position: absolute;
+  top: -10px; right: -20px;
+  font-weight: 900;
+  font-size: 160px;
+  letter-spacing: -8px;
+  color: rgba(56,189,248,.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  font-style: italic;
+}
+
+.hero-d {
+  padding: 28px 28px 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-d-title {
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: -2.5px;
+  line-height: .95;
+  color: #F0F9FF;
+}
+
+.hero-d-title .thin {
+  font-weight: 300;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: rgba(186,230,253,.35);
+  font-size: 36px;
+  display: block;
+}
+
+.hero-d-meta {
+  text-align: right;
+}
+
+.hero-d-meta .num {
+  font-weight: 900;
+  font-size: 48px;
+  color: rgba(56,189,248,.15);
+  line-height: 1;
+}
+
+.hero-d-meta .sub {
+  font-size: 7px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(56,189,248,.3);
+}
+
+/* Ticker marquee */
+.ticker-wrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(56,189,248,.08);
+  border-bottom: 1px solid rgba(56,189,248,.08);
+  background: rgba(56,189,248,.03);
+  padding: 7px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.ticker-inner {
+  display: flex;
+  gap: 0;
+  animation: ticker 18s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 28px;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(186,230,253,.3);
+  flex-shrink: 0;
+}
+
+.ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(56,189,248,.4); flex-shrink: 0; }
+
+/* Search -->  index cards area */
+.d-bottom {
+  padding: 20px 28px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.d-search {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(56,189,248,.18);
+  border-radius: 6px;
+  padding: 10px 16px;
+  grid-column: span 2;
+}
+
+.d-search span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.25); }
+.d-search .kbd { margin-left: auto; font-size: 8px; background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.18); border-radius: 4px; padding: 2px 8px; color: rgba(56,189,248,.5); }
+
+/* Index card (staggered) */
+.index-card {
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(56,189,248,.1);
+  border-radius: 8px;
+  padding: 16px 18px;
+  position: relative;
+  transition: background .2s, border-color .2s;
+}
+
+.index-card.featured {
+  background: rgba(56,189,248,.06);
+  border-color: rgba(56,189,248,.2);
+}
+
+.index-card .card-num {
+  font-weight: 900;
+  font-size: 36px;
+  color: rgba(56,189,248,.08);
+  line-height: 1;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+}
+
+.index-card .card-tag { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: rgba(56,189,248,.5); margin-bottom: 8px; }
+.index-card .card-title { font-size: 13px; font-weight: 700; color: #F0F9FF; line-height: 1.3; margin-bottom: 6px; }
+.index-card .card-excerpt { font-family: Georgia; font-size: 10px; color: rgba(186,230,253,.4); line-height: 1.5; }
+.index-card .card-date { margin-top: 10px; font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.25); }
+.index-card .card-cta { margin-top: 8px; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #38BDF8; opacity: .7; }
+
+
+/* ════════════════════════════════════════════════
+   OPTION E — DEPTH STACK
+   3D-stacked cards, hero full left, stack right
+════════════════════════════════════════════════ */
+.preview-e {
+  background: linear-gradient(150deg, #08111F 0%, #0B1830 100%);
+}
+
+.layout-e {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  min-height: 340px;
+}
+
+.hero-e {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid rgba(56,189,248,.07);
+}
+
+.hero-e-title {
+  font-weight: 900;
+  font-size: 50px;
+  letter-spacing: -3px;
+  line-height: .88;
+  color: #F0F9FF;
+}
+
+.hero-e-title .accent {
+  display: block;
+  background: linear-gradient(90deg, #38BDF8, #0EA5E9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-e-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-e-desc {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(186,230,253,.4);
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+.hero-e-search {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(56,189,248,.18);
+  border-radius: 40px;
+  padding: 10px 18px;
+  max-width: 260px;
+}
+
+.hero-e-search span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.25); }
+
+/* 3D card stack */
+.stack-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  position: relative;
+}
+
+.card-stack {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.stack-card {
+  position: absolute;
+  width: 210px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(56,189,248,.12);
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+}
+
+.stack-card:nth-child(1) {
+  top: 0; left: 10px;
+  transform: rotate(-4deg) translateY(16px);
+  z-index: 1;
+  background: rgba(255,255,255,.03);
+  border-color: rgba(56,189,248,.07);
+}
+
+.stack-card:nth-child(2) {
+  top: 0; left: 5px;
+  transform: rotate(-2deg) translateY(8px);
+  z-index: 2;
+  background: rgba(255,255,255,.045);
+  border-color: rgba(56,189,248,.1);
+}
+
+.stack-card:nth-child(3) {
+  top: 0; left: 0;
+  transform: rotate(0deg);
+  z-index: 3;
+  background: rgba(56,189,248,.07);
+  border-color: rgba(56,189,248,.22);
+  box-shadow: 0 16px 40px rgba(14,165,233,.15);
+}
+
+.stack-card-tag { font-size: 6px; letter-spacing: 3px; text-transform: uppercase; color: rgba(56,189,248,.6); margin-bottom: 8px; }
+.stack-card-title { font-size: 13px; font-weight: 700; color: #F0F9FF; line-height: 1.3; margin-bottom: 8px; }
+.stack-card-excerpt { font-family: Georgia; font-size: 10px; color: rgba(186,230,253,.4); line-height: 1.5; }
+.stack-card-cta { margin-top: 12px; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #38BDF8; opacity: .7; }
+
+/* Hint below stack */
+.stack-hint {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(56,189,248,.3);
+}
+
+/* Article list below grid-e */
+.e-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(56,189,248,.07);
+}
+
+.e-list-item {
+  padding: 16px 20px;
+  border-right: 1px solid rgba(56,189,248,.07);
+  position: relative;
+}
+
+.e-list-item:last-child { border-right: none; }
+
+.e-num { font-weight: 900; font-size: 10px; color: rgba(56,189,248,.3); letter-spacing: 2px; margin-bottom: 6px; }
+.e-title { font-size: 11px; font-weight: 700; color: rgba(240,249,255,.8); line-height: 1.3; margin-bottom: 4px; }
+.e-date  { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.25); }
+
+
+/* ════════════════════════════════════════════════
+   OPTION F — MANIFESTO
+   Full-width poetry-style title + grid reveal
+════════════════════════════════════════════════ */
+.preview-f {
+  background: #050C18;
+}
+
+.hero-f {
+  padding: 36px 28px 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(56,189,248,.06);
+}
+
+/* Decorative vertical line */
+.hero-f::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #38BDF8, rgba(56,189,248,0));
+}
+
+.hero-f-inner {
+  padding-left: 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.hero-f-text {}
+
+.hero-f-eyebrow {
+  font-size: 7px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(56,189,248,.4);
+  margin-bottom: 14px;
+}
+
+/* Big stacked word layout */
+.hero-f-title {
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: .9;
+  color: #F0F9FF;
+}
+
+.hero-f-title .line-1 { font-size: 52px; display: block; }
+.hero-f-title .line-2 { font-size: 52px; display: block; color: transparent; -webkit-text-stroke: 1px rgba(56,189,248,.35); }
+.hero-f-title .line-3 {
+  font-size: 34px; display: block;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -1px;
+  color: rgba(186,230,253,.3);
+  margin-top: 4px;
+}
+
+.hero-f-right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.hero-f-quote {
+  font-family: Georgia;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(186,230,253,.4);
+  line-height: 1.7;
+  text-align: right;
+  max-width: 200px;
+  border-right: 2px solid rgba(56,189,248,.25);
+  padding-right: 14px;
+}
+
+/* Search full strip */
+.f-search-strip {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 52px;
+  background: rgba(56,189,248,.04);
+  border-bottom: 1px solid rgba(56,189,248,.08);
+}
+
+.f-search-strip span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(186,230,253,.25); }
+.f-search-strip .kbd { margin-left: auto; font-size: 8px; background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.18); border-radius: 4px; padding: 2px 8px; color: rgba(56,189,248,.5); }
+
+/* Masonry-ish 3-col grid with alternating sizes */
+.f-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+}
+
+.f-card {
+  padding: 22px 22px;
+  border-right: 1px solid rgba(56,189,248,.06);
+  border-bottom: 1px solid rgba(56,189,248,.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.f-card:nth-child(3), .f-card:nth-child(4), .f-card:nth-child(6) { border-right: none; }
+.f-card:nth-child(4), .f-card:nth-child(5), .f-card:nth-child(6) { border-bottom: none; }
+
+.f-card.hero-card {
+  grid-row: span 2;
+  background: rgba(56,189,248,.05);
+  border-color: rgba(56,189,248,.12);
+}
+
+.f-card .bg-num {
+  position: absolute;
+  right: -8px; bottom: -10px;
+  font-weight: 900;
+  font-size: 80px;
+  color: rgba(56,189,248,.04);
+  line-height: 1;
+  letter-spacing: -4px;
+  pointer-events: none;
+}
+
+.f-tag { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: rgba(56,189,248,.5); margin-bottom: 10px; }
+.f-title { font-size: 14px; font-weight: 700; color: #F0F9FF; line-height: 1.3; margin-bottom: 8px; }
+.f-title.big { font-size: 18px; }
+.f-excerpt { font-family: Georgia; font-size: 10px; color: rgba(186,230,253,.4); line-height: 1.55; }
+.f-cta { margin-top: 14px; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: #38BDF8; opacity: .7; }
+.f-date { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(186,230,253,.2); margin-bottom: 6px; }
+
+/* SVG shared */
+.ico { width: 13px; height: 13px; display: block; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Direzioni creative avanzate</h1>
+  <p>Partendo dall'anima del layout C — tre varianti più audaci</p>
+</div>
+
+<!-- ════════════════════════
+     OPTION D — ARCHIVIO
+════════════════════════ -->
+<div class="option-wrap" onclick="pick(this,'d')">
+  <div class="preview-d">
+    <div class="watermark">SOGLIA</div>
+
+    <div class="mini-nav" style="background:transparent;border-bottom:1px solid rgba(56,189,248,.06);">
+      <div class="mini-pill">
+        <span class="lbl">✛ SOGLIA</span>
+        <span class="sep-v"></span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+      </div>
+    </div>
+
+    <div class="hero-d">
+      <div class="hero-d-title">
+        Pensieri<br>
+        <span class="thin">alla soglia</span>
+      </div>
+      <div class="hero-d-meta">
+        <div class="num">47</div>
+        <div class="sub">articoli pubblicati</div>
+      </div>
+    </div>
+
+    <!-- Ticker -->
+    <div class="ticker-wrap">
+      <div class="ticker-inner">
+        <span class="ticker-item"><span class="ticker-dot"></span>La soglia del mistero</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Il silenzio come linguaggio</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Corpo e spirito nella teologia</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Il tempo liturgico e la memoria</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Fede e ragione in dialogo</span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker-item"><span class="ticker-dot"></span>La soglia del mistero</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Il silenzio come linguaggio</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Corpo e spirito nella teologia</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Il tempo liturgico e la memoria</span>
+        <span class="ticker-item"><span class="ticker-dot"></span>Fede e ragione in dialogo</span>
+      </div>
+    </div>
+
+    <div class="d-bottom">
+      <div class="d-search">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <span>Cerca tra gli articoli…</span>
+        <span class="kbd">⌘K</span>
+      </div>
+
+      <div class="index-card featured">
+        <div class="card-num">01</div>
+        <p class="card-tag">↗ In evidenza</p>
+        <p class="card-title">La soglia del mistero — dove la fede incontra il dubbio</p>
+        <p class="card-excerpt">Riflessioni sulla presenza di Dio nell'esperienza quotidiana…</p>
+        <p class="card-cta">Leggi →</p>
+      </div>
+
+      <div class="index-card">
+        <div class="card-num">02</div>
+        <p class="card-tag">Recente</p>
+        <p class="card-title">Il silenzio come linguaggio di Dio</p>
+        <p class="card-excerpt">Lectio divina e preghiera contemplativa nella vita moderna…</p>
+        <p class="card-date">12 apr 2026</p>
+      </div>
+
+      <div class="index-card">
+        <div class="card-num">03</div>
+        <p class="card-tag">Recente</p>
+        <p class="card-title">Corpo e spirito nella teologia moderna</p>
+        <p class="card-excerpt">Il dualismo superato dalla fenomenologia…</p>
+        <p class="card-date">5 apr 2026</p>
+      </div>
+    </div>
+  </div>
+  <div class="option-footer">
+    <div>
+      <h3>D — Archivio Vivente</h3>
+      <p>Watermark gigante + ticker animato dei titoli + card a schema archivio. Conteggio articoli in evidenza.</p>
+    </div>
+    <div class="check">✓</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════
+     OPTION E — DEPTH STACK
+════════════════════════ -->
+<div class="option-wrap" onclick="pick(this,'e')">
+  <div class="preview-e">
+
+    <div class="mini-nav" style="border-bottom:1px solid rgba(56,189,248,.06);">
+      <div class="mini-pill">
+        <span class="lbl">✛ SOGLIA</span>
+        <span class="sep-v"></span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+      </div>
+    </div>
+
+    <div class="layout-e">
+      <div class="hero-e">
+        <h2 class="hero-e-title">
+          Pensieri<br>alla<br>
+          <span class="accent">soglia</span>
+        </h2>
+        <div class="hero-e-bottom">
+          <p class="hero-e-desc">Riflessioni filosofiche, teologiche ed esistenziali di un sacerdote in dialogo con il mondo.</p>
+          <div class="hero-e-search">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+            <span>Cerca…</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-side">
+        <div class="card-stack">
+          <!-- back card -->
+          <div class="stack-card">
+            <p class="stack-card-tag">Recente</p>
+            <p class="stack-card-title">Il tempo liturgico e la memoria vivente</p>
+          </div>
+          <!-- middle card -->
+          <div class="stack-card">
+            <p class="stack-card-tag">Recente</p>
+            <p class="stack-card-title">Corpo e spirito nella teologia moderna</p>
+          </div>
+          <!-- front card -->
+          <div class="stack-card">
+            <p class="stack-card-tag">↗ In evidenza</p>
+            <p class="stack-card-title">La soglia del mistero — dove la fede incontra il dubbio</p>
+            <p class="stack-card-excerpt">Riflessioni sulla presenza di Dio nell'esperienza quotidiana…</p>
+            <p class="stack-card-cta">Leggi →</p>
+          </div>
+        </div>
+        <span class="stack-hint">↑ sfoglia gli articoli</span>
+      </div>
+    </div>
+
+    <!-- Article strip -->
+    <div class="e-list">
+      <div class="e-list-item">
+        <p class="e-num">— 02</p>
+        <p class="e-title">Il silenzio come linguaggio di Dio</p>
+        <p class="e-date">12 apr 2026</p>
+      </div>
+      <div class="e-list-item">
+        <p class="e-num">— 03</p>
+        <p class="e-title">Corpo e spirito nella teologia</p>
+        <p class="e-date">5 apr 2026</p>
+      </div>
+      <div class="e-list-item">
+        <p class="e-num">— 04</p>
+        <p class="e-title">Il tempo liturgico e la memoria</p>
+        <p class="e-date">28 mar 2026</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="option-footer">
+    <div>
+      <h3>E — Depth Stack</h3>
+      <p>Card articoli impilate in 3D a destra del titolo. Effetto "mazzo di carte" — sfogliabile. Molto unico.</p>
+    </div>
+    <div class="check">✓</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════
+     OPTION F — MANIFESTO
+════════════════════════ -->
+<div class="option-wrap" onclick="pick(this,'f')">
+  <div class="preview-f">
+
+    <div class="mini-nav" style="border-bottom:1px solid rgba(56,189,248,.06);">
+      <div class="mini-pill">
+        <span class="lbl">✛ SOGLIA</span>
+        <span class="sep-v"></span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+      </div>
+    </div>
+
+    <div class="hero-f">
+      <div class="hero-f-inner">
+        <div class="hero-f-text">
+          <p class="hero-f-eyebrow">Riflessioni di un sacerdote</p>
+          <h2 class="hero-f-title">
+            <span class="line-1">PENSIERI</span>
+            <span class="line-2">ALLA</span>
+            <span class="line-3">soglia del tempo</span>
+          </h2>
+        </div>
+        <div class="hero-f-right">
+          <blockquote class="hero-f-quote">
+            "La fede non è certezza, è fiducia nel buio — e nel buio si impara a vedere."
+          </blockquote>
+          <p style="font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(56,189,248,.3);">Thomas Merton</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-search-strip">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <span>Cerca tra gli articoli…</span>
+      <span class="kbd">⌘K</span>
+    </div>
+
+    <div class="f-grid">
+      <!-- Featured big -->
+      <div class="f-card hero-card">
+        <p class="f-tag">↗ In evidenza</p>
+        <div class="bg-num">01</div>
+        <p class="f-title big">La soglia del mistero — dove la fede incontra il dubbio esistenziale</p>
+        <p class="f-excerpt">Riflessioni sulla presenza e sull'assenza di Dio nell'esperienza quotidiana e nel silenzio contemplativo della vita spirituale. Un viaggio attraverso il dubbio come atto di fede…</p>
+        <p class="f-cta">Leggi l'articolo →</p>
+      </div>
+
+      <!-- Top right 1 -->
+      <div class="f-card">
+        <p class="f-tag">Recente</p>
+        <div class="bg-num">02</div>
+        <p class="f-date">12 apr 2026</p>
+        <p class="f-title">Il silenzio come linguaggio di Dio</p>
+        <p class="f-excerpt">Lectio divina e contemplazione nella vita moderna…</p>
+      </div>
+
+      <!-- Top right 2 -->
+      <div class="f-card">
+        <p class="f-tag">Recente</p>
+        <div class="bg-num">03</div>
+        <p class="f-date">5 apr 2026</p>
+        <p class="f-title">Corpo e spirito</p>
+        <p class="f-excerpt">Il dualismo superato dalla fenomenologia contemporanea…</p>
+      </div>
+
+      <!-- Bottom right 1 -->
+      <div class="f-card">
+        <p class="f-tag">Archivio</p>
+        <div class="bg-num">04</div>
+        <p class="f-date">28 mar 2026</p>
+        <p class="f-title">Il tempo liturgico</p>
+        <p class="f-excerpt">La memoria come atto spirituale…</p>
+      </div>
+
+      <!-- Bottom right 2 -->
+      <div class="f-card" style="background:rgba(56,189,248,.04);display:flex;align-items:flex-end;">
+        <div>
+          <p style="font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(56,189,248,.4);margin-bottom:8px;">Tutti gli articoli</p>
+          <p style="font-size:13px;font-weight:700;color:#38BDF8;">→ Archivio completo</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="option-footer">
+    <div>
+      <h3>F — Manifesto Tipografico</h3>
+      <p>Titolo outline/pieno alternato, linea verticale azzurra, grid asimmetrico. Arte + blog. Estremamente originale.</p>
+    </div>
+    <div class="check">✓</div>
+  </div>
+</div>
+
+<script>
+  function pick(el, choice) {
+    document.querySelectorAll('.option-wrap').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    try { window.parent.postMessage({ type:'choice', choice }, '*'); } catch(e) {}
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<h2>Navbar A — revisione allineamento</h2>
+<p class="subtitle">Croce + SOGLIA + links + search, tutto su una riga perfettamente allineata. Ecco come appare.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Preview — Pillola Fluttuante (tutto in linea)</div>
+  <div class="mockup-body" style="background:linear-gradient(135deg,#0C1B33 0%,#163A6F 100%);padding:24px 16px 60px;">
+
+    <!-- THE NAVBAR -->
+    <div style="
+      background:rgba(255,255,255,.06);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      border:1px solid rgba(56,189,248,.2);
+      border-radius:40px;
+      padding:0 24px;
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    ">
+      <!-- Left: cross + wordmark in single flex row, same baseline -->
+      <div style="display:flex;align-items:center;gap:10px;line-height:1;">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;display:block;">
+          <rect x="9" y="2" width="2" height="16" fill="#F0F9FF"/>
+          <rect x="4" y="7" width="12" height="2" fill="#F0F9FF"/>
+        </svg>
+        <span style="font-family:system-ui;font-weight:900;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:#F0F9FF;line-height:1;">SOGLIA</span>
+      </div>
+
+      <!-- Right: links + search icon, same baseline -->
+      <div style="display:flex;align-items:center;gap:24px;line-height:1;">
+        <a style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.75;line-height:1;text-decoration:none;">Articoli</a>
+        <a style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.75;line-height:1;text-decoration:none;">Biografia</a>
+        <div style="width:1px;height:14px;background:rgba(56,189,248,.2);"></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" style="opacity:.75;display:block;">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Page content below for context -->
+    <div style="padding:40px 8px 0;">
+      <div style="font-family:system-ui;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:#38BDF8;opacity:.5;margin-bottom:12px;">In evidenza</div>
+      <div style="font-family:system-ui;font-weight:900;font-size:26px;color:#F0F9FF;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;">La soglia del mistero</div>
+      <div style="font-family:Georgia;font-size:13px;color:#BAE6FD;opacity:.5;line-height:1.6;">Riflessioni sulla presenza e sull'assenza di Dio nell'esperienza quotidiana…</div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:24px;padding:16px;border:1px solid rgba(56,189,248,.15);border-radius:8px;font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;">
+  <strong style="color:rgba(56,189,248,.8);">Cosa è cambiato:</strong> croce SVG e "SOGLIA" sono nello stesso <code>flex row</code> con <code>align-items:center</code> — zero disallineamenti verticali. Stesso per links + icona search a destra.
+</div>
+
+<div style="margin-top:16px;text-align:center;">
+  <div class="option" data-choice="ok" onclick="toggleSelect(this)" style="max-width:300px;margin:0 auto;">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>Confermo questo stile</h3>
+      <p>Procediamo con l'homepage</p>
+    </div>
+  </div>
+</div>

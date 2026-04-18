@@ -1,0 +1,91 @@
+<h2>Quale navbar ti convince?</h2>
+<p class="subtitle">Palette Marina (blu marino + azzurro). Clicca per selezionare la tua preferita.</p>
+
+<div class="cards">
+
+  <!-- Option A: Glass floating -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0C1B33,#163A6F);padding:0;height:200px;position:relative;overflow:hidden;">
+      <!-- Navbar glass pill -->
+      <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:90%;background:rgba(255,255,255,.06);backdrop-filter:blur(12px);border:1px solid rgba(56,189,248,.2);border-radius:40px;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-family:system-ui;font-weight:900;font-size:11px;letter-spacing:4px;color:#F0F9FF;">✛ SOGLIA</div>
+        <div style="display:flex;gap:20px;">
+          <span style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.7;">Articoli</span>
+          <span style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.7;">Biografia</span>
+        </div>
+        <div style="width:28px;height:28px;border-radius:50%;border:1px solid rgba(56,189,248,.4);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:12px;color:#38BDF8;">⌕</span>
+        </div>
+      </div>
+      <!-- Page content hint -->
+      <div style="position:absolute;bottom:24px;left:24px;right:24px;">
+        <div style="font-family:system-ui;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#38BDF8;opacity:.6;margin-bottom:8px;">In evidenza</div>
+        <div style="font-family:system-ui;font-weight:900;font-size:20px;color:#F0F9FF;letter-spacing:-0.5px;">La soglia del mistero</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Pillola Fluttuante</h3>
+      <p>Navbar a pill centrata, effetto vetro smerigliato, con icona search integrata. Moderna, leggera. Flotta sopra il contenuto.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Bold horizontal with accent line -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0C1B33,#163A6F);padding:0;height:200px;position:relative;overflow:hidden;">
+      <!-- Navbar bold -->
+      <div style="background:#060E1C;border-bottom:2px solid #38BDF8;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-family:system-ui;font-weight:900;font-size:13px;letter-spacing:5px;color:#F0F9FF;">✛ SOGLIA</div>
+        <div style="display:flex;gap:28px;align-items:center;">
+          <span style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.6;">Articoli</span>
+          <span style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.6;">Biografia</span>
+          <div style="background:#38BDF8;color:#060E1C;font-family:system-ui;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:2px;">Cerca</div>
+        </div>
+      </div>
+      <!-- Page content hint -->
+      <div style="padding:24px 28px;">
+        <div style="font-family:system-ui;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#38BDF8;opacity:.5;margin-bottom:8px;">In evidenza</div>
+        <div style="font-family:system-ui;font-weight:900;font-size:20px;color:#F0F9FF;letter-spacing:-0.5px;">La soglia del mistero</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Bold con Linea Azzurra</h3>
+      <p>Navbar scura e netta, bordo azzurro in basso come firma cromatica. CTA "Cerca" visibile. Autorevole, editoriale.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Asymmetric / Split -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0C1B33,#163A6F);padding:0;height:200px;position:relative;overflow:hidden;">
+      <!-- Navbar split: left colored band + content -->
+      <div style="display:flex;height:56px;">
+        <div style="width:5px;background:linear-gradient(180deg,#38BDF8,#0EA5E9);flex-shrink:0;"></div>
+        <div style="background:rgba(6,14,28,.9);flex:1;padding:0 24px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="font-family:system-ui;font-weight:900;font-size:13px;letter-spacing:5px;color:#F0F9FF;">SOGLIA</div>
+            <div style="width:1px;height:18px;background:rgba(56,189,248,.2);"></div>
+            <span style="font-family:Georgia;font-size:10px;color:#7DD3FC;font-style:italic;">Riflessioni dal confine</span>
+          </div>
+          <div style="display:flex;gap:24px;align-items:center;">
+            <span style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.6;">Articoli</span>
+            <span style="font-family:system-ui;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#BAE6FD;opacity:.6;">Biografia</span>
+            <span style="font-size:14px;color:#38BDF8;opacity:.7;">⌕</span>
+          </div>
+        </div>
+      </div>
+      <!-- Page content hint -->
+      <div style="padding:20px 28px;">
+        <div style="font-family:system-ui;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#38BDF8;opacity:.5;margin-bottom:8px;">In evidenza</div>
+        <div style="font-family:system-ui;font-weight:900;font-size:20px;color:#F0F9FF;letter-spacing:-0.5px;">La soglia del mistero</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Striscia Laterale + Sottotitolo</h3>
+      <p>Barra verticale azzurra sul lato sinistro come elemento di firma. Logo + sottotitolo in corsivo. Unica, riconoscibile, elegante.</p>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:24px;font-size:12px;color:rgba(255,255,255,.4);line-height:1.6;">
+  La search bar dell'homepage sarà separata dalla navbar — integrata nell'hero ridimensionato. Qui scegliamo solo lo stile della barra di navigazione.
+</div>
