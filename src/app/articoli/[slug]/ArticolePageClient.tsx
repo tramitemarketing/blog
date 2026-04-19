@@ -7,6 +7,8 @@ import CommentsSection from '@/components/article/CommentsSection'
 import { getArticleBySlug } from '@/lib/firestore'
 import { getReadingTime } from '@/lib/utils'
 import type { Article } from '@/types'
+import { useIsMobile } from '@/hooks/useIsMobile'
+import MobileArticleHeader from '@/components/articoli/MobileArticleHeader'
 
 export default function ArticolePage() {
   const params = useParams<{ slug: string }>()
@@ -39,10 +41,15 @@ export default function ArticolePage() {
   }
 
   const readingTime = getReadingTime(article.wordCount)
+  const isMobile = useIsMobile()
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-20">
+    <>
+      {isMobile && (
+        <MobileArticleHeader title={article.title} readingTime={readingTime} />
+      )}
+      <div className="max-w-2xl mx-auto px-6 py-20">
       {/* Meta */}
       <div className="flex items-center gap-4 mb-8">
         <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/30">
@@ -85,5 +92,6 @@ export default function ArticolePage() {
       {/* Comments */}
       <CommentsSection articleId={article.id} />
     </div>
+    </>
   )
 }
