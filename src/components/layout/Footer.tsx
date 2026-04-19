@@ -5,13 +5,41 @@ export default function Footer() {
         <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/40">
           SOGLIA · Riflessioni di un sacerdote
         </p>
+
         <a
           href="https://tramite-marketing.pages.dev"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-sans text-[10px] uppercase tracking-[4px] text-blu-chiaro/50 hover:text-blu-chiaro transition-colors"
+          className="opacity-70 hover:opacity-100 transition-opacity duration-150"
+          style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}
         >
-          TramiteMarketing
+          {/* Bollino rosso con freccia bianca — logo Tramite */}
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 18,
+            height: 18,
+            borderRadius: '50%',
+            background: '#E8333A',
+            flexShrink: 0,
+          }}>
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+
+          <span
+            className="font-sans uppercase"
+            style={{
+              fontSize: 10,
+              fontWeight: 600,
+              letterSpacing: '3px',
+              color: 'rgba(240,249,255,.75)',
+            }}
+          >
+            Made by Tramite
+          </span>
         </a>
       </div>
     </footer>
