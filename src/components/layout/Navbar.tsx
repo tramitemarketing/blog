@@ -86,7 +86,7 @@ export default function Navbar() {
   const [active, setActive] = useState<number | null>(null)
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-center py-4 px-6">
+    <nav className="navbar sticky top-0 z-50 flex justify-center py-4 px-6">
       <div
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => { setOpen(false); setActive(null) }}
