@@ -44,14 +44,15 @@ body {
 }
 
 .enter {
-  animation: soglia-enter 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: soglia-enter 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.enter-d1 { animation-delay: 0.10s; }
-.enter-d2 { animation-delay: 0.25s; }
-.enter-d3 { animation-delay: 0.40s; }
-.enter-d4 { animation-delay: 0.55s; }
-.enter-d5 { animation-delay: 0.70s; }
-.enter-d6 { animation-delay: 0.85s; }
+.enter-d0 { animation-delay: 0.30s; }
+.enter-d1 { animation-delay: 0.65s; }
+.enter-d2 { animation-delay: 1.00s; }
+.enter-d3 { animation-delay: 1.30s; }
+.enter-d4 { animation-delay: 1.60s; }
+.enter-d5 { animation-delay: 1.90s; }
+.enter-d6 { animation-delay: 2.20s; }
 
 /* ─── Tiptap article body styles ─── */
 .article-body h2 {
