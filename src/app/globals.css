@@ -43,6 +43,23 @@ body {
   }
 }
 
+@keyframes soglia-enter-top {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.enter-from-top {
+  animation: soglia-enter-top 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .enter {
   animation: soglia-enter 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
