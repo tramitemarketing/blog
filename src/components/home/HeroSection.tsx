@@ -22,7 +22,7 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
         {/* Colonna sinistra — titolo manifesto */}
         <div className="flex flex-col justify-between gap-8">
           <div>
-            <p className="font-sans text-[8px] uppercase tracking-[5px] text-blu-accento/40 mb-4">
+            <p className="font-sans text-[8px] uppercase tracking-[5px] text-blu-accento/40 mb-4 enter enter-d1">
               Riflessioni di un sacerdote
             </p>
 
@@ -32,13 +32,13 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
               style={{ letterSpacing: '-3px' }}
             >
               <span
-                className="block text-ghiaccio"
+                className="block text-ghiaccio enter enter-d2"
                 style={{ fontSize: 'clamp(2.8rem, 6vw, 3.5rem)' }}
               >
                 PENSIERI
               </span>
               <span
-                className="block"
+                className="block enter enter-d3"
                 style={{
                   fontSize: 'clamp(2.8rem, 6vw, 3.5rem)',
                   WebkitTextStroke: '1px rgba(56,189,248,.35)',
@@ -48,7 +48,7 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
                 ALLA
               </span>
               <span
-                className="block font-serif font-light italic text-ghiaccio/30"
+                className="block font-serif font-light italic text-ghiaccio/30 enter enter-d4"
                 style={{
                   fontSize: 'clamp(1.8rem, 4vw, 2.4rem)',
                   letterSpacing: '-1px',
@@ -61,7 +61,7 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
 
           {/* Articolo in evidenza — link sotto il titolo */}
           {featuredArticle && (
-            <div className="flex flex-col gap-2 max-w-sm">
+            <div className="flex flex-col gap-2 max-w-sm enter enter-d5">
               <p className="font-sans text-[7px] uppercase tracking-[3px] text-blu-accento/50">
                 ↗ In evidenza
               </p>
@@ -80,7 +80,7 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
 
         {/* Colonna destra — citazione */}
         <div
-          className="flex flex-col justify-center gap-3 pl-6"
+          className="flex flex-col justify-center gap-3 pl-6 enter enter-d6"
           style={{ borderLeft: '2px solid rgba(56,189,248,.2)' }}
         >
           {citazione ? (

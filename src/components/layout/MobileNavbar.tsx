@@ -81,6 +81,7 @@ export default function MobileNavbar() {
   return (
     <nav
       aria-label="Navigazione mobile"
+      className="enter"
       style={{
         position: 'fixed',
         bottom: 20,
