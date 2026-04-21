@@ -29,7 +29,49 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Tiptap article body styles */
+/* ─── Entrance animation — blur-in stagger ─── */
+@keyframes soglia-enter {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes soglia-enter-top {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.enter-from-top {
+  animation: soglia-enter-top 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.enter {
+  animation: soglia-enter 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.enter-d0 { animation-delay: 0.30s; }
+.enter-d1 { animation-delay: 0.65s; }
+.enter-d2 { animation-delay: 1.00s; }
+.enter-d3 { animation-delay: 1.30s; }
+.enter-d4 { animation-delay: 1.60s; }
+.enter-d5 { animation-delay: 1.90s; }
+.enter-d6 { animation-delay: 2.20s; }
+
+/* ─── Tiptap article body styles ─── */
 .article-body h2 {
   font-family: Georgia, serif;
   font-size: 1.5rem;
