@@ -10,16 +10,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter()
   const pathname = usePathname()
 
+  const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/'
+
   useEffect(() => {
-    if (!loading && !user && pathname !== '/admin/login') {
+    if (!loading && !user && !isLoginPage) {
       router.replace('/admin/login')
     }
-  }, [user, loading, pathname, router])
+  }, [user, loading, isLoginPage, router])
 
+  if (isLoginPage) return <>{children}</>
   if (loading) return null
-  if (!user && pathname !== '/admin/login') return null
-
-  if (pathname === '/admin/login') return <>{children}</>
+  if (!user) return null
 
   return (
     <div className="min-h-screen bg-viola-profondo">

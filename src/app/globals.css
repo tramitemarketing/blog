@@ -10,6 +10,12 @@
   --color-ghiaccio:     #F0F9FF;
   --color-ghiaccio-soft: #BAE6FD;
 
+  /* Viola / Admin palette */
+  --color-viola-profondo: #0D0A1A;
+  --color-viola-notte:    #130F24;
+  --color-viola-vivace:   #7C3AED;
+  --color-oro:            #D4A843;
+
   /* Typography */
   --font-sans: system-ui, Arial, sans-serif;
   --font-serif: Georgia, serif;
