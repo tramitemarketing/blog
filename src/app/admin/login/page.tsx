@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
     }
   }
 
-  if (loading) return null
+  if (loading) return <p style={{color:'white'}}>Loading...</p>
 
   return (
     <div className="min-h-screen bg-viola-profondo flex items-center justify-center px-6">
