@@ -28,24 +28,26 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
 
   if (!editor) return null
 
-  function toggleBold() { editor.chain().focus().toggleBold().run() }
-  function toggleItalic() { editor.chain().focus().toggleItalic().run() }
-  function toggleBlockquote() { editor.chain().focus().toggleBlockquote().run() }
-  function toggleH2() { editor.chain().focus().toggleHeading({ level: 2 }).run() }
-  function toggleH3() { editor.chain().focus().toggleHeading({ level: 3 }).run() }
+  const e = editor
+
+  function toggleBold() { e.chain().focus().toggleBold().run() }
+  function toggleItalic() { e.chain().focus().toggleItalic().run() }
+  function toggleBlockquote() { e.chain().focus().toggleBlockquote().run() }
+  function toggleH2() { e.chain().focus().toggleHeading({ level: 2 }).run() }
+  function toggleH3() { e.chain().focus().toggleHeading({ level: 3 }).run() }
 
   function setLink() {
     const url = prompt('URL del link:')
     if (url) {
-      editor.chain().focus().setLink({ href: url }).run()
+      e.chain().focus().setLink({ href: url }).run()
     } else {
-      editor.chain().focus().unsetLink().run()
+      e.chain().focus().unsetLink().run()
     }
   }
 
   function insertImage() {
     const url = prompt('URL immagine (ImgBB / Cloudinary):')
-    if (url) editor.chain().focus().setImage({ src: url }).run()
+    if (url) e.chain().focus().setImage({ src: url }).run()
   }
 
   const btnBase = 'px-3 py-1.5 font-sans text-[10px] uppercase tracking-[2px] border transition-colors'
