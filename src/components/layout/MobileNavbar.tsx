@@ -93,14 +93,14 @@ export default function MobileNavbar() {
         zIndex: 50,
         display: 'inline-flex',
         alignItems: 'center',
-        background: 'rgba(200,230,255,.09)',
-        backdropFilter: 'blur(32px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(32px) saturate(180%)',
-        border: '1px solid rgba(255,255,255,.22)',
+        background: 'rgba(5, 12, 24, 0.75)',
+        backdropFilter: 'blur(24px) saturate(200%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+        border: '1px solid rgba(255,255,255,.12)',
         borderRadius: 40,
         padding: '10px 20px',
         gap: 8,
-        boxShadow: 'inset 0 1.5px 0 rgba(255,255,255,.18), 0 4px 16px rgba(0,0,0,.2)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,.10), 0 8px 32px rgba(0,0,0,.45)',
       }}
     >
       {ITEMS.map((item) => {

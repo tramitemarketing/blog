@@ -93,20 +93,20 @@ export default function Navbar() {
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          /* Liquid glass — saturate esalta i colori sottostanti come un vero vetro */
+          /* Glass opaco — background scuro semi-trasparente + blur forte */
           background: open
-            ? 'rgba(200,230,255,.13)'
-            : 'rgba(200,230,255,.09)',
-          backdropFilter: 'blur(32px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(32px) saturate(180%)',
-          border: '1px solid rgba(255,255,255,.22)',
+            ? 'rgba(5, 12, 24, 0.82)'
+            : 'rgba(5, 12, 24, 0.70)',
+          backdropFilter: 'blur(24px) saturate(200%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+          border: '1px solid rgba(255,255,255,.12)',
           borderRadius: 40,
           padding: '8px 18px',
           gap: 4,
-          /* Specular highlight in cima — simula la luce che colpisce il vetro dall'alto */
+          /* Specular highlight in cima */
           boxShadow: open
-            ? 'inset 0 1.5px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(56,189,248,.1), 0 8px 32px rgba(0,0,0,.25)'
-            : 'inset 0 1.5px 0 rgba(255,255,255,.18), 0 4px 16px rgba(0,0,0,.2)',
+            ? 'inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(56,189,248,.08), 0 8px 40px rgba(0,0,0,.45)'
+            : 'inset 0 1px 0 rgba(255,255,255,.10), 0 4px 24px rgba(0,0,0,.35)',
           transition: `background ${EASE}, box-shadow ${EASE}`,
         }}
       >
