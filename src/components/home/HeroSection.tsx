@@ -73,7 +73,7 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
                 className="font-sans text-[9px] uppercase tracking-[3px] text-blu-accento hover:opacity-70 transition-opacity w-fit"
               >
                 Leggi →
-              </Link>
+              </a>
             </div>
           )}
         </div>
