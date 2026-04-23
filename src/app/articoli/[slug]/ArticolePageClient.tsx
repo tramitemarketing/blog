@@ -14,6 +14,7 @@ export default function ArticolePage() {
   const params = useParams<{ slug: string }>()
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     if (!params.slug) return
@@ -41,7 +42,6 @@ export default function ArticolePage() {
   }
 
   const readingTime = getReadingTime(article.wordCount)
-  const isMobile = useIsMobile()
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   return (

@@ -68,12 +68,12 @@ export default function HeroSection({ featuredArticle, citazione }: HeroSectionP
               <p className="font-sans font-bold text-ghiaccio text-sm leading-snug">
                 {featuredArticle.title}
               </p>
-              <Link
-                href={`/articoli/${featuredArticle.id}`}
+              <a
+                href={`/articoli/${featuredArticle.id}/`}
                 className="font-sans text-[9px] uppercase tracking-[3px] text-blu-accento hover:opacity-70 transition-opacity w-fit"
               >
                 Leggi →
-              </Link>
+              </a>
             </div>
           )}
         </div>

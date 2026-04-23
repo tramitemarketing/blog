@@ -38,12 +38,12 @@ export default function ArticleCard({ article, index }: ArticleCardProps) {
         <p className="font-serif text-ghiaccio/60 leading-relaxed">
           {article.excerpt}
         </p>
-        <Link
-          href={`/articoli/${article.id}`}
+        <a
+          href={`/articoli/${article.id}/`}
           className="font-sans text-[11px] uppercase tracking-[4px] text-blu-accento hover:opacity-70 transition-opacity mt-2 w-fit"
         >
           Leggi →
-        </Link>
+        </a>
       </div>
     </article>
   )

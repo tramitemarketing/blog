@@ -71,7 +71,7 @@ export default function SearchOverlay() {
 
   const navigate = (id: string) => {
     setOpen(false)
-    router.push(`/articoli/${id}`)
+    window.location.href = `/articoli/${id}/`
   }
 
   if (!open) return null

@@ -1,11 +1,13 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { getCitazione, saveCitazione, getBiografia, saveBiografia } from '@/lib/firestore'
+import TiptapEditor from '@/components/admin/TiptapEditor'
 
 export default function ConfigPage() {
   const [citazioneText, setCitazioneText] = useState('')
   const [citazioneRef, setCitazioneRef] = useState('')
   const [bioContent, setBioContent] = useState('')
+  const [bioLoaded, setBioLoaded] = useState(false)
   const [savingCit, setSavingCit] = useState(false)
   const [savingBio, setSavingBio] = useState(false)
   const [citSaved, setCitSaved] = useState(false)
@@ -16,7 +18,8 @@ export default function ConfigPage() {
       if (c) { setCitazioneText(c.text); setCitazioneRef(c.reference) }
     })
     getBiografia().then(b => {
-      if (b) setBioContent(b.content)
+      setBioContent(b?.content ?? '')
+      setBioLoaded(true)
     })
   }, [])
 
@@ -82,15 +85,15 @@ export default function ConfigPage() {
         <div className="flex flex-col gap-5 max-w-2xl">
           <div className="flex flex-col gap-2">
             <label className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/40">
-              Testo (HTML supportato per bold, italic, ecc.)
+              Testo
             </label>
-            <textarea
-              value={bioContent}
-              onChange={e => setBioContent(e.target.value)}
-              rows={12}
-              className="bg-transparent border border-ghiaccio/20 p-3 font-serif text-ghiaccio placeholder-ghiaccio/20 focus:outline-none focus:border-oro transition-colors resize-y text-sm"
-              placeholder="Scrivi qui la tua biografia…"
-            />
+            {bioLoaded ? (
+              <TiptapEditor content={bioContent} onChange={setBioContent} />
+            ) : (
+              <p className="font-sans text-[11px] uppercase tracking-[4px] text-ghiaccio/30 animate-pulse py-4">
+                Caricamento…
+              </p>
+            )}
           </div>
           <button
             onClick={handleSaveBio}
