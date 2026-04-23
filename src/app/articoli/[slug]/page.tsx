@@ -1,9 +1,20 @@
+import { getPublishedArticles } from '@/lib/firestore'
 import ArticolePageClient from './ArticolePageClient'
 
-// Generate one static shell. Firebase Hosting rewrites all /articoli/*/ URLs
-// to this shell. The client reads the actual slug via useParams() from the URL.
+// Pre-generate a static page + RSC payload for every published article.
+// Firebase Hosting rewrite (/articoli/*/) handles new articles published
+// after the last build by serving the 'articolo' fallback shell.
 export async function generateStaticParams() {
-  return [{ slug: 'articolo' }]
+  try {
+    const articles = await getPublishedArticles()
+    const slugs = articles.map(a => ({ slug: a.id }))
+    if (!slugs.find(s => s.slug === 'articolo')) {
+      slugs.push({ slug: 'articolo' })
+    }
+    return slugs
+  } catch {
+    return [{ slug: 'articolo' }]
+  }
 }
 
 export default function ArticolePage() {
