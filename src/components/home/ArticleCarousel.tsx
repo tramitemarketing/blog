@@ -217,8 +217,8 @@ function CarouselCard({ article, index }: { article: Article; index: number }) {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link
-          href={`/articoli/${article.id}`}
+        <a
+          href={`/articoli/${article.id}/`}
           style={{
             fontFamily: 'system-ui, sans-serif',
             fontSize: 9,
@@ -229,7 +229,7 @@ function CarouselCard({ article, index }: { article: Article; index: number }) {
           }}
         >
           Leggi →
-        </Link>
+        </a>
         <span style={{
           fontFamily: 'system-ui, sans-serif',
           fontSize: 8,

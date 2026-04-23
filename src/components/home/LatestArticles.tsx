@@ -167,12 +167,12 @@ function ArticleCardFeatured({ article }: { article: Article }) {
       </div>
 
       <div className="flex items-center justify-between">
-        <Link
-          href={`/articoli/${article.id}`}
+        <a
+          href={`/articoli/${article.id}/`}
           className="font-sans text-[9px] uppercase tracking-[3px] text-blu-accento hover:opacity-70 transition-opacity"
         >
           Leggi l&apos;articolo →
-        </Link>
+        </a>
         <span className="font-sans text-[8px] uppercase tracking-[2px] text-ghiaccio/20">
           {readingTime} min
         </span>
@@ -212,12 +212,12 @@ function ArticleCardSmall({ article, index }: { article: Article; index: number 
         </h3>
       </div>
 
-      <Link
-        href={`/articoli/${article.id}`}
+      <a
+        href={`/articoli/${article.id}/`}
         className="font-sans text-[8px] uppercase tracking-[2px] text-blu-accento/60 hover:text-blu-accento transition-colors"
       >
         Leggi →
-      </Link>
+      </a>
     </div>
   )
 }

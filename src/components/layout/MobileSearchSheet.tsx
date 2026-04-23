@@ -44,7 +44,7 @@ export default function MobileSearchSheet() {
 
   function navigate(id: string) {
     setOpen(false)
-    router.push(`/articoli/${id}`)
+    window.location.href = `/articoli/${id}/`
   }
 
   if (!open) return null
