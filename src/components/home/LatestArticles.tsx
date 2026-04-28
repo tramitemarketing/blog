@@ -4,176 +4,288 @@ import type { Article } from '@/types'
 
 interface LatestArticlesProps {
   articles: Article[]
-  searchQuery?: string
   loading?: boolean
 }
 
-export default function LatestArticles({ articles, searchQuery, loading }: LatestArticlesProps) {
-  if (loading) {
-    return <ArticlesSkeleton />
-  }
+export default function LatestArticles({ articles, loading }: LatestArticlesProps) {
+  return (
+    <section style={{ background: '#fbfbf7' }}>
+      {/* Section header */}
+      <header
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'auto 1fr auto',
+          gap: 32,
+          alignItems: 'end',
+          padding: '64px 56px 32px',
+          borderBottom: '1px solid rgba(17,41,107,.1)',
+        }}
+      >
+        <div
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 500,
+            fontSize: 96,
+            lineHeight: .8,
+            color: '#11296b',
+            letterSpacing: '-.04em',
+          }}
+        >
+          <small
+            style={{
+              display: 'block',
+              fontSize: 14,
+              fontStyle: 'italic',
+              fontWeight: 400,
+              letterSpacing: 2,
+              color: 'rgba(17,41,107,.4)',
+              marginBottom: 6,
+            }}
+          >
+            — Sezione 01
+          </small>
+          02
+        </div>
 
-  if (articles.length === 0) {
-    return (
-      <section className="px-14 py-12">
-        <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/20">
-          {searchQuery ? 'Nessun articolo trovato.' : 'Nessun articolo pubblicato.'}
+        <h2
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 400,
+            fontSize: 48,
+            lineHeight: 1,
+            color: '#11296b',
+            borderBottom: '1px solid rgba(17,41,107,.15)',
+            paddingBottom: 14,
+            margin: 0,
+          }}
+        >
+          Riflessioni recenti
+        </h2>
+
+        <Link
+          href="/articoli"
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 11,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: '#11296b',
+            textDecoration: 'none',
+            borderBottom: '2px solid #ffcb05',
+            paddingBottom: 6,
+            alignSelf: 'end',
+          }}
+        >
+          Archivio completo →
+        </Link>
+      </header>
+
+      {/* Grid articoli */}
+      {loading ? (
+        <ArticlesSkeleton />
+      ) : articles.length === 0 ? (
+        <p
+          style={{
+            padding: '48px 56px',
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 4,
+            textTransform: 'uppercase',
+            color: 'rgba(17,41,107,.3)',
+          }}
+        >
+          Nessun articolo pubblicato.
         </p>
-      </section>
-    )
-  }
+      ) : (
+        <ArticlesGrid articles={articles} />
+      )}
+    </section>
+  )
+}
 
+function ArticlesGrid({ articles }: { articles: Article[] }) {
   const [featured, ...rest] = articles
 
   return (
-    <section className="border-b border-blu-accento/08">
-      {searchQuery && (
-        <p className="px-14 pt-6 font-sans text-[8px] uppercase tracking-[4px] text-blu-accento/40">
-          Risultati per &ldquo;{searchQuery}&rdquo;
-        </p>
-      )}
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1.6fr 1fr 1fr',
+        borderTop: '1px solid rgba(17,41,107,.1)',
+      }}
+    >
+      {/* Card featured — span 2 righe */}
+      <FeaturedCard article={featured} />
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr 1fr',
-          gridTemplateRows: 'auto auto',
-        }}
-      >
-        {/* Card featured — span 2 righe */}
-        <ArticleCardFeatured article={featured} />
-
-        {/* Card compatte — fino a 4 slot */}
-        {[0, 1, 2, 3].map(slot => {
-          const article = rest[slot]
-          if (!article) {
-            return <div key={`empty-${slot}`} className="border-l border-t border-blu-accento/06" />
-          }
-          return <ArticleCardSmall key={article.id} article={article} index={slot + 2} />
-        })}
-
-        {/* Ultima cella: link archivio */}
-        <div
-          className="border-l border-t border-blu-accento/06 flex items-end p-5"
-          style={{ background: 'rgba(56,189,248,.02)' }}
-        >
-          <div>
-            <p className="font-sans text-[7px] uppercase tracking-[3px] text-blu-accento/40 mb-2">
-              Tutti gli articoli
-            </p>
-            <Link
-              href="/articoli"
-              className="font-sans text-[11px] font-bold text-blu-accento hover:opacity-70 transition-opacity"
-            >
-              → Archivio completo
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
+      {/* Card compatte — slot 0-3 */}
+      {[0, 1, 2, 3].map(slot => {
+        const article = rest[slot]
+        if (!article) {
+          return (
+            <div
+              key={`empty-${slot}`}
+              style={{
+                borderLeft: '1px solid rgba(17,41,107,.1)',
+                borderTop: slot >= 2 ? '1px solid rgba(17,41,107,.1)' : undefined,
+              }}
+            />
+          )
+        }
+        return (
+          <SmallCard
+            key={article.id}
+            article={article}
+            index={slot + 2}
+            isSecondRow={slot >= 2}
+          />
+        )
+      })}
+    </div>
   )
 }
 
-function ArticlesSkeleton() {
-  return (
-    <section className="border-b border-blu-accento/08">
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr 1fr',
-          gridTemplateRows: 'auto auto',
-        }}
-      >
-        {/* Featured skeleton */}
-        <div
-          className="p-8 border-r border-t border-blu-accento/08 flex flex-col gap-4"
-          style={{ gridRow: 'span 2', minHeight: 280, background: 'rgba(56,189,248,.02)' }}
-        >
-          <div className="h-2 w-16 rounded bg-blu-accento/10 animate-pulse" />
-          <div className="h-5 w-3/4 rounded bg-ghiaccio/08 animate-pulse" />
-          <div className="h-4 w-full rounded bg-ghiaccio/05 animate-pulse" />
-          <div className="h-4 w-5/6 rounded bg-ghiaccio/05 animate-pulse" />
-        </div>
-
-        {/* 4 small card skeletons */}
-        {[0, 1, 2, 3].map(i => (
-          <div key={i} className="p-5 border-l border-t border-blu-accento/06 flex flex-col gap-3">
-            <div className="h-2 w-12 rounded bg-blu-accento/10 animate-pulse" />
-            <div className="h-4 w-4/5 rounded bg-ghiaccio/08 animate-pulse" />
-            <div className="h-2 w-8 rounded bg-blu-accento/08 animate-pulse mt-auto" />
-          </div>
-        ))}
-
-        {/* Archive link cell */}
-        <div
-          className="border-l border-t border-blu-accento/06 flex items-end p-5"
-          style={{ background: 'rgba(56,189,248,.02)' }}
-        >
-          <Link
-            href="/articoli"
-            className="font-sans text-[11px] font-bold text-blu-accento/30"
-          >
-            → Archivio completo
-          </Link>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ArticleCardFeatured({ article }: { article: Article }) {
+function FeaturedCard({ article }: { article: Article }) {
   const readingTime = getReadingTime(article.wordCount)
 
   return (
     <div
-      className="relative p-8 border-r border-t border-blu-accento/08 flex flex-col justify-between"
       style={{
         gridRow: 'span 2',
-        background: 'rgba(56,189,248,.04)',
-        borderColor: 'rgba(56,189,248,.1)',
-        minHeight: 280,
+        background: '#11296b',
+        color: '#fff',
+        padding: 36,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        minHeight: 380,
       }}
     >
+      {/* Accent bar */}
+      <span
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: 6,
+          height: 64,
+          background: '#ffcb05',
+        }}
+      />
+
       {/* Numero watermark */}
       <span
-        className="absolute pointer-events-none select-none font-black"
+        aria-hidden="true"
         style={{
-          right: -8,
-          bottom: -10,
-          fontSize: 100,
-          letterSpacing: -6,
-          lineHeight: 1,
-          color: 'rgba(56,189,248,.04)',
+          position: 'absolute',
+          right: 28,
+          top: 28,
+          fontFamily: 'var(--font-display)',
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 64,
+          color: 'rgba(255,219,87,.25)',
+          letterSpacing: -1,
+          pointerEvents: 'none',
+          userSelect: 'none',
         }}
       >
         01
       </span>
 
       <div>
-        <p className="font-sans text-[7px] uppercase tracking-[4px] text-blu-accento/60 mb-4">
-          ↗ In evidenza
-        </p>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: '#ffdb57',
+            marginBottom: 18,
+            fontFamily: 'var(--font-sans)',
+          }}
+        >
+          <span
+            style={{
+              display: 'inline-block',
+              padding: '3px 10px',
+              background: '#ffdb57',
+              color: '#11296b',
+              fontWeight: 800,
+              letterSpacing: 2,
+            }}
+          >
+            In evidenza
+          </span>
+          <span>
+            {article.publishedAt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })}
+          </span>
+        </div>
+
         <h2
-          className="font-sans font-black text-ghiaccio leading-tight mb-4"
-          style={{ fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', letterSpacing: '-0.5px' }}
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 500,
+            fontSize: 'clamp(32px, 3.5vw, 54px)',
+            lineHeight: 1.05,
+            letterSpacing: '-.01em',
+            color: '#fff',
+            marginBottom: 14,
+            margin: '0 0 14px',
+          }}
         >
           {article.title}
         </h2>
+
         {article.excerpt && (
-          <p className="font-serif text-ghiaccio/50 text-sm leading-relaxed mb-6">
+          <p
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontWeight: 300,
+              fontSize: 19,
+              lineHeight: 1.5,
+              color: 'rgba(255,255,255,.75)',
+              marginTop: 14,
+            }}
+          >
             {article.excerpt}
           </p>
         )}
       </div>
 
-      <div className="flex items-center justify-between">
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 24 }}>
         <a
           href={`/articoli/${article.id}/`}
-          className="font-sans text-[9px] uppercase tracking-[3px] text-blu-accento hover:opacity-70 transition-opacity"
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: '#ffdb57',
+            textDecoration: 'none',
+            borderBottom: '2px solid #ffdb57',
+            paddingBottom: 4,
+          }}
         >
-          Leggi l&apos;articolo →
+          Leggi l&rsquo;articolo →
         </a>
-        <span className="font-sans text-[8px] uppercase tracking-[2px] text-ghiaccio/20">
+        <span
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 9,
+            letterSpacing: 2,
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            color: 'rgba(255,219,87,.5)',
+          }}
+        >
           {readingTime} min
         </span>
       </div>
@@ -181,43 +293,166 @@ function ArticleCardFeatured({ article }: { article: Article }) {
   )
 }
 
-function ArticleCardSmall({ article, index }: { article: Article; index: number }) {
+function SmallCard({ article, index, isSecondRow }: { article: Article; index: number; isSecondRow: boolean }) {
+  const readingTime = getReadingTime(article.wordCount)
+
   return (
-    <div className="relative p-5 border-l border-t border-blu-accento/06 flex flex-col justify-between overflow-hidden">
+    <div
+      style={{
+        padding: '36px 32px',
+        borderLeft: '1px solid rgba(17,41,107,.1)',
+        borderTop: isSecondRow ? '1px solid rgba(17,41,107,.1)' : undefined,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        minHeight: 190,
+        background: '#fbfbf7',
+      }}
+    >
       {/* Numero watermark */}
       <span
-        className="absolute pointer-events-none select-none font-black"
+        aria-hidden="true"
         style={{
-          right: -4,
-          bottom: -8,
-          fontSize: 56,
-          letterSpacing: -3,
-          lineHeight: 1,
-          color: 'rgba(56,189,248,.04)',
+          position: 'absolute',
+          right: 18,
+          top: 24,
+          fontFamily: 'var(--font-display)',
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 32,
+          color: 'rgba(17,41,107,.18)',
+          letterSpacing: -1,
+          pointerEvents: 'none',
+          userSelect: 'none',
         }}
       >
         {String(index).padStart(2, '0')}
       </span>
 
       <div>
-        <p className="font-sans text-[7px] uppercase tracking-[3px] text-blu-accento/40 mb-2">
-          {article.publishedAt.toLocaleDateString('it-IT', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-          })}
+        <p
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: 'rgba(17,41,107,.55)',
+            marginBottom: 18,
+          }}
+        >
+          {article.publishedAt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' })}
         </p>
-        <h3 className="font-sans font-bold text-ghiaccio text-sm leading-snug mb-2">
+
+        <h3
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 500,
+            fontSize: 28,
+            lineHeight: 1.05,
+            letterSpacing: '-.01em',
+            color: '#11296b',
+            marginBottom: 14,
+          }}
+        >
           {article.title}
         </h3>
+
+        {article.excerpt && (
+          <p
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontWeight: 300,
+              fontSize: 16,
+              lineHeight: 1.5,
+              color: 'rgba(17,41,107,.65)',
+            }}
+          >
+            {article.excerpt}
+          </p>
+        )}
       </div>
 
-      <a
-        href={`/articoli/${article.id}/`}
-        className="font-sans text-[8px] uppercase tracking-[2px] text-blu-accento/60 hover:text-blu-accento transition-colors"
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 24 }}>
+        <a
+          href={`/articoli/${article.id}/`}
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: '#11296b',
+            textDecoration: 'none',
+            borderBottom: '2px solid #ffcb05',
+            paddingBottom: 4,
+          }}
+        >
+          Leggi →
+        </a>
+        <span
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 9,
+            letterSpacing: 2,
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            color: 'rgba(17,41,107,.4)',
+          }}
+        >
+          {readingTime} min
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function ArticlesSkeleton() {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1.6fr 1fr 1fr',
+        borderTop: '1px solid rgba(17,41,107,.1)',
+      }}
+    >
+      {/* Featured skeleton */}
+      <div
+        style={{
+          gridRow: 'span 2',
+          background: 'rgba(17,41,107,.04)',
+          padding: 36,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 16,
+          minHeight: 380,
+        }}
       >
-        Leggi →
-      </a>
+        <div style={{ height: 8, width: 80, borderRadius: 4, background: 'rgba(17,41,107,.1)' }} />
+        <div style={{ height: 40, width: '80%', borderRadius: 4, background: 'rgba(17,41,107,.08)' }} />
+        <div style={{ height: 16, borderRadius: 4, background: 'rgba(17,41,107,.06)' }} />
+        <div style={{ height: 16, width: '90%', borderRadius: 4, background: 'rgba(17,41,107,.06)' }} />
+      </div>
+
+      {[0, 1, 2, 3].map(i => (
+        <div
+          key={i}
+          style={{
+            padding: '36px 32px',
+            borderLeft: '1px solid rgba(17,41,107,.1)',
+            borderTop: i >= 2 ? '1px solid rgba(17,41,107,.1)' : undefined,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+          }}
+        >
+          <div style={{ height: 8, width: 64, borderRadius: 4, background: 'rgba(17,41,107,.1)' }} />
+          <div style={{ height: 24, width: '85%', borderRadius: 4, background: 'rgba(17,41,107,.08)' }} />
+          <div style={{ height: 8, width: 48, borderRadius: 4, background: 'rgba(17,41,107,.06)', marginTop: 'auto' }} />
+        </div>
+      ))}
     </div>
   )
 }

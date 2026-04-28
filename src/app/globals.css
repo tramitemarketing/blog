@@ -1,32 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Blu Marina palette */
-  --color-blu-notte:    #050C18;
-  --color-blu-marino:   #0C1B33;
-  --color-blu-profondo: #040810;
-  --color-blu-accento:  #38BDF8;
-  --color-blu-chiaro:   #7DD3FC;
-  --color-ghiaccio:     #F0F9FF;
-  --color-ghiaccio-soft: #BAE6FD;
+  /* A1 Audace — palette blu imperiale + senape */
+  --color-imperial-blue: #11296b;
+  --color-imperial-deep: #0a1a47;
+  --color-steel-azure:   #00509d;
+  --color-platinum:      #ededed;
+  --color-platinum-warm: #f5f5f1;
+  --color-mustard:       #ffdb57;
+  --color-amber:         #ffcb05;
+  --color-ink:           #0a0f24;
+  --color-paper:         #fbfbf7;
 
-  /* Viola / Admin palette */
+  /* Legacy — admin panel e pagine articoli */
+  --color-blu-notte:      #050C18;
+  --color-blu-marino:     #0C1B33;
+  --color-blu-profondo:   #040810;
+  --color-blu-accento:    #38BDF8;
+  --color-blu-chiaro:     #7DD3FC;
+  --color-ghiaccio:       #F0F9FF;
+  --color-ghiaccio-soft:  #BAE6FD;
   --color-viola-profondo: #0D0A1A;
   --color-viola-notte:    #130F24;
   --color-viola-vivace:   #7C3AED;
   --color-oro:            #D4A843;
 
   /* Typography */
-  --font-sans: system-ui, Arial, sans-serif;
-  --font-serif: Georgia, serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:    'Inter', system-ui, Arial, sans-serif;
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
 
   --letter-spacing-widest: 4px;
-  --line-height-relaxed: 1.85;
+  --line-height-relaxed:   1.85;
 }
 
 :root {
-  --background: #050C18;
-  --foreground: #F0F9FF;
+  --background: #fbfbf7;
+  --foreground: #0a0f24;
 }
 
 body {
@@ -35,63 +46,21 @@ body {
   font-family: var(--font-sans);
 }
 
-/* ─── Entrance animation — blur-in stagger ─── */
-@keyframes soglia-enter {
-  from {
-    opacity: 0;
-    filter: blur(10px);
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0px);
-    transform: translateY(0);
-  }
-}
-
-@keyframes soglia-enter-top {
-  from {
-    opacity: 0;
-    filter: blur(10px);
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0px);
-    transform: translateY(0);
-  }
-}
-
-.enter-from-top {
-  animation: soglia-enter-top 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.enter {
-  animation: soglia-enter 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.enter-d0 { animation-delay: 0.30s; }
-.enter-d1 { animation-delay: 0.65s; }
-.enter-d2 { animation-delay: 1.00s; }
-.enter-d3 { animation-delay: 1.30s; }
-.enter-d4 { animation-delay: 1.60s; }
-.enter-d5 { animation-delay: 1.90s; }
-.enter-d6 { animation-delay: 2.20s; }
-
-/* ─── Tiptap article body styles ─── */
+/* ─── Tiptap article body — dark-on-light ─── */
 .article-body h2 {
-  font-family: Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.5rem;
   font-weight: bold;
   margin: 2rem 0 0.75rem;
-  color: #F0F9FF;
+  color: #11296b;
 }
 
 .article-body h3 {
-  font-family: Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.25rem;
   font-weight: bold;
   margin: 1.5rem 0 0.5rem;
-  color: #F0F9FF;
+  color: #11296b;
 }
 
 .article-body p {
@@ -99,7 +68,8 @@ body {
 }
 
 .article-body strong {
-  color: #38BDF8;
+  color: #11296b;
+  font-weight: 700;
 }
 
 .article-body em {
@@ -107,22 +77,21 @@ body {
 }
 
 .article-body blockquote {
-  border-left: 3px solid #38BDF8;
+  border-left: 3px solid #ffcb05;
   padding-left: 1.25rem;
   margin: 1.5rem 0;
   font-style: italic;
   font-size: 1.125rem;
-  color: #F0F9FF;
+  color: #0a0f24;
 }
 
 .article-body a {
-  color: #38BDF8;
+  color: #11296b;
   text-decoration: underline;
 }
 
 .article-body a:hover {
-  color: #38BDF8;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .article-body img {
@@ -131,51 +100,39 @@ body {
   margin: 1.5rem 0;
 }
 
-/* =============================================
-   Motion Design System — CSS Animations
-   ============================================= */
+/* ─── Entrance animations ─── */
+@keyframes soglia-enter {
+  from { opacity: 0; filter: blur(10px); transform: translateY(8px); }
+  to   { opacity: 1; filter: blur(0);    transform: translateY(0);   }
+}
 
+@keyframes soglia-enter-top {
+  from { opacity: 0; filter: blur(10px); transform: translateY(-20px); }
+  to   { opacity: 1; filter: blur(0);    transform: translateY(0);     }
+}
+
+.enter-from-top { animation: soglia-enter-top 1s cubic-bezier(0.16,1,0.3,1) both; }
+.enter          { animation: soglia-enter     1s cubic-bezier(0.16,1,0.3,1) both; }
+.enter-d0 { animation-delay: 0.30s; }
+.enter-d1 { animation-delay: 0.65s; }
+.enter-d2 { animation-delay: 1.00s; }
+.enter-d3 { animation-delay: 1.30s; }
+.enter-d4 { animation-delay: 1.60s; }
+.enter-d5 { animation-delay: 1.90s; }
+.enter-d6 { animation-delay: 2.20s; }
+
+/* ─── Navbar fade-in ─── */
 @keyframes navbar-entrance {
-  from {
-    opacity: 0;
-    transform: translateY(-24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-24px); }
+  to   { opacity: 1; transform: translateY(0);     }
 }
 
-@keyframes text-entrance {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Navbar: glassmorphism layer + fade-in dall'alto con rimbalzo */
 .navbar {
-  backdrop-filter: blur(8px) saturate(130%);
-  -webkit-backdrop-filter: blur(8px) saturate(130%);
-  animation: navbar-entrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-/* Text weight & physics — slide-up con inerzia, appare dopo la navbar */
-h1,
-h2,
-.text-animate {
-  animation: text-entrance 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+  animation: navbar-entrance 0.55s cubic-bezier(0.16,1,0.3,1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .navbar,
-  h1,
-  h2,
-  .text-animate {
+  .navbar, .enter, .enter-from-top {
     animation: none;
   }
 }

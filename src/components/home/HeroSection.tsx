@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import type { Article, Citazione } from '@/types'
 
 interface HeroSectionProps {
@@ -6,101 +5,225 @@ interface HeroSectionProps {
   citazione: Citazione | null
 }
 
-export default function HeroSection({ featuredArticle, citazione }: HeroSectionProps) {
+export default function HeroSection({ citazione }: HeroSectionProps) {
   return (
-    <section className="relative border-b border-blu-accento/10">
-      {/* Linea verticale azzurra — firma visiva */}
+    <section
+      style={{
+        position: 'relative',
+        background: '#11296b',
+        color: '#fff',
+        padding: '90px 56px 80px',
+        overflow: 'hidden',
+        isolation: 'isolate',
+      }}
+    >
+      {/* Cerchi concentrici decorativi */}
       <div
-        className="absolute left-7 top-0 bottom-0 w-px pointer-events-none"
-        style={{ background: 'linear-gradient(180deg, #38BDF8 0%, rgba(56,189,248,0) 100%)' }}
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          right: -260,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: 900,
+          height: 900,
+          borderRadius: '50%',
+          background: `
+            radial-gradient(circle, transparent 0 92px,
+              rgba(255,219,87,.12) 92px 94px, transparent 94px 184px,
+              rgba(255,219,87,.08) 184px 186px, transparent 186px 280px,
+              rgba(255,219,87,.06) 280px 282px, transparent 282px 380px,
+              rgba(255,219,87,.04) 380px 382px, transparent 382px 488px,
+              rgba(255,219,87,.03) 488px 490px, transparent 490px)
+          `,
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
       />
 
+      {/* Linea inferiore */}
       <div
-        className="grid pl-14 pr-8 py-10"
-        style={{ gridTemplateColumns: '3fr 2fr', gap: '24px' }}
-      >
-        {/* Colonna sinistra — titolo manifesto */}
-        <div className="flex flex-col justify-between gap-8">
-          <div>
-            <p className="font-sans text-[8px] uppercase tracking-[5px] text-blu-accento/40 mb-4 enter enter-d1">
-              Riflessioni di un sacerdote
-            </p>
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 1,
+          background: 'linear-gradient(90deg, transparent, rgba(255,219,87,.4) 30%, rgba(255,219,87,.4) 70%, transparent)',
+        }}
+      />
 
-            {/* Titolo 3 livelli */}
-            <div
-              className="font-sans font-black leading-none"
-              style={{ letterSpacing: '-3px' }}
-            >
-              <span
-                className="block text-ghiaccio enter enter-d2"
-                style={{ fontSize: 'clamp(2.8rem, 6vw, 3.5rem)' }}
-              >
-                PENSIERI
-              </span>
-              <span
-                className="block enter enter-d3"
-                style={{
-                  fontSize: 'clamp(2.8rem, 6vw, 3.5rem)',
-                  WebkitTextStroke: '1px rgba(56,189,248,.35)',
-                  color: 'transparent',
-                }}
-              >
-                ALLA
-              </span>
-              <span
-                className="block font-serif font-light italic text-ghiaccio/30 enter enter-d4"
-                style={{
-                  fontSize: 'clamp(1.8rem, 4vw, 2.4rem)',
-                  letterSpacing: '-1px',
-                }}
-              >
-                soglia del tempo
-              </span>
-            </div>
+      {/* Grid 1.45fr / 1fr */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          display: 'grid',
+          gridTemplateColumns: '1.45fr 1fr',
+          gap: 60,
+          alignItems: 'end',
+          minHeight: 560,
+        }}
+      >
+        {/* Colonna sinistra */}
+        <div>
+          {/* Eyebrow */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 14,
+              marginBottom: 28,
+              fontSize: 10,
+              letterSpacing: 6,
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              color: '#ffdb57',
+              fontFamily: 'var(--font-sans)',
+            }}
+          >
+            <span style={{ flexShrink: 0, width: 56, height: 1, background: '#ffdb57', opacity: .7 }} />
+            <span>Riflessioni di un sacerdote</span>
           </div>
 
-          {/* Articolo in evidenza — link sotto il titolo */}
-          {featuredArticle && (
-            <div className="flex flex-col gap-2 max-w-sm enter enter-d5">
-              <p className="font-sans text-[7px] uppercase tracking-[3px] text-blu-accento/50">
-                ↗ In evidenza
-              </p>
-              <p className="font-sans font-bold text-ghiaccio text-sm leading-snug">
-                {featuredArticle.title}
-              </p>
-              <a
-                href={`/articoli/${featuredArticle.id}/`}
-                className="font-sans text-[9px] uppercase tracking-[3px] text-blu-accento hover:opacity-70 transition-opacity w-fit"
-              >
-                Leggi →
-              </a>
-            </div>
-          )}
+          {/* Display tipografico */}
+          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, lineHeight: .86, letterSpacing: '-.04em' }}>
+            <span
+              style={{
+                display: 'block',
+                fontSize: 'clamp(120px, 14vw, 220px)',
+                color: '#ffdb57',
+                fontWeight: 600,
+              }}
+            >
+              SOGLIA
+            </span>
+            <span
+              style={{
+                display: 'block',
+                fontSize: 'clamp(78px, 9vw, 140px)',
+                fontStyle: 'italic',
+                fontWeight: 400,
+                color: '#fff',
+                marginTop: '-.06em',
+                marginLeft: '.6em',
+              }}
+            >
+              riflessioni
+            </span>
+            <span
+              style={{
+                display: 'block',
+                fontSize: 'clamp(52px, 6vw, 86px)',
+                color: 'transparent',
+                WebkitTextStroke: '1.5px #ffdb57',
+                fontWeight: 600,
+                marginTop: '-.04em',
+              }}
+            >
+              DI UN SACERDOTE
+            </span>
+          </div>
+
+          {/* Sottotitolo */}
+          <p
+            style={{
+              marginTop: 38,
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontWeight: 300,
+              fontSize: 24,
+              lineHeight: 1.35,
+              color: 'rgba(255,255,255,.85)',
+              maxWidth: 540,
+              borderLeft: '3px solid #ffdb57',
+              paddingLeft: 18,
+            }}
+          >
+            Pensare ad alta voce la fede — in dialogo con la filosofia, la teologia
+            e l&rsquo;esperienza quotidiana, sul confine tra ciò che si crede e ciò
+            che si interroga.
+          </p>
         </div>
 
-        {/* Colonna destra — citazione */}
-        <div
-          className="flex flex-col justify-center gap-3 pl-6 enter enter-d6"
-          style={{ borderLeft: '2px solid rgba(56,189,248,.2)' }}
-        >
-          {citazione ? (
-            <>
-              <blockquote
-                className="font-serif italic text-ghiaccio/60 leading-relaxed"
-                style={{ fontSize: 'clamp(0.85rem, 1.5vw, 1rem)' }}
-              >
-                &ldquo;{citazione.text}&rdquo;
-              </blockquote>
-              <p className="font-sans text-[8px] uppercase tracking-[3px] text-blu-accento/40">
-                {citazione.reference}
-              </p>
-            </>
-          ) : (
-            <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/20 italic">
-              Nessuna citazione.
+        {/* Colonna destra — citazione del giorno */}
+        {citazione && (
+          <aside
+            style={{
+              alignSelf: 'end',
+              background: 'rgba(255,255,255,.04)',
+              border: '1px solid rgba(255,219,87,.25)',
+              padding: '36px 32px 32px',
+              position: 'relative',
+            }}
+          >
+            {/* Virgoletta decorativa */}
+            <span
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                top: -36,
+                left: 24,
+                fontFamily: 'var(--font-display)',
+                fontStyle: 'italic',
+                fontWeight: 600,
+                fontSize: 140,
+                lineHeight: 1,
+                color: '#ffdb57',
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+            >
+              &ldquo;
+            </span>
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                fontSize: 9,
+                letterSpacing: 4,
+                textTransform: 'uppercase',
+                fontWeight: 700,
+                color: '#ffdb57',
+                marginBottom: 18,
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              <span style={{ width: 6, height: 6, background: '#ffdb57', borderRadius: '50%', flexShrink: 0 }} />
+              Citazione del giorno
+            </div>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontStyle: 'italic',
+                fontWeight: 400,
+                fontSize: 22,
+                lineHeight: 1.4,
+                color: '#fff',
+                marginBottom: 22,
+              }}
+            >
+              {citazione.text}
             </p>
-          )}
-        </div>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 10,
+                letterSpacing: 3,
+                textTransform: 'uppercase',
+                fontWeight: 600,
+                color: 'rgba(255,219,87,.7)',
+              }}
+            >
+              — {citazione.reference}
+            </p>
+          </aside>
+        )}
       </div>
     </section>
   )

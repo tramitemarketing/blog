@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it">
-      <body className="bg-blu-notte text-ghiaccio min-h-screen flex flex-col">
+      <body className="bg-paper text-ink min-h-screen flex flex-col">
         <CookieBanner />
         <ConditionalGA measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ''} />
         <NavbarWrapper />

@@ -1,180 +1,121 @@
 'use client'
-import { useState } from 'react'
 import Link from 'next/link'
-import type { ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
 
-interface NavItem {
-  label: string
-  icon: ReactNode
-  href?: string
-  action?: () => void
-}
-
-const ITEMS: NavItem[] = [
-  {
-    label: 'Home',
-    href: '/',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-        <rect x="9" y="2" width="2" height="16" fill="#F0F9FF" />
-        <rect x="4" y="7" width="12" height="2" fill="#F0F9FF" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Articoli',
-    href: '/articoli',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-        stroke="#BAE6FD" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"
-        aria-hidden="true" style={{ flexShrink: 0 }}>
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-        <line x1="8" y1="7" x2="16" y2="7" />
-        <line x1="8" y1="11" x2="13" y2="11" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Cerca',
-    action: () => window.dispatchEvent(new Event('soglia:open-search')),
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-        stroke="#7DD3FC" strokeWidth="1.8" strokeLinecap="round"
-        aria-hidden="true" style={{ flexShrink: 0 }}>
-        <circle cx="11" cy="11" r="7" />
-        <line x1="16.5" y1="16.5" x2="22" y2="22" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Biografia',
-    href: '/biografia',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-        stroke="#E0F2FE" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"
-        aria-hidden="true" style={{ flexShrink: 0 }}>
-        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-        <line x1="16" y1="8" x2="2" y2="22" />
-        <line x1="17.5" y1="15" x2="9" y2="15" />
-      </svg>
-    ),
-  },
+const LINKS = [
+  { label: 'Home',      href: '/' },
+  { label: 'Articoli',  href: '/articoli' },
+  { label: 'Biografia', href: '/biografia' },
 ]
 
-const EASE = '0.38s cubic-bezier(0.34, 1.2, 0.64, 1)'
-
-const itemStyle = (isActive: boolean) => ({
-  display: 'flex' as const,
-  flexDirection: 'column' as const,
-  alignItems: 'center' as const,
-  gap: 3,
-  padding: '5px 10px',
-  borderRadius: 24,
-  textDecoration: 'none',
-  background: isActive ? 'rgba(255,255,255,.12)' : 'transparent',
-  boxShadow: isActive
-    ? 'inset 0 1px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(56,189,248,.1)'
-    : 'none',
-  transition: 'background 0.18s ease, box-shadow 0.18s ease',
-  border: 'none',
-  cursor: 'pointer',
-})
-
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
-  const [active, setActive] = useState<number | null>(null)
+  const pathname = usePathname()
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-center py-4 px-6 enter-from-top enter-d0">
-      <div
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => { setOpen(false); setActive(null) }}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          /* Glass opaco — background scuro semi-trasparente + blur forte */
-          background: open
-            ? 'rgba(5, 12, 24, 0.82)'
-            : 'rgba(5, 12, 24, 0.70)',
-          backdropFilter: 'blur(24px) saturate(200%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
-          border: '1px solid rgba(255,255,255,.12)',
-          borderRadius: 40,
-          padding: '8px 18px',
-          gap: 4,
-          /* Specular highlight in cima */
-          boxShadow: open
-            ? 'inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(56,189,248,.08), 0 8px 40px rgba(0,0,0,.45)'
-            : 'inset 0 1px 0 rgba(255,255,255,.10), 0 4px 24px rgba(0,0,0,.35)',
-          transition: `background ${EASE}, box-shadow ${EASE}`,
-        }}
-      >
-        {ITEMS.map((item, i) => {
-          const isActive = active === i
-          const sharedProps = {
-            'aria-label': item.label,
-            onMouseEnter: () => setActive(i),
-            onMouseLeave: () => setActive(null),
-            style: itemStyle(isActive),
-          }
-          const inner = (
-            <>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: open ? 7 : 0,
-                transition: `gap ${EASE}`,
-              }}>
-                {item.icon}
-                <span style={{
-                  maxWidth: open ? 80 : 0,
-                  opacity: open ? 1 : 0,
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                  fontFamily: 'system-ui, sans-serif',
-                  fontSize: 9,
-                  fontWeight: 700,
-                  letterSpacing: '2.5px',
-                  textTransform: 'uppercase',
-                  /* Contrasto aumentato: bianco puro su hover, bianco/80 a riposo */
-                  color: isActive ? '#FFFFFF' : 'rgba(240,249,255,.82)',
-                  transition: `max-width ${EASE}, opacity 0.22s ease, color 0.15s ease`,
-                }}>
-                  {item.label}
-                </span>
-              </div>
-              {/* Dot indicator */}
-              <div style={{
-                width: isActive && open ? 16 : 3,
-                height: 2,
-                borderRadius: 2,
-                background: 'rgba(255,255,255,.7)',
-                opacity: isActive && open ? 1 : 0,
-                transition: 'width 0.22s ease, opacity 0.18s ease',
-              }} />
-            </>
-          )
+    <nav
+      className="navbar"
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        background: 'rgba(255,255,255,.92)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(17,41,107,.08)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '18px 56px',
+      }}
+    >
+      {/* Brand */}
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+        <Link
+          href="/"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 600,
+            fontSize: 22,
+            letterSpacing: 6,
+            color: '#11296b',
+            textDecoration: 'none',
+          }}
+        >
+          SOGLIA
+        </Link>
+        <span
+          style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 9,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            color: 'rgba(17,41,107,.5)',
+            fontWeight: 600,
+          }}
+        >
+          Riflessioni di un sacerdote
+        </span>
+      </div>
 
+      {/* Links + Search */}
+      <div style={{ display: 'flex', gap: 36, alignItems: 'center' }}>
+        {LINKS.map(({ label, href }) => {
+          const isActive = pathname === href
           return (
-            <div key={item.label} style={{ display: 'flex', alignItems: 'center' }}>
-              {i === 1 && (
-                <div style={{
-                  width: 1,
-                  height: 14,
-                  background: 'rgba(255,255,255,.15)',
-                  marginRight: 4,
-                  flexShrink: 0,
-                }} />
+            <Link
+              key={href}
+              href={href}
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 11,
+                letterSpacing: 3,
+                textTransform: 'uppercase',
+                fontWeight: 600,
+                color: '#11296b',
+                textDecoration: 'none',
+                position: 'relative',
+                padding: '4px 0',
+              }}
+            >
+              {label}
+              {isActive && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    bottom: -2,
+                    height: 2,
+                    background: '#ffcb05',
+                  }}
+                />
               )}
-              {item.action ? (
-                <button {...sharedProps} onClick={item.action}>{inner}</button>
-              ) : (
-                <Link {...sharedProps} href={item.href!}>{inner}</Link>
-              )}
-            </div>
+            </Link>
           )
         })}
+
+        <button
+          onClick={() => window.dispatchEvent(new Event('soglia:open-search'))}
+          aria-label="Cerca"
+          style={{
+            width: 34,
+            height: 34,
+            borderRadius: '50%',
+            background: '#11296b',
+            color: '#ffdb57',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'none',
+            cursor: 'pointer',
+            flexShrink: 0,
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="22" y2="22" />
+          </svg>
+        </button>
       </div>
     </nav>
   )
