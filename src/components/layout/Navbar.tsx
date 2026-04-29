@@ -18,9 +18,7 @@ export default function Navbar() {
         position: 'fixed',
         top: 0, left: 0, right: 0,
         zIndex: 50,
-        background: 'rgba(8,18,52,.42)',
-        backdropFilter: 'blur(28px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+        background: '#0a1230',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -67,6 +65,7 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
+              className={`nav-link${isActive ? ' nav-link--active' : ''}`}
               style={{
                 fontFamily: 'var(--font-sans)',
                 fontSize: 11,
@@ -75,20 +74,9 @@ export default function Navbar() {
                 fontWeight: 600,
                 color: isActive ? '#ffdb57' : 'rgba(255,255,255,.78)',
                 textDecoration: 'none',
-                position: 'relative',
-                padding: '4px 0',
-                transition: 'color 0.2s ease',
               }}
             >
               {label}
-              {isActive && (
-                <span style={{
-                  position: 'absolute',
-                  left: 0, right: 0, bottom: -2,
-                  height: 2,
-                  background: '#ffdb57',
-                }} />
-              )}
             </Link>
           )
         })}
@@ -97,21 +85,19 @@ export default function Navbar() {
         <button
           onClick={() => window.dispatchEvent(new Event('soglia:open-search'))}
           aria-label="Cerca"
+          className="nav-search-btn"
           style={{
             width: 34,
             height: 34,
             borderRadius: '50%',
-            background: 'rgba(255,255,255,.10)',
+            background: 'rgba(255,255,255,.08)',
             color: '#ffdb57',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '1px solid rgba(255,219,87,.38)',
+            border: '1px solid rgba(255,219,87,.35)',
             cursor: 'pointer',
             flexShrink: 0,
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-            transition: 'background 0.2s ease',
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
