@@ -7,7 +7,7 @@ import CookieBanner from '@/components/ui/CookieBanner'
 import ConditionalGA from '@/components/ui/ConditionalGA'
 
 export const metadata: Metadata = {
-  title: 'SOGLIA — Riflessioni di un sacerdote',
+  title: 'SOGLIA · Riflessioni di un sacerdote',
   description:
     'Un blog di riflessioni filosofiche, teologiche ed esistenziali scritto da un sacerdote.',
   icons: { icon: '/favicon.svg' },

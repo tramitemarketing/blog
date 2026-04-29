@@ -39,10 +39,10 @@ export default function MobileNavbar() {
         zIndex: 50,
         transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
         transition: 'transform 0.28s cubic-bezier(0.16,1,0.3,1)',
-        background: 'rgba(255,255,255,0.68)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-        borderBottom: '1px solid rgba(17,41,107,.10)',
+        background: 'rgba(8,18,52,.88)',
+        backdropFilter: 'blur(22px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(22px) saturate(180%)',
+        borderBottom: '1px solid rgba(255,219,87,.2)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -57,7 +57,7 @@ export default function MobileNavbar() {
           fontWeight: 600,
           fontSize: 16,
           letterSpacing: 5,
-          color: '#11296b',
+          color: '#ffdb57',
           textDecoration: 'none',
         }}
       >
@@ -78,9 +78,9 @@ export default function MobileNavbar() {
                 letterSpacing: 2,
                 textTransform: 'uppercase',
                 fontWeight: 600,
-                color: isActive ? '#11296b' : 'rgba(17,41,107,.55)',
+                color: isActive ? '#ffdb57' : 'rgba(255,255,255,.72)',
                 textDecoration: 'none',
-                borderBottom: isActive ? '2px solid #ffcb05' : '2px solid transparent',
+                borderBottom: isActive ? '2px solid #ffdb57' : '2px solid transparent',
                 paddingBottom: 2,
               }}
             >

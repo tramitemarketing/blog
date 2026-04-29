@@ -5,7 +5,13 @@ interface HeroSectionProps {
   citazione: Citazione | null
 }
 
+const FALLBACK_CITAZIONE = {
+  text: 'Vivi ciò che vedi. Immagina ciò che ami e sogni.',
+  reference: 'Luigi Verdi',
+}
+
 export default function HeroSection({ citazione }: HeroSectionProps) {
+  const displayCitazione = citazione ?? FALLBACK_CITAZIONE
   return (
     <section className="hero-section">
       {/* Cerchi concentrici decorativi */}
@@ -47,6 +53,7 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
         <div>
           {/* Eyebrow */}
           <div
+            className="hero-anim-eyebrow"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -66,11 +73,11 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
 
           {/* Display tipografico */}
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, lineHeight: .86, letterSpacing: '-.04em' }}>
-            <span className="hero-l1" style={{ display: 'block', color: '#ffdb57', fontWeight: 600 }}>
-              SOGLIA
+            <span className="hero-l1 hero-anim-l1" style={{ display: 'block', color: '#ffdb57', fontWeight: 600 }}>
+              Immaginare
             </span>
             <span
-              className="hero-l2"
+              className="hero-l2 hero-anim-l2"
               style={{
                 display: 'block',
                 fontStyle: 'italic',
@@ -83,7 +90,7 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
               riflessioni
             </span>
             <span
-              className="hero-l3"
+              className="hero-l3 hero-anim-l3"
               style={{
                 display: 'block',
                 color: 'transparent',
@@ -98,6 +105,7 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
 
           {/* Sottotitolo */}
           <p
+            className="hero-anim-subtitle"
             style={{
               marginTop: 32,
               fontFamily: 'var(--font-display)',
@@ -118,8 +126,8 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
         </div>
 
         {/* Colonna destra — citazione del giorno */}
-        {citazione && (
-          <aside
+        <aside
+            className="hero-anim-quote"
             style={{
               alignSelf: 'end',
               background: 'rgba(255,255,255,.04)',
@@ -177,7 +185,7 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
                 marginBottom: 18,
               }}
             >
-              {citazione.text}
+              {displayCitazione.text}
             </p>
 
             <p
@@ -190,10 +198,9 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
                 color: 'rgba(255,219,87,.7)',
               }}
             >
-              — {citazione.reference}
+              — {displayCitazione.reference}
             </p>
           </aside>
-        )}
       </div>
     </section>
   )

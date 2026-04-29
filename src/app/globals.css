@@ -174,3 +174,31 @@ body {
   .hero-l2 { font-size: clamp(46px, 13vw,  72px); }
   .hero-l3 { font-size: clamp(30px,  9vw,  48px); }
 }
+
+/* ─── Hero entrance animations ─── */
+@keyframes heroWipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0%   0 0); }
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroSlideIn {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.hero-anim-eyebrow  { animation: heroSlideIn 0.75s cubic-bezier(.16,1,.3,1) 0.2s  both; }
+.hero-anim-l1       { animation: heroFadeUp  0.9s  cubic-bezier(.16,1,.3,1) 0.45s both; }
+.hero-anim-l2       { animation: heroFadeUp  0.9s  cubic-bezier(.16,1,.3,1) 0.7s  both; }
+.hero-anim-l3       { animation: heroFadeUp  0.9s  cubic-bezier(.16,1,.3,1) 0.93s both; }
+.hero-anim-subtitle { animation: heroFadeUp  0.85s cubic-bezier(.16,1,.3,1) 1.2s  both; }
+.hero-anim-quote    { animation: heroFadeUp  0.85s cubic-bezier(.16,1,.3,1) 1.5s  both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-anim-eyebrow, .hero-anim-l1, .hero-anim-l2,
+  .hero-anim-l3, .hero-anim-subtitle, .hero-anim-quote {
+    animation: none;
+  }
+}

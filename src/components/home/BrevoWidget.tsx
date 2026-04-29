@@ -31,7 +31,7 @@ export default function BrevoWidget() {
               color: '#00509d',
             }}
           >
-            una volta al mese
+            quando viene il momento
           </em>
           , nella tua casella.
         </h2>
@@ -48,8 +48,8 @@ export default function BrevoWidget() {
             maxWidth: 520,
           }}
         >
-          Niente algoritmi, niente notifiche. Solo un articolo lungo, scelto a mano,
-          ogni primo venerdì del mese — perché certe parole hanno bisogno di lentezza.
+          Niente algoritmi, niente notifiche. Solo un articolo scritto a sentimento,
+          senza cadenza fissa: perché certi pensieri non seguono il calendario.
         </p>
       </div>
 
