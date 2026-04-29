@@ -82,9 +82,9 @@ export default function SearchOverlay() {
         position: 'fixed',
         inset: 0,
         zIndex: 100,
-        background: 'rgba(5,12,24,.88)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
+        background: 'rgba(245,240,230,.18)',
+        backdropFilter: 'blur(32px) saturate(120%)',
+        WebkitBackdropFilter: 'blur(32px) saturate(120%)',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
@@ -97,13 +97,13 @@ export default function SearchOverlay() {
           width: '100%',
           maxWidth: 580,
           margin: '0 16px',
-          background: 'rgba(255,255,255,.07)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(56,189,248,.22)',
+          background: 'rgba(253,250,243,.96)',
+          backdropFilter: 'blur(32px)',
+          WebkitBackdropFilter: 'blur(32px)',
+          border: '1px solid rgba(17,41,107,.12)',
           borderRadius: 20,
           overflow: 'hidden',
-          boxShadow: '0 32px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(56,189,248,.06)',
+          boxShadow: '0 32px 80px rgba(0,0,0,.35), 6px 6px 0 #ffcb05',
           transition: `box-shadow ${EASE}`,
         }}
         onClick={e => e.stopPropagation()}
@@ -114,11 +114,11 @@ export default function SearchOverlay() {
           alignItems: 'center',
           gap: 12,
           padding: '14px 18px',
-          borderBottom: filtered.length > 0 ? '1px solid rgba(56,189,248,.1)' : 'none',
+          borderBottom: filtered.length > 0 ? '1px solid rgba(17,41,107,.1)' : 'none',
         }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round"
-            aria-hidden="true" style={{ flexShrink: 0, opacity: 0.6 }}>
+            stroke="#11296b" strokeWidth="2.2" strokeLinecap="round"
+            aria-hidden="true" style={{ flexShrink: 0, opacity: 0.5 }}>
             <circle cx="11" cy="11" r="7" />
             <line x1="16.5" y1="16.5" x2="22" y2="22" />
           </svg>
@@ -138,7 +138,7 @@ export default function SearchOverlay() {
               outline: 'none',
               fontFamily: 'system-ui, sans-serif',
               fontSize: 15,
-              color: '#F0F9FF',
+              color: '#11296b',
               letterSpacing: '0.3px',
             }}
           />
@@ -149,9 +149,9 @@ export default function SearchOverlay() {
               fontFamily: 'system-ui, sans-serif',
               fontSize: 9,
               letterSpacing: '1px',
-              color: 'rgba(240,249,255,.3)',
-              background: 'rgba(56,189,248,.08)',
-              border: '1px solid rgba(56,189,248,.18)',
+              color: 'rgba(17,41,107,.4)',
+              background: 'rgba(17,41,107,.06)',
+              border: '1px solid rgba(17,41,107,.18)',
               borderRadius: 5,
               padding: '3px 7px',
               cursor: 'pointer',
@@ -183,9 +183,9 @@ export default function SearchOverlay() {
                     width: '100%',
                     textAlign: 'left',
                     padding: '12px 18px',
-                    background: isActive ? 'rgba(56,189,248,.07)' : 'transparent',
-                    borderBottom: '1px solid rgba(56,189,248,.05)',
-                    borderLeft: isActive ? '2px solid rgba(56,189,248,.5)' : '2px solid transparent',
+                    background: isActive ? 'rgba(255,203,5,.12)' : 'transparent',
+                    borderBottom: '1px solid rgba(17,41,107,.06)',
+                    borderLeft: isActive ? '2px solid #ffcb05' : '2px solid transparent',
                     transition: 'background 0.14s ease, border-color 0.14s ease',
                     cursor: 'pointer',
                   }}
@@ -195,7 +195,7 @@ export default function SearchOverlay() {
                     fontFamily: 'system-ui, sans-serif',
                     fontWeight: 900,
                     fontSize: 10,
-                    color: 'rgba(56,189,248,.25)',
+                    color: 'rgba(17,41,107,.22)',
                     letterSpacing: '-0.5px',
                     paddingTop: 3,
                     flexShrink: 0,
@@ -208,7 +208,7 @@ export default function SearchOverlay() {
                       fontFamily: 'system-ui, sans-serif',
                       fontWeight: 700,
                       fontSize: 13,
-                      color: isActive ? '#F0F9FF' : 'rgba(240,249,255,.8)',
+                      color: isActive ? '#0a1a47' : 'rgba(17,41,107,.8)',
                       letterSpacing: '-0.2px',
                       marginBottom: 3,
                       transition: 'color 0.14s ease',
@@ -219,7 +219,7 @@ export default function SearchOverlay() {
                       <p style={{
                         fontFamily: 'Georgia, serif',
                         fontSize: 11,
-                        color: 'rgba(240,249,255,.35)',
+                        color: 'rgba(17,41,107,.45)',
                         lineHeight: 1.5,
                       }}>
                         {excerptWords}
@@ -232,7 +232,7 @@ export default function SearchOverlay() {
                     fontSize: 8,
                     textTransform: 'uppercase',
                     letterSpacing: '1.5px',
-                    color: 'rgba(56,189,248,.35)',
+                    color: 'rgba(17,41,107,.35)',
                     flexShrink: 0,
                     paddingTop: 4,
                   }}>
@@ -251,7 +251,7 @@ export default function SearchOverlay() {
             fontFamily: 'Georgia, serif',
             fontSize: 12,
             fontStyle: 'italic',
-            color: 'rgba(240,249,255,.25)',
+            color: 'rgba(17,41,107,.35)',
           }}>
             Nessun articolo trovato per &ldquo;{query}&rdquo;
           </div>
@@ -262,7 +262,7 @@ export default function SearchOverlay() {
           display: 'flex',
           gap: 16,
           padding: '8px 18px',
-          borderTop: '1px solid rgba(56,189,248,.07)',
+          borderTop: '1px solid rgba(17,41,107,.08)',
         }}>
           {[['↑↓', 'naviga'], ['↵', 'apri'], ['esc', 'chiudi']].map(([key, label]) => (
             <span key={key} style={{
@@ -270,14 +270,14 @@ export default function SearchOverlay() {
               fontSize: 8,
               textTransform: 'uppercase',
               letterSpacing: '1px',
-              color: 'rgba(240,249,255,.2)',
+              color: 'rgba(17,41,107,.35)',
               display: 'flex',
               alignItems: 'center',
               gap: 5,
             }}>
               <kbd style={{
-                background: 'rgba(56,189,248,.06)',
-                border: '1px solid rgba(56,189,248,.12)',
+                background: 'rgba(17,41,107,.05)',
+                border: '1px solid rgba(17,41,107,.14)',
                 borderRadius: 3,
                 padding: '1px 5px',
                 fontSize: 8,

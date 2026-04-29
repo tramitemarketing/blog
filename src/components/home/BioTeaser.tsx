@@ -53,7 +53,7 @@ export default function BioTeaser() {
             letterSpacing: 0,
           }}
         >
-          03 — Chi scrive
+          03 · Chi scrive
         </p>
       </div>
 
@@ -68,8 +68,10 @@ export default function BioTeaser() {
           color: 'rgba(255,255,255,.92)',
         }}
       >
-        Sacerdote da diciassette anni, insegnante di religione e di filosofia in un
-        liceo di provincia. Scrivo queste riflessioni come{' '}
+        Prete dal dicembre dell&rsquo;88, pellegrino in grandi comunità parrocchiali,
+        oggi parroco in una piccolissima parrocchia tra i calanchi delle colline.
+        Da più di 30 anni insegno religione al Liceo Rosetti — e scrivo queste
+        riflessioni come{' '}
         <em
           style={{
             fontStyle: 'normal',
@@ -78,10 +80,9 @@ export default function BioTeaser() {
             padding: '0 4px',
           }}
         >
-          tentativo di pensare ad alta voce
-        </em>{' '}
-        — perché la fede, quando non si lascia interrogare, finisce per diventare
-        un&rsquo;abitudine elegante.
+          tentativo di immaginare e vivere con bellezza la vita
+        </em>
+        .
       </p>
 
       {/* Colonna 3 — meta + link */}
@@ -95,9 +96,9 @@ export default function BioTeaser() {
         }}
       >
         {[
-          { label: 'Ordinato',  value: '2009 · Diocesi di —' },
-          { label: 'Studi',     value: 'Teologia fondamentale, Roma' },
-          { label: 'Insegna',   value: 'Religione, filosofia teoretica' },
+          { label: 'Ordinato',   value: 'Dicembre 1988' },
+          { label: 'Parrocchia', value: 'Tra i calanchi delle colline' },
+          { label: 'Insegna',    value: 'Religione · Liceo Rosetti' },
         ].map(({ label, value }) => (
           <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             <b
