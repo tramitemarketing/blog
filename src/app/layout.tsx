@@ -25,7 +25,7 @@ export default function RootLayout({
         <ConditionalGA measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ''} />
         <NavbarWrapper />
         <SearchWrapper />
-        <main className="flex-1 pb-24 md:pb-0">{children}</main>
+        <main className="flex-1 pt-[62px]">{children}</main>
         <Footer />
       </body>
     </html>

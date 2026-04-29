@@ -15,13 +15,15 @@ export default function Navbar() {
     <nav
       className="navbar"
       style={{
-        position: 'sticky',
+        position: 'fixed',
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 50,
-        background: 'rgba(255,255,255,.92)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(17,41,107,.08)',
+        background: 'rgba(255,255,255,0.68)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        borderBottom: '1px solid rgba(17,41,107,.10)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',

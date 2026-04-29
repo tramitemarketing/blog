@@ -7,16 +7,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ citazione }: HeroSectionProps) {
   return (
-    <section
-      style={{
-        position: 'relative',
-        background: '#11296b',
-        color: '#fff',
-        padding: '90px 56px 80px',
-        overflow: 'hidden',
-        isolation: 'isolate',
-      }}
-    >
+    <section className="hero-section">
       {/* Cerchi concentrici decorativi */}
       <div
         aria-hidden="true"
@@ -28,14 +19,13 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
           width: 900,
           height: 900,
           borderRadius: '50%',
-          background: `
-            radial-gradient(circle, transparent 0 92px,
-              rgba(255,219,87,.12) 92px 94px, transparent 94px 184px,
-              rgba(255,219,87,.08) 184px 186px, transparent 186px 280px,
-              rgba(255,219,87,.06) 280px 282px, transparent 282px 380px,
-              rgba(255,219,87,.04) 380px 382px, transparent 382px 488px,
-              rgba(255,219,87,.03) 488px 490px, transparent 490px)
-          `,
+          background: `radial-gradient(circle,
+            transparent 0 92px,
+            rgba(255,219,87,.12) 92px 94px, transparent 94px 184px,
+            rgba(255,219,87,.08) 184px 186px, transparent 186px 280px,
+            rgba(255,219,87,.06) 280px 282px, transparent 282px 380px,
+            rgba(255,219,87,.04) 380px 382px, transparent 382px 488px,
+            rgba(255,219,87,.03) 488px 490px, transparent 490px)`,
           pointerEvents: 'none',
           zIndex: 0,
         }}
@@ -46,26 +36,13 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
         aria-hidden="true"
         style={{
           position: 'absolute',
-          left: 0,
-          right: 0,
-          bottom: 0,
+          left: 0, right: 0, bottom: 0,
           height: 1,
           background: 'linear-gradient(90deg, transparent, rgba(255,219,87,.4) 30%, rgba(255,219,87,.4) 70%, transparent)',
         }}
       />
 
-      {/* Grid 1.45fr / 1fr */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'grid',
-          gridTemplateColumns: '1.45fr 1fr',
-          gap: 60,
-          alignItems: 'end',
-          minHeight: 560,
-        }}
-      >
+      <div className="hero-grid">
         {/* Colonna sinistra */}
         <div>
           {/* Eyebrow */}
@@ -89,33 +66,26 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
 
           {/* Display tipografico */}
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, lineHeight: .86, letterSpacing: '-.04em' }}>
-            <span
-              style={{
-                display: 'block',
-                fontSize: 'clamp(120px, 14vw, 220px)',
-                color: '#ffdb57',
-                fontWeight: 600,
-              }}
-            >
+            <span className="hero-l1" style={{ display: 'block', color: '#ffdb57', fontWeight: 600 }}>
               SOGLIA
             </span>
             <span
+              className="hero-l2"
               style={{
                 display: 'block',
-                fontSize: 'clamp(78px, 9vw, 140px)',
                 fontStyle: 'italic',
                 fontWeight: 400,
                 color: '#fff',
                 marginTop: '-.06em',
-                marginLeft: '.6em',
+                marginLeft: '.4em',
               }}
             >
               riflessioni
             </span>
             <span
+              className="hero-l3"
               style={{
                 display: 'block',
-                fontSize: 'clamp(52px, 6vw, 86px)',
                 color: 'transparent',
                 WebkitTextStroke: '1.5px #ffdb57',
                 fontWeight: 600,
@@ -129,12 +99,12 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
           {/* Sottotitolo */}
           <p
             style={{
-              marginTop: 38,
+              marginTop: 32,
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
               fontWeight: 300,
-              fontSize: 24,
-              lineHeight: 1.35,
+              fontSize: 'clamp(16px, 2vw, 24px)',
+              lineHeight: 1.4,
               color: 'rgba(255,255,255,.85)',
               maxWidth: 540,
               borderLeft: '3px solid #ffdb57',
@@ -154,7 +124,7 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
               alignSelf: 'end',
               background: 'rgba(255,255,255,.04)',
               border: '1px solid rgba(255,219,87,.25)',
-              padding: '36px 32px 32px',
+              padding: '36px 28px 28px',
               position: 'relative',
             }}
           >
@@ -163,12 +133,12 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                top: -36,
-                left: 24,
+                top: -32,
+                left: 20,
                 fontFamily: 'var(--font-display)',
                 fontStyle: 'italic',
                 fontWeight: 600,
-                fontSize: 140,
+                fontSize: 120,
                 lineHeight: 1,
                 color: '#ffdb57',
                 pointerEvents: 'none',
@@ -188,7 +158,7 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
                 textTransform: 'uppercase',
                 fontWeight: 700,
                 color: '#ffdb57',
-                marginBottom: 18,
+                marginBottom: 16,
                 fontFamily: 'var(--font-sans)',
               }}
             >
@@ -201,10 +171,10 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
                 fontFamily: 'var(--font-display)',
                 fontStyle: 'italic',
                 fontWeight: 400,
-                fontSize: 22,
+                fontSize: 'clamp(16px, 1.8vw, 22px)',
                 lineHeight: 1.4,
                 color: '#fff',
-                marginBottom: 22,
+                marginBottom: 18,
               }}
             >
               {citazione.text}

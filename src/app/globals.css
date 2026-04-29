@@ -136,3 +136,41 @@ body {
     animation: none;
   }
 }
+
+/* ─── Hero responsive ─── */
+.hero-section {
+  position: relative;
+  background: #11296b;
+  color: #fff;
+  padding: 110px 56px 80px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 60px;
+  align-items: end;
+  min-height: 560px;
+}
+
+.hero-l1 { font-size: clamp(120px, 14vw, 220px); }
+.hero-l2 { font-size: clamp(78px,   9vw, 140px); }
+.hero-l3 { font-size: clamp(52px,   6vw,  86px); }
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 88px 22px 52px;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    min-height: unset;
+    gap: 28px;
+  }
+  .hero-l1 { font-size: clamp(72px, 20vw, 110px); }
+  .hero-l2 { font-size: clamp(46px, 13vw,  72px); }
+  .hero-l3 { font-size: clamp(30px,  9vw,  48px); }
+}

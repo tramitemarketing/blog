@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { getReadingTime } from '@/lib/utils'
 import type { Article } from '@/types'
 
@@ -11,36 +10,100 @@ export default function ArticleCard({ article, index }: ArticleCardProps) {
   const readingTime = getReadingTime(article.wordCount)
 
   return (
-    <article className="py-10 grid grid-cols-[4rem_1fr] gap-6 border-b border-ghiaccio/10 last:border-0">
+    <article
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '4rem 1fr',
+        gap: 24,
+        padding: '36px 0',
+        borderBottom: '1px solid rgba(17,41,107,.1)',
+      }}
+    >
+      {/* Numero */}
       <span
-        className="font-sans font-black text-blu-chiaro/40 leading-none"
-        style={{ fontSize: '2.5rem' }}
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 500,
+          fontSize: 40,
+          lineHeight: 1,
+          color: 'rgba(17,41,107,.18)',
+          letterSpacing: '-.03em',
+          userSelect: 'none',
+        }}
       >
         {String(index + 1).padStart(2, '0')}
       </span>
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-4">
-          <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/30">
-            {article.publishedAt.toLocaleDateString('it-IT', {
-              day: '2-digit',
-              month: 'long',
-              year: 'numeric',
-            })}
+
+      {/* Contenuto */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {/* Meta */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <p style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: 'rgba(17,41,107,.45)',
+          }}>
+            {article.publishedAt.toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' })}
           </p>
-          <span className="text-ghiaccio/20">·</span>
-          <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/30">
+          <span style={{ color: 'rgba(17,41,107,.2)', fontSize: 10 }}>·</span>
+          <p style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: 'rgba(17,41,107,.35)',
+          }}>
             {readingTime} min
           </p>
         </div>
-        <h2 className="font-sans font-black text-ghiaccio text-xl leading-tight">
+
+        {/* Titolo */}
+        <h2 style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 500,
+          fontSize: 'clamp(20px, 2.5vw, 28px)',
+          lineHeight: 1.05,
+          letterSpacing: '-.01em',
+          color: '#11296b',
+          margin: 0,
+        }}>
           {article.title}
         </h2>
-        <p className="font-serif text-ghiaccio/60 leading-relaxed">
-          {article.excerpt}
-        </p>
+
+        {/* Excerpt */}
+        {article.excerpt && (
+          <p style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 17,
+            lineHeight: 1.5,
+            color: 'rgba(17,41,107,.6)',
+          }}>
+            {article.excerpt}
+          </p>
+        )}
+
+        {/* Link */}
         <a
           href={`/articoli/${article.id}/`}
-          className="font-sans text-[11px] uppercase tracking-[4px] text-blu-accento hover:opacity-70 transition-opacity mt-2 w-fit"
+          style={{
+            marginTop: 4,
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: '#11296b',
+            textDecoration: 'none',
+            borderBottom: '2px solid #ffcb05',
+            paddingBottom: 3,
+            width: 'fit-content',
+          }}
         >
           Leggi →
         </a>

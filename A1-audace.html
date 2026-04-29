@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>SOGLIA — A1 Audace / Palette Blu-Giallo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --imperial-blue:#11296b;
+    --imperial-deep:#0a1a47;
+    --steel-azure:#00509d;
+    --platinum:#ededed;
+    --platinum-warm:#f5f5f1;
+    --mustard:#ffdb57;
+    --bright-amber:#ffcb05;
+    --ink:#0a0f24;
+    --paper:#fbfbf7;
+    --ff-display:'Cormorant Garamond', Georgia, serif;
+    --ff-sans:'Inter', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#1a1a18;color:var(--ink);font-family:var(--ff-sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* ── Page chrome ─────────────────── */
+  .page{
+    max-width:1480px;
+    margin:0 auto;
+    padding:28px 28px 80px;
+  }
+  .label-bar{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:18px;
+    color:rgba(255,255,255,.55);
+    font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:600;
+  }
+  .label-bar .dot{width:6px;height:6px;background:var(--mustard);border-radius:50%;display:inline-block;margin-right:8px;vertical-align:middle}
+  .label-bar .right{color:rgba(255,255,255,.3)}
+
+  .stage{
+    display:grid;
+    grid-template-columns: 1fr 380px;
+    gap:28px;
+    align-items:start;
+  }
+
+  /* ── DESKTOP ARTBOARD ────────────── */
+  .desktop{
+    background:var(--paper);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .browser-bar{
+    height:34px;background:#e9e9e3;
+    display:flex;align-items:center;padding:0 14px;gap:6px;
+    border-bottom:1px solid rgba(0,0,0,.06);
+  }
+  .browser-bar i{width:11px;height:11px;border-radius:50%;background:#d2d2cc}
+  .browser-bar .url{
+    flex:1;text-align:center;font-family:var(--ff-sans);font-size:11px;
+    color:#7a7a72;letter-spacing:.5px;
+  }
+
+  /* Navbar */
+  .nav{
+    position:sticky;top:0;z-index:5;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(17,41,107,.08);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 56px;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px}
+  .brand .mark{
+    font-family:var(--ff-display);font-weight:600;font-size:22px;
+    letter-spacing:6px;color:var(--imperial-blue);
+  }
+  .brand .ref{
+    font-family:var(--ff-sans);font-size:9px;letter-spacing:3px;text-transform:uppercase;
+    color:rgba(17,41,107,.5);font-weight:600;
+  }
+  .nav-links{display:flex;gap:36px;align-items:center}
+  .nav-links a{
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;
+    color:var(--imperial-blue);position:relative;padding:4px 0;
+  }
+  .nav-links a.active::after{
+    content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--bright-amber);
+  }
+  .nav-search{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--imperial-blue);color:var(--mustard);
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    background:var(--imperial-blue);
+    color:#fff;
+    padding:90px 56px 80px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero::before{
+    /* concentric circles — soglia / aureola */
+    content:'';position:absolute;
+    right:-260px;top:50%;transform:translateY(-50%);
+    width:900px;height:900px;border-radius:50%;
+    background:
+      radial-gradient(circle, transparent 0 92px,
+        rgba(255,219,87,.12) 92px 94px, transparent 94px 184px,
+        rgba(255,219,87,.08) 184px 186px, transparent 186px 280px,
+        rgba(255,219,87,.06) 280px 282px, transparent 282px 380px,
+        rgba(255,219,87,.04) 380px 382px, transparent 382px 488px,
+        rgba(255,219,87,.03) 488px 490px, transparent 490px);
+    pointer-events:none;z-index:0;
+  }
+  .hero::after{
+    /* horizontal rule echoing soglia */
+    content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(90deg, transparent, rgba(255,219,87,.4) 30%, rgba(255,219,87,.4) 70%, transparent);
+  }
+  .hero-grid{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1.45fr 1fr;gap:60px;align-items:end;
+    min-height:560px;
+  }
+  .hero-eyebrow{
+    font-size:10px;letter-spacing:6px;text-transform:uppercase;font-weight:700;
+    color:var(--mustard);
+    display:flex;align-items:center;gap:14px;margin-bottom:28px;
+  }
+  .hero-eyebrow .line{flex:0 0 56px;height:1px;background:var(--mustard);opacity:.7}
+  .hero-eyebrow .num{
+    font-family:var(--ff-display);font-style:italic;font-weight:400;
+    font-size:14px;letter-spacing:1px;text-transform:none;color:rgba(255,219,87,.65);
+  }
+
+  .display{
+    font-family:var(--ff-display);
+    font-weight:500;
+    line-height:.86;
+    letter-spacing:-.04em;
+  }
+  .display .l1{
+    display:block;font-size:clamp(120px, 14vw, 220px);
+    color:var(--mustard);font-weight:600;
+  }
+  .display .l2{
+    display:block;font-size:clamp(78px, 9vw, 140px);
+    font-style:italic;font-weight:400;color:#fff;
+    margin-top:-.06em;margin-left:.6em;
+  }
+  .display .l3{
+    display:block;font-size:clamp(52px, 6vw, 86px);
+    color:transparent;-webkit-text-stroke:1.5px var(--mustard);font-weight:600;
+    margin-top:-.04em;
+  }
+
+  .hero-sub{
+    margin-top:38px;
+    font-family:var(--ff-display);font-style:italic;font-weight:300;
+    font-size:24px;line-height:1.35;color:rgba(255,255,255,.85);
+    max-width:540px;
+    border-left:3px solid var(--mustard);padding-left:18px;
+  }
+
+  /* Citazione asimmetrica colonna destra */
+  .quote-card{
+    align-self:end;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,219,87,.25);
+    padding:36px 32px 32px;
+    position:relative;
+  }
+  .quote-card::before{
+    content:'"';position:absolute;top:-36px;left:24px;
+    font-family:var(--ff-display);font-style:italic;font-weight:600;
+    font-size:140px;line-height:1;color:var(--mustard);
+  }
+  .quote-eyebrow{
+    font-size:9px;letter-spacing:4px;text-transform:uppercase;font-weight:700;
+    color:var(--mustard);margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .quote-eyebrow .pulse{width:6px;height:6px;background:var(--mustard);border-radius:50%}
+  .quote-text{
+    font-family:var(--ff-display);font-style:italic;font-weight:400;
+    font-size:22px;line-height:1.4;color:#fff;margin-bottom:22px;
+    text-wrap:pretty;
+  }
+  .quote-ref{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;
+    color:rgba(255,219,87,.7);
+  }
+
+  /* SECTION HEADER */
+  .sect-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:end;
+    padding:64px 56px 32px;
+    background:var(--paper);
+  }
+  .sect-num{
+    font-family:var(--ff-display);font-weight:500;font-size:96px;line-height:.8;
+    color:var(--imperial-blue);letter-spacing:-.04em;
+  }
+  .sect-num small{font-size:14px;font-style:italic;font-weight:400;letter-spacing:2px;display:block;color:rgba(17,41,107,.4);margin-bottom:6px}
+  .sect-title{
+    font-family:var(--ff-display);font-style:italic;font-weight:400;
+    font-size:48px;line-height:1;color:var(--imperial-blue);
+    border-bottom:1px solid rgba(17,41,107,.15);padding-bottom:14px;
+  }
+  .sect-cta{
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+    color:var(--imperial-blue);
+    border-bottom:2px solid var(--bright-amber);padding-bottom:6px;
+    align-self:end;
+  }
+
+  /* ARTICLES grid editoriale */
+  .articles{
+    background:var(--paper);
+    padding:0 56px 80px;
+    display:grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap:0;
+    border-top:1px solid rgba(17,41,107,.1);
+  }
+  .card{
+    padding:36px 32px;
+    border-right:1px solid rgba(17,41,107,.1);
+    position:relative;
+    display:flex;flex-direction:column;justify-content:space-between;
+    min-height:380px;
+    background:var(--paper);
+  }
+  .card:last-child{border-right:none}
+  .card.featured{
+    grid-row:span 2;
+    background:var(--imperial-blue);color:#fff;
+    border-right:none;
+    margin-right:-1px;
+  }
+  .card.featured::before{
+    content:'';position:absolute;top:0;left:0;width:6px;height:64px;background:var(--bright-amber);
+  }
+  .card-meta{
+    display:flex;align-items:center;gap:14px;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+    color:rgba(17,41,107,.55);margin-bottom:18px;
+  }
+  .card.featured .card-meta{color:var(--mustard)}
+  .card-meta .tag{
+    display:inline-block;padding:3px 10px;
+    background:var(--bright-amber);color:var(--imperial-blue);
+    font-weight:800;letter-spacing:2px;
+  }
+  .card.featured .card-meta .tag{background:var(--mustard);color:var(--imperial-blue)}
+  .card-num{
+    position:absolute;right:18px;top:24px;
+    font-family:var(--ff-display);font-style:italic;font-weight:400;
+    font-size:32px;color:rgba(17,41,107,.18);letter-spacing:-1px;
+  }
+  .card.featured .card-num{color:rgba(255,219,87,.25);font-size:64px;right:28px;top:28px}
+
+  .card-title{
+    font-family:var(--ff-display);font-weight:500;
+    font-size:30px;line-height:1.05;letter-spacing:-.01em;
+    color:var(--imperial-blue);margin-bottom:14px;text-wrap:pretty;
+  }
+  .card.featured .card-title{font-size:54px;color:#fff}
+  .card-excerpt{
+    font-family:var(--ff-display);font-style:italic;font-weight:300;
+    font-size:17px;line-height:1.5;color:rgba(17,41,107,.65);
+    text-wrap:pretty;
+  }
+  .card.featured .card-excerpt{color:rgba(255,255,255,.75);font-size:19px}
+  .card-foot{
+    margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+    padding-top:24px;
+  }
+  .card-read{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+    color:var(--imperial-blue);border-bottom:2px solid var(--bright-amber);padding-bottom:4px;
+  }
+  .card.featured .card-read{color:var(--mustard);border-color:var(--mustard)}
+  .card-time{
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:600;
+    color:rgba(17,41,107,.4);
+  }
+  .card.featured .card-time{color:rgba(255,219,87,.5)}
+
+  /* row 2 cells */
+  .articles > .card.small-2{border-top:1px solid rgba(17,41,107,.1)}
+  .articles > .card.small-3{border-top:1px solid rgba(17,41,107,.1)}
+
+  /* BIO */
+  .bio{
+    background:var(--imperial-deep);color:#fff;
+    padding:96px 56px;
+    display:grid;grid-template-columns: 220px 1fr 280px;gap:64px;align-items:start;
+    position:relative;overflow:hidden;
+  }
+  .bio::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--bright-amber);
+  }
+  .bio-eyebrow{
+    font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:700;
+    color:var(--mustard);
+  }
+  .bio-eyebrow small{display:block;margin-top:10px;font-family:var(--ff-display);font-style:italic;font-weight:300;font-size:24px;color:rgba(255,255,255,.4);letter-spacing:0;text-transform:none}
+  .bio-text{
+    font-family:var(--ff-display);font-style:italic;font-weight:300;
+    font-size:30px;line-height:1.35;color:rgba(255,255,255,.92);
+    text-wrap:pretty;
+  }
+  .bio-text em{font-style:normal;color:var(--mustard);background:linear-gradient(180deg, transparent 60%, rgba(255,219,87,.2) 60%);padding:0 4px}
+  .bio-meta{
+    display:flex;flex-direction:column;gap:18px;
+    border-left:1px solid rgba(255,219,87,.3);padding-left:24px;
+  }
+  .bio-meta .row{display:flex;flex-direction:column;gap:4px}
+  .bio-meta .row b{font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--mustard)}
+  .bio-meta .row span{font-family:var(--ff-display);font-size:18px;font-weight:400;color:#fff}
+  .bio-link{
+    margin-top:8px;
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--imperial-deep);
+    background:var(--mustard);padding:14px 22px;align-self:flex-start;
+    width:fit-content;
+  }
+
+  /* NEWSLETTER */
+  .news{
+    background:var(--platinum);
+    padding:96px 56px;
+    display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;
+    position:relative;
+  }
+  .news-left h3{
+    font-family:var(--ff-display);font-weight:500;font-size:80px;line-height:.95;
+    color:var(--imperial-blue);letter-spacing:-.03em;text-wrap:balance;
+  }
+  .news-left h3 em{font-style:italic;font-weight:400;color:var(--steel-azure)}
+  .news-left p{
+    margin-top:24px;font-family:var(--ff-display);font-style:italic;font-weight:300;
+    font-size:22px;line-height:1.45;color:rgba(17,41,107,.7);max-width:520px;
+  }
+  .news-form{
+    display:flex;flex-direction:column;gap:18px;
+    background:#fff;padding:36px;border:1px solid rgba(17,41,107,.1);
+    box-shadow:8px 8px 0 var(--mustard);
+  }
+  .news-form label{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--imperial-blue);
+  }
+  .news-form .input{
+    display:flex;align-items:center;border-bottom:2px solid var(--imperial-blue);padding:8px 2px;
+  }
+  .news-form .input input{
+    border:0;outline:0;background:transparent;flex:1;
+    font-family:var(--ff-display);font-size:24px;font-weight:400;color:var(--imperial-blue);
+  }
+  .news-form .input input::placeholder{color:rgba(17,41,107,.3);font-style:italic}
+  .news-form .submit{
+    background:var(--imperial-blue);color:var(--mustard);
+    border:0;padding:18px 24px;
+    font-family:var(--ff-sans);font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:800;
+    cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  }
+  .news-form .submit span{display:flex;align-items:center;gap:8px}
+  .news-form .submit em{font-family:var(--ff-display);font-style:italic;font-weight:400;font-size:14px;color:rgba(255,219,87,.7);text-transform:none;letter-spacing:0}
+
+  /* FOOTER */
+  .foot{
+    background:var(--imperial-deep);color:rgba(255,255,255,.7);
+    padding:34px 56px;
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid rgba(255,219,87,.2);
+  }
+  .foot .left{font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:10px}
+  .foot .left .dot{width:6px;height:6px;background:var(--mustard);border-radius:50%}
+  .foot .right{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600}
+  .foot .bollino{
+    width:18px;height:18px;border-radius:50%;background:#E8333A;display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ── MOBILE FRAME ────────────────── */
+  .mobile-col{
+    display:flex;flex-direction:column;gap:18px;
+    position:sticky;top:28px;
+  }
+  .mobile-cap{
+    color:rgba(255,255,255,.6);font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:600;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .mobile-cap em{font-family:var(--ff-display);font-style:italic;font-weight:300;color:rgba(255,219,87,.6);text-transform:none;letter-spacing:0;font-size:14px}
+  .mobile{
+    width:380px;height:780px;
+    background:#0a0a0a;border-radius:46px;padding:10px;
+    box-shadow:0 30px 60px rgba(0,0,0,.5), inset 0 0 0 2px rgba(255,255,255,.06);
+    position:relative;
+  }
+  .mobile-screen{
+    width:100%;height:100%;border-radius:36px;overflow:hidden;
+    background:var(--paper);position:relative;
+    display:flex;flex-direction:column;
+  }
+  .notch{
+    position:absolute;top:10px;left:50%;transform:translateX(-50%);
+    width:110px;height:28px;background:#000;border-radius:18px;z-index:3;
+  }
+  .status{
+    height:38px;display:flex;justify-content:space-between;align-items:flex-end;padding:8px 28px 4px;
+    font-size:11px;font-weight:700;color:var(--imperial-blue);
+  }
+  .m-nav{
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(17,41,107,.08);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 22px;
+  }
+  .m-nav .mark{font-family:var(--ff-display);font-weight:600;font-size:14px;letter-spacing:4px;color:var(--imperial-blue)}
+  .m-nav .icons{display:flex;gap:14px}
+  .m-nav .icons div{width:24px;height:24px;border-radius:50%;background:var(--imperial-blue);display:flex;align-items:center;justify-content:center;color:var(--mustard);font-size:12px}
+
+  .m-hero{
+    background:var(--imperial-blue);color:#fff;
+    padding:36px 22px 32px;position:relative;overflow:hidden;
+  }
+  .m-hero::before{
+    content:'';position:absolute;right:-160px;top:-60px;width:380px;height:380px;border-radius:50%;
+    background:
+      radial-gradient(circle, transparent 0 60px,
+        rgba(255,219,87,.14) 60px 62px, transparent 62px 110px,
+        rgba(255,219,87,.1) 110px 112px, transparent 112px 170px,
+        rgba(255,219,87,.06) 170px 172px, transparent 172px);
+    pointer-events:none;
+  }
+  .m-hero .eb{font-size:8px;letter-spacing:4px;text-transform:uppercase;font-weight:700;color:var(--mustard);margin-bottom:14px}
+  .m-hero h1{
+    font-family:var(--ff-display);font-weight:600;font-size:78px;line-height:.85;color:var(--mustard);
+    letter-spacing:-.04em;
+  }
+  .m-hero h1 i{display:block;font-style:italic;font-weight:400;font-size:42px;color:#fff;margin-top:-4px;margin-left:18px}
+  .m-hero .sub{
+    margin-top:22px;font-family:var(--ff-display);font-style:italic;font-weight:300;font-size:16px;line-height:1.4;color:rgba(255,255,255,.85);
+    border-left:2px solid var(--mustard);padding-left:12px;
+  }
+  .m-quote{
+    margin-top:24px;padding:18px 16px;border:1px solid rgba(255,219,87,.3);position:relative;
+  }
+  .m-quote .l{font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--mustard);margin-bottom:8px}
+  .m-quote p{font-family:var(--ff-display);font-style:italic;font-weight:400;font-size:14px;line-height:1.4;color:#fff}
+  .m-quote .r{margin-top:10px;font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:rgba(255,219,87,.7)}
+
+  .m-section-head{padding:28px 22px 14px;display:flex;justify-content:space-between;align-items:baseline}
+  .m-section-head h2{font-family:var(--ff-display);font-style:italic;font-weight:500;font-size:28px;color:var(--imperial-blue);letter-spacing:-.01em}
+  .m-section-head .pg{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:rgba(17,41,107,.5)}
+
+  /* MOBILE CAROUSEL — main card + sliver */
+  .m-carousel{
+    padding:6px 0 16px;
+    overflow:hidden;position:relative;
+  }
+  .m-carousel-track{
+    display:flex;gap:14px;padding:0 22px;
+  }
+  .m-card{
+    flex:0 0 290px;height:240px;
+    background:var(--imperial-blue);color:#fff;
+    padding:22px;display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .m-card.alt{background:var(--paper);color:var(--imperial-blue);border:1px solid rgba(17,41,107,.15)}
+  .m-card .num{
+    position:absolute;right:8px;bottom:-14px;
+    font-family:var(--ff-display);font-style:italic;font-weight:500;
+    font-size:80px;line-height:1;color:rgba(255,219,87,.18);letter-spacing:-.04em;
+  }
+  .m-card.alt .num{color:rgba(17,41,107,.08)}
+  .m-card .meta{font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--mustard);display:flex;gap:8px;align-items:center}
+  .m-card.alt .meta{color:var(--imperial-blue)}
+  .m-card .meta .tag{background:var(--mustard);color:var(--imperial-blue);padding:2px 8px;font-weight:800}
+  .m-card h4{font-family:var(--ff-display);font-weight:500;font-size:22px;line-height:1.05;letter-spacing:-.01em;margin-top:10px;text-wrap:pretty}
+  .m-card p{font-family:var(--ff-display);font-style:italic;font-weight:300;font-size:13px;line-height:1.4;color:rgba(255,255,255,.7);margin-top:8px}
+  .m-card.alt p{color:rgba(17,41,107,.6)}
+  .m-card .foot{display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+  .m-card .foot a{color:var(--mustard);border-bottom:1px solid var(--mustard);padding-bottom:2px}
+  .m-card.alt .foot a{color:var(--imperial-blue);border-bottom:1px solid var(--bright-amber)}
+  .m-card .foot span{color:rgba(255,255,255,.4)}
+  .m-card.alt .foot span{color:rgba(17,41,107,.4)}
+
+  .m-dots{
+    display:flex;justify-content:center;gap:6px;margin-top:14px;
+  }
+  .m-dots i{width:6px;height:6px;border-radius:50%;background:rgba(17,41,107,.15)}
+  .m-dots i.on{background:var(--imperial-blue);width:22px;border-radius:3px}
+
+  .m-bio{
+    background:var(--imperial-deep);color:#fff;padding:28px 22px;border-left:4px solid var(--bright-amber);margin-top:6px;
+  }
+  .m-bio .l{font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--mustard);margin-bottom:10px}
+  .m-bio p{font-family:var(--ff-display);font-style:italic;font-weight:300;font-size:18px;line-height:1.4}
+  .m-bio p em{font-style:normal;color:var(--mustard)}
+  .m-bio a{display:inline-block;margin-top:14px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--imperial-deep);background:var(--mustard);padding:8px 14px}
+
+  .m-news{
+    background:var(--platinum);padding:24px 22px;
+  }
+  .m-news h4{font-family:var(--ff-display);font-style:italic;font-weight:500;font-size:24px;color:var(--imperial-blue);line-height:1}
+  .m-news h4 b{font-style:normal;font-weight:600}
+  .m-news .input{margin-top:14px;display:flex;gap:6px}
+  .m-news .input input{flex:1;border:1px solid rgba(17,41,107,.2);background:#fff;padding:10px 12px;font-family:var(--ff-display);font-style:italic;font-size:13px;color:var(--imperial-blue);outline:none}
+  .m-news .input button{background:var(--imperial-blue);color:var(--mustard);border:0;padding:10px 14px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:800}
+
+  .m-foot{
+    background:var(--imperial-deep);color:rgba(255,255,255,.5);padding:14px 22px;
+    font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:600;display:flex;justify-content:space-between;align-items:center;
+  }
+  .m-foot .bollino{width:14px;height:14px;border-radius:50%;background:#E8333A}
+
+  .m-scroll{flex:1;overflow:hidden}
+
+  /* annotation chips */
+  .anno{
+    position:absolute;font-family:var(--ff-display);font-style:italic;font-weight:400;
+    color:rgba(255,255,255,.5);font-size:13px;letter-spacing:.5px;
+    display:flex;align-items:center;gap:6px;
+  }
+  .anno::before{content:'';width:18px;height:1px;background:rgba(255,219,87,.5)}
+
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- TOP LABEL -->
+  <div class="label-bar">
+    <div><span class="dot"></span>A1 — AUDACE / Palette Blu-Giallo · Soglia homepage mockup</div>
+    <div class="right">Cormorant Garamond · Inter · 1480 × auto</div>
+  </div>
+
+  <div class="stage">
+    <!-- ───────── DESKTOP ───────── -->
+    <div class="desktop">
+      <div class="browser-bar">
+        <i></i><i></i><i></i>
+        <div class="url">soglia.pages.dev</div>
+        <div style="width:48px"></div>
+      </div>
+
+      <!-- NAV -->
+      <nav class="nav">
+        <div class="brand">
+          <div class="mark">SOGLIA</div>
+          <div class="ref">Riflessioni di un sacerdote</div>
+        </div>
+        <div class="nav-links">
+          <a class="active" href="#">Home</a>
+          <a href="#">Articoli</a>
+          <a href="#">Biografia</a>
+          <a class="nav-search" href="#" aria-label="Cerca">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+          </a>
+        </div>
+      </nav>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">
+              <span class="line"></span>
+              <span>N° 47 · Anno II</span>
+              <span class="num">— Aprile 2026</span>
+            </div>
+            <div class="display">
+              <span class="l1">SOGLIA</span>
+              <span class="l2">riflessioni</span>
+              <span class="l3">DI UN SACERDOTE</span>
+            </div>
+            <p class="hero-sub">
+              Pensare ad alta voce la fede — in dialogo con la filosofia, la teologia e l'esperienza quotidiana, sul confine tra ciò che si crede e ciò che si interroga.
+            </p>
+          </div>
+
+          <aside class="quote-card">
+            <div class="quote-eyebrow"><span class="pulse"></span>Citazione del giorno</div>
+            <p class="quote-text">
+              Davanti a una soglia non si passa: si decide. Restare di qua o accettare di non essere più gli stessi dall'altra parte.
+            </p>
+            <p class="quote-ref">— S. Agostino · Confessioni, X, 6</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ARTICLES SECTION HEAD -->
+      <header class="sect-head">
+        <div class="sect-num"><small>— Sezione 01</small>02</div>
+        <h2 class="sect-title">Riflessioni recenti</h2>
+        <a class="sect-cta" href="#">Archivio completo →</a>
+      </header>
+
+      <!-- ARTICLES GRID -->
+      <section class="articles">
+        <!-- FEATURED — span 2 -->
+        <article class="card featured">
+          <div>
+            <div class="card-meta">
+              <span class="tag">In evidenza</span>
+              <span>22 Apr 2026 · Filosofia</span>
+            </div>
+            <h3 class="card-title">Sulla soglia del silenzio: ascoltare ciò che la preghiera non dice</h3>
+            <p class="card-excerpt">Un'indagine sull'apofatismo cristiano a partire da Massimo il Confessore, in dialogo con la fenomenologia di Jean-Luc Marion. Cosa accade quando le parole della liturgia diventano contenitori vuoti che si riempiono solo di presenza?</p>
+          </div>
+          <div class="card-foot">
+            <a class="card-read" href="#">Leggi l'articolo →</a>
+            <span class="card-time">12 min · 2 480 parole</span>
+          </div>
+          <span class="card-num">01</span>
+        </article>
+
+        <!-- SMALL #2 -->
+        <article class="card small-1">
+          <div>
+            <div class="card-meta"><span>15 Apr · Teologia</span></div>
+            <h3 class="card-title">Il pane spezzato e l'ospite imprevisto</h3>
+            <p class="card-excerpt">Riflessioni sui pellegrini di Emmaus e la grammatica dell'incontro.</p>
+          </div>
+          <div class="card-foot">
+            <a class="card-read" href="#">Leggi →</a>
+            <span class="card-time">7 min</span>
+          </div>
+          <span class="card-num">02</span>
+        </article>
+
+        <!-- SMALL #3 -->
+        <article class="card small-1">
+          <div>
+            <div class="card-meta"><span>09 Apr · Esperienza</span></div>
+            <h3 class="card-title">Confessare un'ora prima della Pasqua</h3>
+            <p class="card-excerpt">Il sacramento come laboratorio di parresìa: appunti dal confessionale.</p>
+          </div>
+          <div class="card-foot">
+            <a class="card-read" href="#">Leggi →</a>
+            <span class="card-time">5 min</span>
+          </div>
+          <span class="card-num">03</span>
+        </article>
+
+        <!-- SMALL #4 -->
+        <article class="card small-2">
+          <div>
+            <div class="card-meta"><span>02 Apr · Filosofia</span></div>
+            <h3 class="card-title">Heidegger, l'attesa e la domenica delle Palme</h3>
+            <p class="card-excerpt">Note in margine a "Essere e tempo" §74, durante la Settimana Santa.</p>
+          </div>
+          <div class="card-foot">
+            <a class="card-read" href="#">Leggi →</a>
+            <span class="card-time">9 min</span>
+          </div>
+          <span class="card-num">04</span>
+        </article>
+
+        <!-- SMALL #5 -->
+        <article class="card small-3">
+          <div>
+            <div class="card-meta"><span>26 Mar · Lectio</span></div>
+            <h3 class="card-title">Lazzaro fuori, e la pietra che eravamo noi</h3>
+            <p class="card-excerpt">Una lectio divina su Giovanni 11 — la voce che chiama da fuori la tomba.</p>
+          </div>
+          <div class="card-foot">
+            <a class="card-read" href="#">Leggi →</a>
+            <span class="card-time">6 min</span>
+          </div>
+          <span class="card-num">05</span>
+        </article>
+      </section>
+
+      <!-- BIO -->
+      <section class="bio">
+        <div class="bio-eyebrow">
+          Il sacerdote
+          <small>03 — Chi scrive</small>
+        </div>
+        <p class="bio-text">
+          Sacerdote da diciassette anni, insegnante di religione e di filosofia in un liceo di provincia. Scrivo queste riflessioni come <em>tentativo di pensare ad alta voce</em> — perché la fede, quando non si lascia interrogare, finisce per diventare un'abitudine elegante.
+        </p>
+        <div class="bio-meta">
+          <div class="row"><b>Ordinato</b><span>2009 · Diocesi di —</span></div>
+          <div class="row"><b>Studi</b><span>Teologia fondamentale, Roma</span></div>
+          <div class="row"><b>Insegna</b><span>Religione, filosofia teoretica</span></div>
+          <a class="bio-link" href="#">Leggi la biografia →</a>
+        </div>
+      </section>
+
+      <!-- NEWSLETTER -->
+      <section class="news">
+        <div class="news-left">
+          <h3>Una riflessione, <em>una volta al mese</em>, nella tua casella.</h3>
+          <p>Niente algoritmi, niente notifiche. Solo un articolo lungo, scelto a mano, ogni primo venerdì del mese — perché certe parole hanno bisogno di lentezza.</p>
+        </div>
+        <form class="news-form" onsubmit="return false">
+          <label>Iscriviti alla newsletter</label>
+          <div class="input">
+            <input type="email" placeholder="il-tuo-nome@esempio.it" />
+          </div>
+          <button class="submit" type="submit">
+            <span>Iscriviti →</span>
+            <em>nessuno spam, mai.</em>
+          </button>
+        </form>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="foot">
+        <div class="left"><span class="dot"></span>SOGLIA · Riflessioni di un sacerdote · © 2026</div>
+        <div class="right">
+          <span class="bollino">
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3.5M8 2V6.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Made by Tramite</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ───────── MOBILE FRAME ───────── -->
+    <div class="mobile-col">
+      <div class="mobile-cap">
+        <span>Mobile · 390 × 844</span>
+        <em>carousel swipe</em>
+      </div>
+
+      <div class="mobile">
+        <div class="mobile-screen">
+          <div class="notch"></div>
+          <div class="status">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center">
+              <svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="3" width="3" height="5" fill="currentColor"/><rect x="5" y="2" width="3" height="6" fill="currentColor"/><rect x="10" y="1" width="3" height="7" fill="currentColor"/><rect x="15" y="0" width="3" height="8" fill="currentColor"/></svg>
+              <svg width="14" height="11" viewBox="0 0 14 11"><path d="M7 9 L1 4 Q7 -1 13 4 Z" fill="currentColor"/></svg>
+              <span style="font-size:10px">100%</span>
+            </span>
+          </div>
+
+          <div class="m-scroll">
+            <!-- nav -->
+            <div class="m-nav">
+              <div class="mark">SOGLIA</div>
+              <div class="icons">
+                <div>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+                </div>
+                <div>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="14" y2="18"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- hero mobile -->
+            <div class="m-hero">
+              <div class="eb">N° 47 · Anno II</div>
+              <h1>SOGLIA<i>riflessioni</i></h1>
+              <p class="sub">Pensare ad alta voce la fede — sul confine tra ciò che si crede e ciò che si interroga.</p>
+              <div class="m-quote">
+                <div class="l">Citazione del giorno</div>
+                <p>Davanti a una soglia non si passa: si decide.</p>
+                <div class="r">— S. Agostino</div>
+              </div>
+            </div>
+
+            <!-- section head -->
+            <div class="m-section-head">
+              <h2>Riflessioni recenti</h2>
+              <div class="pg">01 / 05</div>
+            </div>
+
+            <!-- carousel: card visibile + sliver -->
+            <div class="m-carousel">
+              <div class="m-carousel-track">
+                <div class="m-card">
+                  <div>
+                    <div class="meta"><span class="tag">In evidenza</span><span>22 APR</span></div>
+                    <h4>Sulla soglia del silenzio: ascoltare ciò che la preghiera non dice</h4>
+                    <p>Apofatismo cristiano in dialogo con Jean-Luc Marion.</p>
+                  </div>
+                  <div class="foot"><a>Leggi →</a><span>12 min</span></div>
+                  <span class="num">01</span>
+                </div>
+                <div class="m-card alt">
+                  <div>
+                    <div class="meta"><span>15 APR · TEOLOGIA</span></div>
+                    <h4>Il pane spezzato e l'ospite imprevisto</h4>
+                    <p>Pellegrini di Emmaus.</p>
+                  </div>
+                  <div class="foot"><a>Leggi →</a><span>7 min</span></div>
+                  <span class="num">02</span>
+                </div>
+              </div>
+            </div>
+            <div class="m-dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+
+            <!-- bio -->
+            <div class="m-bio">
+              <div class="l">Il sacerdote</div>
+              <p>Sacerdote da diciassette anni. Scrivo per <em>pensare ad alta voce</em> la fede.</p>
+              <a href="#">Biografia →</a>
+            </div>
+
+            <!-- newsletter -->
+            <div class="m-news">
+              <h4>Una riflessione, <b>una volta al mese.</b></h4>
+              <div class="input">
+                <input placeholder="email@esempio.it" />
+                <button>Iscrivi</button>
+              </div>
+            </div>
+
+            <!-- footer -->
+            <div class="m-foot">
+              <span>SOGLIA · 2026</span>
+              <span style="display:flex;align-items:center;gap:6px"><span class="bollino"></span>Tramite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-cap" style="margin-top:4px">
+        <em>card visibile + bordo della successiva — "c'è altro"</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

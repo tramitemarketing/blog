@@ -3,59 +3,10 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const ITEMS = [
-  {
-    label: 'Home',
-    href: '/',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <rect x="9" y="2" width="2" height="16" fill="#F0F9FF" />
-        <rect x="4" y="7" width="12" height="2" fill="#F0F9FF" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Articoli',
-    href: '/articoli',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke="#BAE6FD" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"
-        aria-hidden="true">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-        <line x1="8" y1="7" x2="16" y2="7" />
-        <line x1="8" y1="11" x2="13" y2="11" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Cerca',
-    action: () => {
-      if (typeof navigator !== 'undefined' && navigator.vibrate) navigator.vibrate(10)
-      window.dispatchEvent(new Event('soglia:open-search'))
-    },
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke="#7DD3FC" strokeWidth="1.8" strokeLinecap="round"
-        aria-hidden="true">
-        <circle cx="11" cy="11" r="7" />
-        <line x1="16.5" y1="16.5" x2="22" y2="22" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Biografia',
-    href: '/biografia',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-        stroke="#E0F2FE" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"
-        aria-hidden="true">
-        <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
-        <line x1="16" y1="8" x2="2" y2="22" />
-        <line x1="17.5" y1="15" x2="9" y2="15" />
-      </svg>
-    ),
-  },
+const LINKS = [
+  { label: 'Home',      href: '/' },
+  { label: 'Articoli',  href: '/articoli' },
+  { label: 'Biografia', href: '/biografia' },
 ]
 
 export default function MobileNavbar() {
@@ -66,13 +17,12 @@ export default function MobileNavbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY
-      const prevY = lastScrollY.current
-      lastScrollY.current = currentY
-      if (currentY > prevY && currentY > 80) {
+      if (currentY > lastScrollY.current && currentY > 60) {
         setHidden(true)
-      } else if (currentY < prevY) {
+      } else {
         setHidden(false)
       }
+      lastScrollY.current = currentY
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
@@ -81,84 +31,90 @@ export default function MobileNavbar() {
   return (
     <nav
       aria-label="Navigazione mobile"
-      className="enter-from-top enter-d0"
       style={{
         position: 'fixed',
-        bottom: 20,
-        left: '50%',
-        transform: hidden
-          ? 'translateX(-50%) translateY(calc(100% + 28px))'
-          : 'translateX(-50%) translateY(0)',
-        transition: 'transform 0.3s ease',
+        top: 0,
+        left: 0,
+        right: 0,
         zIndex: 50,
-        display: 'inline-flex',
+        transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 0.28s cubic-bezier(0.16,1,0.3,1)',
+        background: 'rgba(255,255,255,0.68)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        borderBottom: '1px solid rgba(17,41,107,.10)',
+        display: 'flex',
         alignItems: 'center',
-        background: 'rgba(5, 12, 24, 0.75)',
-        backdropFilter: 'blur(24px) saturate(200%)',
-        WebkitBackdropFilter: 'blur(24px) saturate(200%)',
-        border: '1px solid rgba(255,255,255,.12)',
-        borderRadius: 40,
-        padding: '10px 20px',
-        gap: 8,
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,.10), 0 8px 32px rgba(0,0,0,.45)',
+        justifyContent: 'space-between',
+        padding: '14px 22px',
       }}
     >
-      {ITEMS.map((item) => {
-        const isActive = item.href
-          ? item.href === '/'
-            ? pathname === '/'
-            : pathname.startsWith(item.href)
-          : false
-
-        const content = (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            {item.icon}
-            <span style={{
-              fontFamily: 'system-ui, sans-serif',
-              fontSize: 8,
-              fontWeight: 700,
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              color: isActive ? '#FFFFFF' : 'rgba(240,249,255,.7)',
-            }}>
-              {item.label}
-            </span>
-            <div style={{
-              width: isActive ? 14 : 3,
-              height: 2,
-              borderRadius: 2,
-              background: 'rgba(255,255,255,.7)',
-              opacity: isActive ? 1 : 0,
-              transition: 'width 0.22s ease, opacity 0.18s ease',
-            }} />
-          </div>
-        )
-
-        const sharedStyle: React.CSSProperties = {
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '6px 12px',
-          borderRadius: 24,
-          background: isActive ? 'rgba(255,255,255,.12)' : 'transparent',
-          border: 'none',
-          cursor: 'pointer',
+      {/* Brand */}
+      <Link
+        href="/"
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 600,
+          fontSize: 16,
+          letterSpacing: 5,
+          color: '#11296b',
           textDecoration: 'none',
-        }
+        }}
+      >
+        SOGLIA
+      </Link>
 
-        if (item.action) {
+      {/* Links + Search */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        {LINKS.filter(l => l.href !== '/').map(({ label, href }) => {
+          const isActive = pathname === href || (href !== '/' && pathname.startsWith(href))
           return (
-            <button key={item.label} style={sharedStyle} onClick={item.action} aria-label={item.label}>
-              {content}
-            </button>
+            <Link
+              key={href}
+              href={href}
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 10,
+                letterSpacing: 2,
+                textTransform: 'uppercase',
+                fontWeight: 600,
+                color: isActive ? '#11296b' : 'rgba(17,41,107,.55)',
+                textDecoration: 'none',
+                borderBottom: isActive ? '2px solid #ffcb05' : '2px solid transparent',
+                paddingBottom: 2,
+              }}
+            >
+              {label}
+            </Link>
           )
-        }
-        return (
-          <Link key={item.label} href={item.href!} style={sharedStyle} aria-label={item.label}>
-            {content}
-          </Link>
-        )
-      })}
+        })}
+
+        <button
+          onClick={() => {
+            if (navigator.vibrate) navigator.vibrate(8)
+            window.dispatchEvent(new Event('soglia:open-search'))
+          }}
+          aria-label="Cerca"
+          style={{
+            width: 30,
+            height: 30,
+            borderRadius: '50%',
+            background: '#11296b',
+            color: '#ffdb57',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'none',
+            cursor: 'pointer',
+            flexShrink: 0,
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="22" y2="22" />
+          </svg>
+        </button>
+      </div>
     </nav>
   )
 }
