@@ -1,13 +1,9 @@
 export default function BrevoWidget() {
   return (
     <section
+      className="brevo-widget"
       style={{
         background: '#ededed',
-        padding: '96px 56px',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: 72,
-        alignItems: 'center',
       }}
     >
       {/* Colonna sinistra — testo */}

@@ -3,14 +3,10 @@ import Link from 'next/link'
 export default function BioTeaser() {
   return (
     <section
+      className="bio-teaser"
       style={{
         background: '#0a1a47',
         color: '#fff',
-        padding: '96px 56px',
-        display: 'grid',
-        gridTemplateColumns: '220px 1fr 280px',
-        gap: 64,
-        alignItems: 'start',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -87,12 +83,11 @@ export default function BioTeaser() {
 
       {/* Colonna 3 — meta + link */}
       <div
+        className="bio-teaser-divider"
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: 18,
-          borderLeft: '1px solid rgba(255,219,87,.3)',
-          paddingLeft: 24,
         }}
       >
         {[

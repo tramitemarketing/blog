@@ -19,7 +19,7 @@ export default function MobileArticleHeader({ title, readingTime }: MobileArticl
     <div
       style={{
         position: 'sticky',
-        top: 0,
+        top: 56,
         zIndex: 40,
         background: 'rgba(255,255,255,.07)',
         backdropFilter: 'blur(20px)',

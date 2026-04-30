@@ -205,9 +205,10 @@ body {
     min-height: unset;
     gap: 28px;
   }
-  .hero-l1 { font-size: clamp(72px, 20vw, 110px); }
-  .hero-l2 { font-size: clamp(46px, 13vw,  72px); }
-  .hero-l3 { font-size: clamp(30px,  9vw,  48px); }
+  /* Font ridotti per contenere il testo in 390px − 44px padding = 346px */
+  .hero-l1 { font-size: clamp(46px, 12.5vw, 64px); }
+  .hero-l2 { font-size: clamp(30px,  8.5vw, 44px); }
+  .hero-l3 { font-size: clamp(18px,  5.8vw, 28px); }
 }
 
 /* ─── Hero entrance animations ─── */
@@ -235,5 +236,75 @@ body {
   .hero-anim-eyebrow, .hero-anim-l1, .hero-anim-l2,
   .hero-anim-l3, .hero-anim-subtitle, .hero-anim-quote {
     animation: none;
+  }
+}
+
+/* ─── Overflow fix globale ─── */
+html, body {
+  overflow-x: hidden;
+}
+
+/* ─── BioTeaser responsive ─── */
+.bio-teaser {
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  gap: 64px;
+  padding: 96px 56px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .bio-teaser {
+    grid-template-columns: 1fr;
+    padding: 52px 22px;
+    gap: 36px;
+  }
+}
+
+.bio-teaser-divider {
+  border-left: 1px solid rgba(255, 219, 87, 0.3);
+  padding-left: 24px;
+}
+
+@media (max-width: 768px) {
+  .bio-teaser-divider {
+    border-left: none;
+    border-top: 1px solid rgba(255, 219, 87, 0.2);
+    padding-left: 0;
+    padding-top: 28px;
+  }
+}
+
+/* ─── BrevoWidget responsive ─── */
+.brevo-widget {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  padding: 96px 56px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .brevo-widget {
+    grid-template-columns: 1fr;
+    padding: 52px 22px;
+    gap: 40px;
+  }
+}
+
+/* ─── Footer responsive ─── */
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34px 56px;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px 22px;
+    text-align: center;
   }
 }

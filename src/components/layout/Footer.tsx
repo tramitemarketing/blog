@@ -1,13 +1,10 @@
 export default function Footer() {
   return (
     <footer
+      className="site-footer"
       style={{
         background: '#0a1a47',
         color: 'rgba(255,255,255,.7)',
-        padding: '34px 56px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         borderTop: '1px solid rgba(255,219,87,.2)',
       }}
     >
