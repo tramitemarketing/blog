@@ -1,4 +1,31 @@
+'use client'
+import { useState } from 'react'
+
 export default function BrevoWidget() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!email.trim()) return
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      })
+      if (res.ok) {
+        setStatus('done')
+        setEmail('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <section
       className="brevo-widget"
@@ -72,52 +99,78 @@ export default function BrevoWidget() {
           Iscriviti alla newsletter
         </p>
 
-        {/*
-          BREVO EMBED: incolla qui il codice embed dal tuo account Brevo.
-          Brevo → Contatti → Form → Crea form → Ottieni codice embed
-          Sostituisci il div placeholder con il tag <script> o <iframe> di Brevo.
-        */}
-        <div
-          style={{
-            borderBottom: '2px solid #11296b',
-            padding: '8px 2px',
-            marginBottom: 18,
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <input
-            type="email"
-            placeholder="il-tuo-nome@esempio.it"
-            disabled
-            style={{
-              border: 0,
-              outline: 0,
-              background: 'transparent',
-              flex: 1,
-              fontFamily: 'var(--font-display)',
-              fontSize: 24,
-              fontWeight: 400,
-              color: '#11296b',
-            }}
-          />
-        </div>
+        {status === 'done' ? (
+          <p style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 22,
+            color: '#11296b',
+            lineHeight: 1.4,
+          }}>
+            Grazie. Ti scriverò quando avrò qualcosa da dire.
+          </p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div style={{
+              borderBottom: '2px solid #11296b',
+              padding: '8px 2px',
+              marginBottom: 18,
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="il-tuo-nome@esempio.it"
+                required
+                style={{
+                  border: 0,
+                  outline: 0,
+                  background: 'transparent',
+                  flex: 1,
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 24,
+                  fontWeight: 400,
+                  color: '#11296b',
+                }}
+              />
+            </div>
 
-        <div
-          style={{
-            background: 'rgba(17,41,107,.05)',
-            border: '1px dashed rgba(17,41,107,.2)',
-            padding: '18px 24px',
-            fontFamily: 'var(--font-sans)',
-            fontSize: 10,
-            letterSpacing: 3,
-            textTransform: 'uppercase',
-            color: 'rgba(17,41,107,.4)',
-            textAlign: 'center',
-          }}
-        >
-          [Widget Brevo — incolla qui il codice embed]
-        </div>
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 11,
+                letterSpacing: 3,
+                textTransform: 'uppercase',
+                fontWeight: 700,
+                color: '#0a1a47',
+                background: '#ffdb57',
+                padding: '14px 28px',
+                border: 'none',
+                cursor: status === 'sending' ? 'wait' : 'pointer',
+                opacity: status === 'sending' ? 0.7 : 1,
+                width: '100%',
+              }}
+            >
+              {status === 'sending' ? 'Iscrizione…' : 'Iscriviti →'}
+            </button>
+
+            {status === 'error' && (
+              <p style={{
+                marginTop: 12,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 11,
+                color: '#c0392b',
+              }}>
+                Qualcosa è andato storto. Riprova.
+              </p>
+            )}
+          </form>
+        )}
       </div>
     </section>
   )
