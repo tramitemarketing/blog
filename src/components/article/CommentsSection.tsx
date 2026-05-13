@@ -47,7 +47,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
 
       {/* Approved comments */}
       {comments.length === 0 ? (
-        <p className="font-serif text-[rgba(17,41,107,0.4)] italic mb-12">
+        <p className="font-serif text-[rgba(10,15,36,0.6)] italic mb-12">
           Nessun commento ancora. Sii il primo.
         </p>
       ) : (
@@ -58,7 +58,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
                 <span className="font-sans font-bold text-[#11296b] text-sm">
                   {comment.authorName}
                 </span>
-                <span className="font-sans text-[10px] uppercase tracking-[3px] text-[rgba(17,41,107,0.4)]">
+                <span className="font-sans text-[10px] uppercase tracking-[3px] text-[rgba(10,15,36,0.6)]">
                   {comment.createdAt.toLocaleDateString('it-IT', {
                     day: '2-digit',
                     month: 'long',
@@ -66,7 +66,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
                   })}
                 </span>
               </div>
-              <p className="font-serif text-[rgba(17,41,107,0.75)] leading-relaxed">
+              <p className="font-serif text-[#0a0f24] leading-relaxed">
                 {comment.text}
               </p>
             </div>
@@ -76,7 +76,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
 
       {/* Submission form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <h3 className="font-sans text-[11px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]">
+        <h3 className="font-sans text-[11px] uppercase tracking-[4px] text-[rgba(10,15,36,0.65)]">
           Lascia un commento
         </h3>
 
@@ -94,7 +94,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]" htmlFor="comment-name">
+          <label className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(10,15,36,0.65)]" htmlFor="comment-name">
             Nome
           </label>
           <input
@@ -109,7 +109,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]" htmlFor="comment-text">
+          <label className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(10,15,36,0.65)]" htmlFor="comment-text">
             Commento
           </label>
           <textarea
@@ -124,7 +124,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
         </div>
 
         {status === 'sent' ? (
-          <p className="font-serif text-[rgba(17,41,107,0.65)] italic">
+          <p className="font-serif text-[#0a0f24] italic">
             Grazie! Il tuo commento è in attesa di approvazione.
           </p>
         ) : (
