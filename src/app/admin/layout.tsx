@@ -27,7 +27,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <nav className="bg-viola-notte border-b border-viola-vivace/30 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <span className="font-sans font-black text-ghiaccio uppercase tracking-[4px] text-xs">
-            SOGLIA Admin
+            IMMAGINARE Admin
           </span>
           <Link href="/admin" className="font-sans text-[10px] uppercase tracking-[3px] text-ghiaccio/50 hover:text-oro transition-colors">
             Articoli

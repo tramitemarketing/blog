@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
             <rect x="4" y="7" width="12" height="2" fill="#F8F4FF"/>
           </svg>
           <h1 className="font-sans font-black text-ghiaccio uppercase tracking-[4px] text-sm">
-            SOGLIA Admin
+            IMMAGINARE Admin
           </h1>
         </div>
 

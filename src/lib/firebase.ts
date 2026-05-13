@@ -15,7 +15,7 @@ const missingKeys = (Object.entries(firebaseConfig) as [string, string | undefin
 
 if (missingKeys.length > 0) {
   console.warn(
-    `[SOGLIA] Missing Firebase config: ${missingKeys.join(', ')}. ` +
+    `[IMMAGINARE] Missing Firebase config: ${missingKeys.join(', ')}. ` +
     `Set these in .env.local (see .env.local.example)`
   )
 }

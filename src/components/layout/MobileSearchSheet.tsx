@@ -21,8 +21,8 @@ export default function MobileSearchSheet() {
 
   useEffect(() => {
     const handler = () => setOpen(true)
-    window.addEventListener('soglia:open-search', handler)
-    return () => window.removeEventListener('soglia:open-search', handler)
+    window.addEventListener('immaginare:open-search', handler)
+    return () => window.removeEventListener('immaginare:open-search', handler)
   }, [])
 
   useEffect(() => {

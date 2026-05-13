@@ -29,7 +29,7 @@ export default function Footer() {
             flexShrink: 0,
           }}
         />
-        SOGLIA · Riflessioni di un sacerdote · © {new Date().getFullYear()}
+        IMMAGINARE · Riflessioni di un sacerdote · © {new Date().getFullYear()}
       </div>
 
       <a

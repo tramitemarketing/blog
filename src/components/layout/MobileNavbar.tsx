@@ -107,7 +107,7 @@ export default function MobileNavbar() {
             textDecoration: 'none',
           }}
         >
-          SOGLIA
+          IMMAGINARE
         </Link>
 
         {/* Hamburger */}
@@ -166,7 +166,7 @@ export default function MobileNavbar() {
           userSelect: 'none',
           letterSpacing: '-.04em',
         }}>
-          SOGLIA
+          IMMAGINARE
         </div>
 
         {/* Cerchi concentrici decorativi */}
@@ -262,7 +262,7 @@ export default function MobileNavbar() {
         <button
           onClick={() => {
             setMenuOpen(false)
-            setTimeout(() => window.dispatchEvent(new Event('soglia:open-search')), 320)
+            setTimeout(() => window.dispatchEvent(new Event('immaginare:open-search')), 320)
           }}
           style={{
             display: 'flex',

@@ -43,7 +43,7 @@ export default function Navbar() {
           color: '#ffdb57',
           textDecoration: 'none',
         }}>
-          SOGLIA
+          IMMAGINARE
         </Link>
         <span style={{
           fontFamily: 'var(--font-sans)',
@@ -83,7 +83,7 @@ export default function Navbar() {
 
         {/* Search — glass pill */}
         <button
-          onClick={() => window.dispatchEvent(new Event('soglia:open-search'))}
+          onClick={() => window.dispatchEvent(new Event('immaginare:open-search'))}
           aria-label="Cerca"
           className="nav-search-btn"
           style={{

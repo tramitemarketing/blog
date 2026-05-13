@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 
-const STORAGE_KEY = 'soglia_cookie_consent'
+const STORAGE_KEY = 'immaginare_cookie_consent'
 
 export function useCookieConsent(): {
   consented: boolean | null
