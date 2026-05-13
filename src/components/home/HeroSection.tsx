@@ -132,8 +132,12 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
               alignSelf: 'end',
               background: 'rgba(255,255,255,.04)',
               border: '1px solid rgba(255,219,87,.25)',
-              padding: '36px 28px 28px',
+              padding: '36px 28px 36px',
               position: 'relative',
+              minHeight: 280,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
             }}
           >
             {/* Virgoletta decorativa */}

@@ -24,8 +24,8 @@ export default function BioTeaser() {
         }}
       />
 
-      {/* Colonna 1 — etichetta */}
-      <div>
+      {/* Colonna 1 — etichetta + riquadro libro */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
         <p
           style={{
             fontFamily: 'var(--font-sans)',
@@ -51,6 +51,58 @@ export default function BioTeaser() {
         >
           03 · Chi scrive
         </p>
+
+        {/* Riquadro libro */}
+        <div
+          style={{
+            marginTop: 28,
+            border: '1px solid rgba(255,219,87,.22)',
+            padding: '22px 20px 20px',
+            position: 'relative',
+            background: 'rgba(255,255,255,.03)',
+          }}
+        >
+          {/* Angolo decorativo */}
+          <div aria-hidden="true" style={{
+            position: 'absolute',
+            top: 0, right: 0,
+            width: 18, height: 18,
+            borderBottom: '1px solid rgba(255,219,87,.22)',
+            borderLeft: '1px solid rgba(255,219,87,.22)',
+            background: '#0a1a47',
+          }} />
+
+          <p style={{
+            fontFamily: 'var(--font-sans)',
+            fontSize: 9,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: 'rgba(255,219,87,.5)',
+            marginBottom: 14,
+          }}>
+            Leggi la biografia
+          </p>
+
+          <p style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 15,
+            lineHeight: 1.6,
+            color: 'rgba(255,255,255,.65)',
+          }}>
+            Una vita spesa tra i calanchi,
+            le aule scolastiche e il silenzio
+            della preghiera quotidiana.
+          </p>
+
+          <div style={{
+            marginTop: 16,
+            width: 24, height: 1,
+            background: 'rgba(255,219,87,.35)',
+          }} />
+        </div>
       </div>
 
       {/* Colonna 2 — testo */}
