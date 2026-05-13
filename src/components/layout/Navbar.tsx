@@ -60,7 +60,7 @@ export default function Navbar() {
       {/* Links + Search */}
       <div style={{ display: 'flex', gap: 36, alignItems: 'center' }}>
         {LINKS.map(({ label, href }) => {
-          const isActive = pathname === href
+          const isActive = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
           return (
             <Link
               key={href}

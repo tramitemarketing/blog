@@ -26,7 +26,7 @@ export default function ArticolePage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="font-sans text-[11px] uppercase tracking-[4px] text-ghiaccio/30 animate-pulse">
+        <p className="font-sans text-[11px] uppercase tracking-[4px] text-[rgba(17,41,107,0.35)] animate-pulse">
           Caricamento…
         </p>
       </div>
@@ -36,7 +36,7 @@ export default function ArticolePage() {
   if (!article) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-20 text-center">
-        <p className="font-serif text-ghiaccio/40 italic">Articolo non trovato.</p>
+        <p className="font-serif text-[rgba(17,41,107,0.4)] italic">Articolo non trovato.</p>
       </div>
     )
   }
@@ -52,21 +52,21 @@ export default function ArticolePage() {
       <div className="max-w-2xl mx-auto px-6 py-20">
       {/* Meta */}
       <div className="flex items-center gap-4 mb-8">
-        <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/30">
+        <p className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]">
           {article.publishedAt.toLocaleDateString('it-IT', {
             day: '2-digit',
             month: 'long',
             year: 'numeric',
           })}
         </p>
-        <span className="text-ghiaccio/20">·</span>
-        <p className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/30">
+        <span className="text-[rgba(17,41,107,0.25)]">·</span>
+        <p className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]">
           {readingTime} min di lettura
         </p>
       </div>
 
       {/* Title */}
-      <h1 className="font-serif text-ghiaccio leading-tight mb-8"
+      <h1 className="font-serif text-[#11296b] leading-tight mb-8"
         style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}>
         {article.title}
       </h1>
@@ -85,7 +85,7 @@ export default function ArticolePage() {
       <ArticleBody html={article.content} />
 
       {/* Share */}
-      <div className="mt-16 pt-8 border-t border-ghiaccio/10">
+      <div className="mt-16 pt-8 border-t border-[rgba(17,41,107,0.12)]">
         <ShareButton title={article.title} url={pageUrl} />
       </div>
 
