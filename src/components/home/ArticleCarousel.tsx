@@ -73,7 +73,7 @@ export default function ArticleCarousel({ articles, loading }: ArticleCarouselPr
           <div style={{ height: 24, width: 140, borderRadius: 4, background: 'rgba(17,41,107,.08)' }} />
           <div style={{ height: 10, width: 60, borderRadius: 4, background: 'rgba(17,41,107,.06)' }} />
         </div>
-        <div style={{ display: 'flex', gap: 12, padding: '0 22px', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', gap: 12, padding: '0 22px', overflow: 'visible' }}>
           {[0, 1].map(i => (
             <div key={i} style={{
               flexShrink: 0, width: '85vw', height: 260,

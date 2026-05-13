@@ -31,19 +31,6 @@ export default function LatestArticles({ articles, loading }: LatestArticlesProp
             letterSpacing: '-.04em',
           }}
         >
-          <small
-            style={{
-              display: 'block',
-              fontSize: 14,
-              fontStyle: 'italic',
-              fontWeight: 400,
-              letterSpacing: 2,
-              color: 'rgba(17,41,107,.4)',
-              marginBottom: 6,
-            }}
-          >
-            — Sezione 01
-          </small>
           02
         </div>
 
@@ -446,6 +433,7 @@ function ArticlesSkeleton() {
             display: 'flex',
             flexDirection: 'column',
             gap: 12,
+            minHeight: 190,
           }}
         >
           <div style={{ height: 8, width: 64, borderRadius: 4, background: 'rgba(17,41,107,.1)' }} />
