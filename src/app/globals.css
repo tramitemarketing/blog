@@ -185,11 +185,8 @@ body {
 .hero-grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: 1.45fr 1fr;
-  gap: 60px;
-  align-items: end;
-  min-height: 560px;
+  display: block;
+  min-height: 460px;
 }
 
 .hero-l1 { font-size: clamp(120px, 14vw, 220px); }
@@ -201,9 +198,7 @@ body {
     padding: 88px 22px 52px;
   }
   .hero-grid {
-    grid-template-columns: 1fr;
     min-height: unset;
-    gap: 28px;
   }
   /* Font ridotti per contenere il testo in 390px − 44px padding = 346px */
   .hero-l1 { font-size: clamp(46px, 12.5vw, 64px); }

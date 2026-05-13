@@ -124,88 +124,95 @@ export default function HeroSection({ citazione }: HeroSectionProps) {
             che si interroga.
           </p>
         </div>
-
-        {/* Colonna destra — citazione del giorno */}
-        <aside
-            className="hero-anim-quote"
-            style={{
-              alignSelf: 'end',
-              background: 'rgba(255,255,255,.04)',
-              border: '1px solid rgba(255,219,87,.25)',
-              padding: '36px 28px 36px',
-              position: 'relative',
-              minHeight: 280,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          >
-            {/* Virgoletta decorativa */}
-            <span
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                top: -32,
-                left: 20,
-                fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
-                fontWeight: 600,
-                fontSize: 120,
-                lineHeight: 1,
-                color: '#ffdb57',
-                pointerEvents: 'none',
-                userSelect: 'none',
-              }}
-            >
-              &ldquo;
-            </span>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                fontSize: 9,
-                letterSpacing: 4,
-                textTransform: 'uppercase',
-                fontWeight: 700,
-                color: '#ffdb57',
-                marginBottom: 16,
-                fontFamily: 'var(--font-sans)',
-              }}
-            >
-              <span style={{ width: 6, height: 6, background: '#ffdb57', borderRadius: '50%', flexShrink: 0 }} />
-              Citazione del giorno
-            </div>
-
-            <p
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
-                fontWeight: 400,
-                fontSize: 'clamp(16px, 1.8vw, 22px)',
-                lineHeight: 1.4,
-                color: '#fff',
-                marginBottom: 18,
-              }}
-            >
-              {displayCitazione.text}
-            </p>
-
-            <p
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: 10,
-                letterSpacing: 3,
-                textTransform: 'uppercase',
-                fontWeight: 600,
-                color: 'rgba(255,219,87,.7)',
-              }}
-            >
-              — {displayCitazione.reference}
-            </p>
-          </aside>
       </div>
+
+      {/* Citazione del giorno — barra orizzontale a tutta larghezza */}
+      <aside
+        className="hero-anim-quote"
+        style={{
+          marginTop: 48,
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 40,
+          background: 'rgba(255,255,255,.04)',
+          border: '1px solid rgba(255,219,87,.25)',
+          padding: '22px 36px',
+        }}
+      >
+        {/* Virgoletta decorativa */}
+        <span
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: -28,
+            left: 28,
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 600,
+            fontSize: 100,
+            lineHeight: 1,
+            color: '#ffdb57',
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}
+        >
+          &ldquo;
+        </span>
+
+        {/* Label */}
+        <div
+          style={{
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            fontSize: 9,
+            letterSpacing: 4,
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            color: '#ffdb57',
+            fontFamily: 'var(--font-sans)',
+          }}
+        >
+          <span style={{ width: 6, height: 6, background: '#ffdb57', borderRadius: '50%', flexShrink: 0 }} />
+          Citazione<br />del giorno
+        </div>
+
+        {/* Linea separatrice */}
+        <div style={{ flexShrink: 0, width: 1, alignSelf: 'stretch', background: 'rgba(255,219,87,.2)' }} />
+
+        {/* Testo citazione */}
+        <p
+          style={{
+            flex: 1,
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 400,
+            fontSize: 'clamp(16px, 1.6vw, 21px)',
+            lineHeight: 1.4,
+            color: '#fff',
+          }}
+        >
+          {displayCitazione.text}
+        </p>
+
+        {/* Riferimento */}
+        <p
+          style={{
+            flexShrink: 0,
+            fontFamily: 'var(--font-sans)',
+            fontSize: 10,
+            letterSpacing: 3,
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            color: 'rgba(255,219,87,.7)',
+            textAlign: 'right',
+          }}
+        >
+          — {displayCitazione.reference}
+        </p>
+      </aside>
     </section>
   )
 }
