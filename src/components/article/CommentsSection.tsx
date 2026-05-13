@@ -40,14 +40,14 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
   }
 
   return (
-    <section className="mt-20 pt-8 border-t border-ghiaccio/10">
-      <h2 className="font-sans font-black text-ghiaccio uppercase tracking-[3px] text-sm mb-10">
+    <section className="mt-20 pt-8 border-t border-[rgba(17,41,107,0.12)]">
+      <h2 className="font-sans font-black text-[#11296b] uppercase tracking-[3px] text-sm mb-10">
         Commenti
       </h2>
 
       {/* Approved comments */}
       {comments.length === 0 ? (
-        <p className="font-serif text-ghiaccio/40 italic mb-12">
+        <p className="font-serif text-[rgba(17,41,107,0.4)] italic mb-12">
           Nessun commento ancora. Sii il primo.
         </p>
       ) : (
@@ -55,10 +55,10 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
           {comments.map(comment => (
             <div key={comment.id} className="flex flex-col gap-1">
               <div className="flex items-center gap-3">
-                <span className="font-sans font-bold text-ghiaccio text-sm">
+                <span className="font-sans font-bold text-[#11296b] text-sm">
                   {comment.authorName}
                 </span>
-                <span className="font-sans text-[10px] uppercase tracking-[3px] text-ghiaccio/30">
+                <span className="font-sans text-[10px] uppercase tracking-[3px] text-[rgba(17,41,107,0.4)]">
                   {comment.createdAt.toLocaleDateString('it-IT', {
                     day: '2-digit',
                     month: 'long',
@@ -66,7 +66,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
                   })}
                 </span>
               </div>
-              <p className="font-serif text-ghiaccio/70 leading-relaxed">
+              <p className="font-serif text-[rgba(17,41,107,0.75)] leading-relaxed">
                 {comment.text}
               </p>
             </div>
@@ -76,7 +76,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
 
       {/* Submission form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <h3 className="font-sans text-[11px] uppercase tracking-[4px] text-ghiaccio/40">
+        <h3 className="font-sans text-[11px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]">
           Lascia un commento
         </h3>
 
@@ -94,7 +94,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/40" htmlFor="comment-name">
+          <label className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]" htmlFor="comment-name">
             Nome
           </label>
           <input
@@ -104,12 +104,12 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
             onChange={e => setName(e.target.value)}
             required
             maxLength={100}
-            className="bg-transparent border-b border-ghiaccio/20 py-2 font-serif text-ghiaccio placeholder-ghiaccio/20 focus:outline-none focus:border-oro transition-colors"
+            className="bg-transparent border-b border-[rgba(17,41,107,0.2)] py-2 font-serif text-[#11296b] placeholder-[rgba(17,41,107,0.3)] focus:outline-none focus:border-[#ffcb05] transition-colors"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-[10px] uppercase tracking-[4px] text-ghiaccio/40" htmlFor="comment-text">
+          <label className="font-sans text-[10px] uppercase tracking-[4px] text-[rgba(17,41,107,0.45)]" htmlFor="comment-text">
             Commento
           </label>
           <textarea
@@ -119,12 +119,12 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
             required
             maxLength={2000}
             rows={4}
-            className="bg-transparent border border-ghiaccio/20 p-3 font-serif text-ghiaccio placeholder-ghiaccio/20 focus:outline-none focus:border-oro transition-colors resize-none"
+            className="bg-transparent border border-[rgba(17,41,107,0.2)] p-3 font-serif text-[#11296b] placeholder-[rgba(17,41,107,0.3)] focus:outline-none focus:border-[#ffcb05] transition-colors resize-none"
           />
         </div>
 
         {status === 'sent' ? (
-          <p className="font-serif text-ghiaccio/60 italic">
+          <p className="font-serif text-[rgba(17,41,107,0.65)] italic">
             Grazie! Il tuo commento è in attesa di approvazione.
           </p>
         ) : (
